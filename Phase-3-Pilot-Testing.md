@@ -31,8 +31,8 @@ Current verified position:
 - Phase 2 evidence is present under `~/rootCA/phase2`, including:
    - `root-ca.pem`
    - `sub-ca.pem`
-   - `phase2-cert-validation-phase2-wf30-ejbca9-20260419T220700Z.txt`
-   - `phase2-closeout-report-20260420T092051Z.txt`
+   - `logs/phase2-cert-validation-phase2-wf30-ejbca9-20260419T220700Z.txt`
+   - `logs/phase2-closeout-report-20260420T092051Z.txt`
 
 Remaining blockers before this phase may formally start:
 - None. Phase 2 signed off 2026-04-20. Phase 3 entry authorized.

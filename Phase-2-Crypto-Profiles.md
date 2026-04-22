@@ -278,9 +278,9 @@ PHASE 2 SIGN-OFF:
   [x] Profile definitions approved by Root CA Officer and Security Officer
 
   Evidence references:
-  - phase2/root-phase2-wf30-ejbca9-20260419T220700Z.txt
-  - phase2/sub-phase2-wf30-ejbca9-20260419T220700Z.txt
-  - phase2/phase2-cert-validation-phase2-wf30-ejbca9-20260419T220700Z.txt
+  - phase2/logs/root-phase2-wf30-ejbca9-20260419T220700Z.txt
+  - phase2/logs/sub-phase2-wf30-ejbca9-20260419T220700Z.txt
+  - phase2/logs/phase2-cert-validation-phase2-wf30-ejbca9-20260419T220700Z.txt
   - phase2/logs/phase2-closeout-report-20260420T092051Z.txt
 
   Issued certificate note:
@@ -311,7 +311,7 @@ Officer B (Name): ______________________
 Officer B (Signature): _________________  Date: __/__/__
 
 Recorded By: ___________________________  Date: __/__/__
-Evidence Set: phase2/phase2-closeout-report-*.txt
+Evidence Set: phase2/logs/phase2-closeout-report-*.txt
 ```
 
 ---
