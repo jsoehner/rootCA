@@ -255,6 +255,69 @@ Evidence:
 
 ---
 
+### Entry 6 — Pilot Cert Validation Refresh (2026-04-22)
+
+Objective:
+- Generate a fresh, timestamped validation artifact from the current `pilot-root.pem` and `pilot-sub.pem` material before continuing with remaining interoperability tests.
+
+Action completed:
+- Executed:
+
+```bash
+./phase3/phase3-validate-pilot-certs.sh \
+   --root-cert ./phase3/pilot-root.pem \
+   --sub-cert ./phase3/pilot-sub.pem \
+   --label pilot-jsigroup-ca
+```
+
+Result summary:
+- Validation timestamp: `2026-04-22 22:46:14 UTC`
+- PASS: 7
+- FAIL: 0
+- Result: `ALL CHECKS PASSED`
+
+Verified properties:
+- Root CA is self-signed (`subject == issuer`)
+- Root basic constraints include `CA:TRUE`
+- Root key usage includes `keyCertSign` and `cRLSign`
+- Root self-signature verifies
+- Subordinate basic constraints include `CA:TRUE, pathLen=0`
+- Subordinate chain verifies against pilot root
+
+Evidence:
+- `./phase3/logs/phase3-cert-validation-pilot-jsigroup-ca-20260422T224614Z.txt`
+
+Gate interpretation:
+- This refresh confirms Linux-side certificate structure and root-to-subordinate chain integrity only.
+- Phase 3 mandatory Windows interoperability tests (Test 1 through Test 6) and formal GO/NO-GO decision remain pending.
+
+---
+
+### Entry 7 — Operator Worksheet Prepared For Mandatory Test Matrix (2026-04-22)
+
+Objective:
+- Standardize execution and evidence capture for mandatory Phase 3 interoperability tests to reduce decision-gate ambiguity.
+
+Action completed:
+- Created operator worksheet:
+   - `./phase3/Phase-3-Test-Execution-Worksheet.md`
+- Prepared Windows-ready pilot root certificate artifact:
+   - `./phase3/pilot-root.cer` (DER)
+
+Worksheet coverage:
+- Test 1: Root chain recognition
+- Test 2: AD CS subordinate issuance
+- Test 3: Enrollment workflow
+- Test 4: Chain building and URL fetch validation
+- Test 5: TLS/Schannel validation
+- Test 6: CRL publication/retrieval
+- Final gate summary section with GO/NO-GO recommendation fields
+
+Immediate next action:
+- Execute Tests 1 through 6 using the worksheet and populate pass/fail evidence, then complete the GO/NO-GO decision block in this log.
+
+---
+
 ## Test Results
 
 | Test | Result | Date | Notes |

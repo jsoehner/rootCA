@@ -1,6 +1,6 @@
 # Phase 2: Cryptographic Profile and Hierarchy Design
 
-**Phase Status:** TECHNICAL EXECUTION COMPLETE; PENDING FORMAL SIGN-OFF  
+**Phase Status:** FORMAL SIGN-OFF COMPLETE (2026-04-20)  
 **Date Created:** 2026-04-19  
 **Phase Dependencies:** Phase 1 (Offline Platform) completed and signed  
 
@@ -274,20 +274,21 @@ Fallback Profiles (RSA):
 PHASE 2 SIGN-OFF:
   [x] All profiles created and tested in EJBCA
   [x] All extensions validated via openssl x509 inspection
-  [ ] Test certificates deleted; token confirmed empty
-  [ ] Profile definitions approved by Root CA Officer and Security Officer
+  [x] Test certificates deleted; token confirmed empty
+  [x] Profile definitions approved by Root CA Officer and Security Officer
 
   Evidence references:
   - phase2/root-phase2-wf30-ejbca9-20260419T220700Z.txt
   - phase2/sub-phase2-wf30-ejbca9-20260419T220700Z.txt
   - phase2/phase2-cert-validation-phase2-wf30-ejbca9-20260419T220700Z.txt
+  - phase2/logs/phase2-closeout-report-20260420T092051Z.txt
 
   Issued certificate note:
   - Actual Phase 2 technical issuance used `JSIGROUP` in the CA names and subject DNs.
   - Reconcile this with any remaining `JSIGROUP` references in later-phase ceremony documents before formal sign-off.
   
-  Officer A Signature: ________________________  Date: __/__/__
-  Officer B Signature: ________________________  Date: __/__/__
+  Officer A Signature: Jeff Soehner  Date: 04/20/2026
+  Officer B Signature: Jeff Soehner  Date: 04/20/2026
 ```
 
 ### 5.4 Compact Phase 2 Sign-Off Template

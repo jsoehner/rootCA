@@ -18,7 +18,7 @@ Workspace: ~/rootCA
 | :--- | :--- | :--- | :--- | :--- |
 | Phase 0 | Governance and policy approval | ✅ Closed (Signed Off) | CA-Policy.md (Status: APPROVED AND SIGNED OFF) | Closed |
 | Phase 1 | Offline platform baseline | ✅ Closed (Signed Off) | Phase-1-Platform-Setup.md, Phase-1-Execution-Log.md | Closed |
-| **Phase 2** | Crypto profiles and validation | ✅ Closed (Formal Sign-Off Complete) | Phase-2-Crypto-Profiles.md, Phase-2-Execution-Log.md, phase2/phase2-closeout-report-20260420T092051Z.txt | Closed |
+| **Phase 2** | Crypto profiles and validation | ✅ Closed (Formal Sign-Off Complete) | Phase-2-Crypto-Profiles.md, Phase-2-Execution-Log.md, phase2/logs/phase2-closeout-report-20260420T092051Z.txt | Closed |
 | **Phase 3** | Pilot interoperability and go/no-go | 🟡 **IN PROGRESS** | Phase-3-Pilot-Testing.md, phase3/Phase-3-Execution-Log.md | Open (Execution Underway) |
 | Phase 4 | Production key ceremony | 🔴 Blocked | Phase-4-Key-Ceremony.md | Blocked by Phase 3 GO decision |
 | Phase 5 | AD CS integration and trust rollout | 🔴 Blocked | Phase-5-ADCS-Integration.md | Blocked by Phase 4 completion |
@@ -33,8 +33,8 @@ Workspace: ~/rootCA
 *   **Runtime Environment:** Runtime baseline successfully migrated and normalized to EJBCA 9.3.7 + WildFly 30.
 *   **Retirement:** Legacy EJBCA 8 and WildFly 26 runtime paths have been retired.
 *   **Phase 2 Core:** Production root/subordinate CA creation and export are complete.
-*   **Validation:** OpenSSL validation evidence has been generated and archived in the `phase2/` directory.
-*   **Closeout:** Phase 2 closeout helper was run, and the closeout report was generated.
+*   **Validation:** OpenSSL validation evidence has been generated and archived under `phase2/` and `phase2/logs/`.
+*   **Closeout:** Phase 2 closeout helper was run, and the closeout report was generated under `phase2/logs/`.
 *   **GO:** Phase 2 formal sign-off complete on 2026-04-20. All prerequisites for Phase 3 are met.
 *   **Retroactive Phase 3 Update (2026-04-22):** Pilot root creation/export completed using CLI-only workflow (`phase3-step3-pilot-root.sh`) with validation evidence in `phase3/`.
 
