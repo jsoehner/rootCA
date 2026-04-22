@@ -158,8 +158,8 @@ Activity completed:
 
 Supporting evidence:
 - `./phase3/pilot-root.pem`
-- `./phase3/phase3-step3-cli.log`
-- `./phase3/phase3-cert-validation-pilot-ecc-root-20260422T112215Z.txt`
+- `./phase3/logs/phase3-step3-cli.log`
+- `./phase3/logs/phase3-cert-validation-pilot-ecc-root-20260422T112215Z.txt`
 
 Technical corrections recorded:
 - Deployment naming standardized to `ejbca.ear` (required for `bin/ejbca.sh` CLI EJB lookup compatibility).

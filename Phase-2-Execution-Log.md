@@ -35,7 +35,7 @@ Attempted runtime paths:
    - OCSP status endpoint HTTP: 200
 
 Evidence saved:
-- Runtime probe artifact: `~/rootCA/phase2/runtime-checkpoint-2026-04-19.txt`
+- Runtime probe artifact: `~/rootCA/phase2/logs/runtime-checkpoint-2026-04-19.txt`
 
 Decision:
 - Phase 2 can proceed using the validated EJBCA runtime path while EJBCA 9 compatibility is treated as a parallel technical item.
@@ -102,7 +102,7 @@ Objective results:
 - RA remains non-operational for issuance (`Unable to serve RA requests since there is no connection to the upstream CA`).
 
 Evidence:
-- `~/rootCA/phase2/admin-setup-attempt-2026-04-19.txt`
+- `~/rootCA/phase2/logs/admin-setup-attempt-2026-04-19.txt`
 
 Status impact:
 - Admin profile creation inside EJBCA, certificate issuance/export, and Phase 2 sign-off completion remain blocked by platform/runtime compatibility between this EJBCA build path and available appserver/CLI receiver path.
@@ -246,9 +246,9 @@ Validation highlights:
 Evidence artifacts added:
 - `~/rootCA/phase2/root-ca.pem`
 - `~/rootCA/phase2/sub-ca.pem`
-- `~/rootCA/phase2/phase2-cert-validation-phase2-wf30-ejbca9-20260419T220700Z.txt`
-- `~/rootCA/phase2/root-phase2-wf30-ejbca9-20260419T220700Z.txt`
-- `~/rootCA/phase2/sub-phase2-wf30-ejbca9-20260419T220700Z.txt`
+- `~/rootCA/phase2/logs/phase2-cert-validation-phase2-wf30-ejbca9-20260419T220700Z.txt`
+- `~/rootCA/phase2/logs/root-phase2-wf30-ejbca9-20260419T220700Z.txt`
+- `~/rootCA/phase2/logs/sub-phase2-wf30-ejbca9-20260419T220700Z.txt`
 
 Phase status update:
 - Phase 2 technical execution objectives for profile creation/import, Root/Sub CA issuance, certificate export, and extension validation are complete.
@@ -271,13 +271,13 @@ Actions completed:
 1. Added automated closeout helper:
    - `~/rootCA/phase2/phase2-closeout-prep.sh`
 2. Executed closeout helper and generated report:
-   - `~/rootCA/phase2/phase2-closeout-report-20260420T092051Z.txt`
+   - `~/rootCA/phase2/logs/phase2-closeout-report-20260420T092051Z.txt`
 3. Verified runtime readiness probes during closeout run:
    - `healthcheck_http=200`
    - `status_ocsp_http=200`
 4. Added cleanup verification helper and executed it in read-only mode:
    - Script: `~/rootCA/phase2/phase2-verify-cleanup.sh`
-   - Latest report: `~/rootCA/phase2/phase2-cleanup-verification-20260420T210512Z.txt`
+   - Latest report: `~/rootCA/phase2/logs/phase2-cleanup-verification-20260420T210512Z.txt`
 5. Re-checked token hardware visibility after NitroKey insertion:
    - USB detection: `lsusb` shows `20a0:4230 Clay Logic Nitrokey HSM`
    - OpenSC slot query: `pkcs11-tool --module /usr/lib64/pkcs11/opensc-pkcs11.so --list-slots` still returned `No slots`
@@ -294,7 +294,7 @@ Cleanup verification result:
 - Retained evidence artifacts remain present as expected:
   - `~/rootCA/phase2/root-ca.pem`
   - `~/rootCA/phase2/sub-ca.pem`
-  - latest validation report under `~/rootCA/phase2/phase2-cert-validation-*.txt`
+   - latest validation report under `~/rootCA/phase2/logs/phase2-cert-validation-*.txt`
 - No obvious transient test or CSR artifacts were found in `~/rootCA/phase2`.
 - OpenSC PKCS#11 module confirmed: `/usr/lib64/pkcs11/opensc-pkcs11.so`.
 - NitroKey serial `DENK0402828` — token empty of key material (PKCS#15 profile object only).
@@ -354,7 +354,7 @@ Officer A: Jeff Soehner  Date: 04/20/2026
 Officer B: Jeff Soehner  Date: 04/20/2026
 
 Recorded by: Jeff Soehner  Date: 04/20/2026
-Evidence: ~/rootCA/phase2/phase2-closeout-report-*.txt
+Evidence: ~/rootCA/phase2/logs/phase2-closeout-report-*.txt
 Decision: [X] PHASE 2 FORMALLY SIGNED OFF
 ```
 
