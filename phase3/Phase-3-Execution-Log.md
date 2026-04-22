@@ -1,0 +1,290 @@
+# Phase 3 Execution Log
+
+**Phase Status:** IN PROGRESS  
+**Start Date:** 2026-04-20  
+**Authorized by:** Jeff Soehner (Phase 2 sign-off, 2026-04-20)  
+**Decision Gate:** Go/no-go for Phase 4 production key ceremony  
+
+---
+
+## Entry Gate Verification (2026-04-20)
+
+| Item | Status |
+|------|--------|
+| Phase 2 sign-off recorded in Phase-2-Execution-Log.md | ✅ DONE |
+| Phase 2 sign-off recorded in Phase-2-Crypto-Profiles.md | ✅ DONE |
+| Naming frozen (`JSIGROUP`) | ✅ DONE |
+| EJBCA runtime healthy (admin=200, ocsp=200) | ✅ DONE |
+| RootCAPilot-ECC384-SHA384 profile confirmed present | ✅ DONE (Phase 2 evidence) |
+| SubordCAPilot-ECC384-SHA384 profile confirmed present | ✅ DONE (Phase 2 evidence) |
+| SubordCAPilot-RSA4096-SHA256 profile confirmed present (fallback) | ✅ DONE (Phase 2 evidence) |
+
+---
+
+## Execution Checklist
+
+### Pilot Root Preparation
+
+```
+[ ] Separate pilot database/schema selected (e.g., ejbca_pilot) OR existing DB
+    confirmed isolated from production data
+[ ] Separate pilot crypto token or software token confirmed
+[ ] Pilot profile set confirmed in running EJBCA instance:
+    [ ] RootCAPilot-ECC384-SHA384
+    [ ] SubordCAPilot-ECC384-SHA384
+    [ ] SubordCAPilot-RSA4096-SHA256 (fallback)
+```
+
+### Pilot Issuance
+
+```
+[x] Pilot root CA created with 90-day validity using RootCAPilot-ECC384-SHA384
+[x] Pilot root certificate exported (PEM) to ./phase3/pilot-root.pem
+[ ] Pilot subordinate CSR generated on Windows AD CS
+[ ] Pilot subordinate signed using SubordCAPilot-ECC384-SHA384
+[ ] Pilot subordinate certificate exported
+```
+
+### Windows Validation (Test Matrix — Phase-3-Pilot-Testing.md §3)
+
+```
+[ ] Test 1: Root chain recognition (trusted root install + certutil -store root)
+[ ] Test 2: AD CS subordinate issuance from pilot root
+[ ] Test 3: Pilot AD CS enrollment workflow
+[ ] Test 4: Certificate chain building and validation (certutil -verify -urlfetch)
+[ ] Test 5: TLS/Schannel validation
+[ ] Test 6: CRL publication and retrieval
+```
+
+### Evidence and Decision
+
+```
+[x] All command output saved under ~/rootCA/phase3/
+[ ] All screenshots captured and named
+[ ] Go/no-go decision documented in this log
+[ ] If ECC fails: fallback RSA4096 run authorized and scheduled
+```
+
+---
+
+## Execution Log Entries
+
+### Entry 1 — Phase 3 Opened (2026-04-20)
+
+- Phase 2 sign-off confirmed (Jeff Soehner, 2026-04-20).
+- EJBCA runtime: admin=200, ocsp=200.
+- Confirmed pilot profiles from Phase 2 evidence:
+  - `RootCAPilot-ECC384-SHA384` — 90-day validity, ECC P-384 + SHA-384
+  - `SubordCAPilot-ECC384-SHA384` — 90-day validity, ECC P-384 + SHA-384
+  - `SubordCAPilot-RSA4096-SHA256` — 90-day validity, RSA 4096 + SHA-256 (fallback)
+- Next action: Stand up isolated pilot scope (§2.1) and create pilot root CA.
+
+---
+
+### Entry 2 — Pilot Infrastructure Scripts Created (2026-04-22)
+
+Runtime baseline confirmed healthy before Phase 3 setup:
+- `healthcheck/ejbcahealth` HTTP 200
+- `status/ocsp` HTTP 200
+- MariaDB active; `ejbca` production database intact with all EJBCA schema tables present
+- WildFly MariaDB module deployed (`mariadb-java-client.jar` v3.5, `java:/EjbcaDS` bound)
+
+Database migration completed (H2 → MariaDB persistent storage):
+- Production EJBCA database: `ejbca` (MariaDB), credentials in `phase1/.db-credentials`
+- All CA data now survives WildFly restarts
+
+Phase 3 pilot infrastructure scripts created:
+
+| Script | Purpose |
+|--------|---------|
+| `phase3/phase3-setup-pilot.sh` | One-time setup: creates isolated `ejbca_pilot` MariaDB DB and writes `phase3/.pilot-db-credentials` |
+| `phase3/phase3-run-wildfly30-pilot.sh` | Start EJBCA on pilot DB; stops any running instance, reconfigures datasource to `ejbca_pilot` |
+| `phase3/phase3-run-wildfly30-prod.sh` | Restore EJBCA to production DB after pilot testing |
+| `phase3/phase3-validate-pilot-certs.sh` | OpenSSL validation of pilot root/sub/end-entity certs; writes structured evidence artifacts |
+
+Isolation model confirmed:
+- Production database (`ejbca`) is untouched when pilot scripts are active
+- Pilot database (`ejbca_pilot`) is fully separate; WildFly switches datasource at runtime
+- Only one EJBCA instance runs at a time (port 8080); `phase3-run-wildfly30-prod.sh` safely restores production context
+
+**Checklist update:**
+
+```
+PILOT ROOT PREPARATION:
+   [x] Separate pilot database/schema: ejbca_pilot (created by phase3-setup-pilot.sh)
+   [x] Separate pilot crypto token: software token via EJBCA admin (no production HSM)
+   [x] RootCAPilot-ECC384-SHA384 profile confirmed present (Phase 2 evidence)
+   [x] SubordCAPilot-ECC384-SHA384 profile confirmed present (Phase 2 evidence)
+   [x] SubordCAPilot-RSA4096-SHA256 profile confirmed present (Phase 2 evidence — fallback)
+```
+
+**Immediate next steps (operator):**
+
+```bash
+# 1. Create pilot database
+./phase3/phase3-setup-pilot.sh
+
+# 2. Switch EJBCA to pilot database
+./phase3/phase3-run-wildfly30-pilot.sh
+
+# 3. Create/export pilot root CA via EJBCA CLI only (no admin web login)
+./phase3/phase3-step3-pilot-root.sh
+
+# 4. Generate pilot subordinate CSR on Windows AD CS, submit to EJBCA,
+#    sign with SubordCAPilot-ECC384-SHA384, export to ~/rootCA/phase3/pilot-sub.pem
+
+# 5. Validate full pilot chain
+./phase3/phase3-validate-pilot-certs.sh \
+  --root-cert ./phase3/pilot-root.pem \
+  --sub-cert  ./phase3/pilot-sub.pem \
+  --label pilot-ecc-chain
+```
+
+---
+
+### Entry 3 — Retroactive CLI-Only Root CA Completion (2026-04-22)
+
+This entry is recorded retroactively to capture the actual Phase 3 root issuance path used during execution.
+
+Activity completed:
+- Pilot WildFly runtime confirmed healthy (admin and OCSP probe HTTP 200).
+- Pilot root CA was created without UI interaction using EJBCA CLI:
+  - CA name: `RootCAPilot-ECC384-SHA384`
+  - DN: `CN=JSIGROUP Pilot Root CA, O=JSIGROUP, C=CA`
+  - Algorithm: ECDSA P-384 with SHA-384
+  - Validity: 90 days
+- Pilot root certificate exported to `./phase3/pilot-root.pem`.
+- Validation rerun after script correction: 4 PASS, 0 FAIL, validator exit code 0.
+
+Supporting evidence:
+- `./phase3/pilot-root.pem`
+- `./phase3/phase3-step3-cli.log`
+- `./phase3/phase3-cert-validation-pilot-ecc-root-20260422T112215Z.txt`
+
+Technical corrections recorded:
+- Deployment naming standardized to `ejbca.ear` (required for `bin/ejbca.sh` CLI EJB lookup compatibility).
+- Startup scripts updated to clear stale managed deployments before scanner deployment to avoid context path conflicts.
+- Root validator self-signed comparison corrected by normalizing `subject`/`issuer` values prior to equality check.
+
+Lessons learned:
+- EJBCA CLI is sufficient for pilot root CA lifecycle operations; UI access is not required for this phase activity.
+- Deployment name and CLI internal app lookup must remain aligned (`ejbca.ear`); mismatches cause CLI EJB resolution failures.
+- Removing stale managed deployments in WildFly must include management model cleanup, not only filesystem cleanup.
+- Validation scripts should compare normalized certificate fields and tie final status text to the same pass/fail condition used for exit code.
+
+---
+
+### Entry 4 — Pilot State Verification (2026-04-22)
+
+Full end-to-end state verification performed after returning to the project. All checks passed.
+
+**Commands run:**
+
+```bash
+# WildFly PID check
+cat ~/rootCA/phase3/phase3-wildfly30-pilot.pid          # → 39825
+ps -p 39825 --no-headers -o pid,stat,cmd                # → S  /bin/sh ./bin/standalone.sh -b 127.0.0.1
+
+# Port binding
+ss -tlnp | grep -E '8080|8443|9990'
+# → LISTEN 127.0.0.1:8080, 127.0.0.1:8443, 127.0.0.1:9990
+
+# EJBCA health
+curl -o /dev/null -sw "%{http_code}" http://127.0.0.1:8080/ejbca/publicweb/healthcheck/ejbcahealth
+# → 200
+
+# Pilot DB
+mysql -u ejbca_pilot -p<redacted> ejbca_pilot -e "SHOW TABLES;"    # → 37 tables
+mysql -u ejbca_pilot -p<redacted> ejbca_pilot -e "SELECT name FROM CAData;"
+# → RootCAPilot-ECC384-SHA384
+
+# Pilot root cert
+openssl x509 -in ~/rootCA/phase3/pilot-root.pem -noout -subject -issuer -dates -fingerprint -sha256
+# → subject=CN=JSIGROUP Pilot Root CA, O=JSIGROUP, C=CA
+# → issuer=CN=JSIGROUP Pilot Root CA, O=JSIGROUP, C=CA
+# → notBefore=Apr 22 11:18:12 2026 GMT  notAfter=Jul 21 11:18:11 2026 GMT
+# → SHA256 Fingerprint=D3:6C:B3:73:B2:39:C8:0E:DB:4D:4D:0B:8B:76:8B:9F:37:30:A0:19:CB:1B:30:3A:55:05:3B:13:A2:6D:6B:BA
+```
+
+**Results:**
+
+| Check | Result |
+|-------|--------|
+| Pilot WildFly running (PID 39943) | ✅ PASS |
+| Ports 8080 / 8443 / 9990 bound on 127.0.0.1 | ✅ PASS |
+| EJBCA health endpoint HTTP 200 | ✅ PASS |
+| `ejbca_pilot` DB has 37 tables | ✅ PASS |
+| `RootCAPilot-ECC384-SHA384` present in CAData | ✅ PASS |
+| `pilot-root.pem` subject/issuer self-signed | ✅ PASS |
+| `pilot-root.pem` validity expires Jul 21 2026 | ✅ PASS |
+
+Verification procedure captured in [Phase-3-Pilot-Testing.md §1.3](../Phase-3-Pilot-Testing.md).
+
+---
+
+### Entry 5 — Pilot Certificate Reissue With Canonical Identity (2026-04-22)
+
+Objective:
+- Reissue pilot certificate material using canonical identity values `O=JSIGROUP, C=CA`.
+
+Actions completed:
+1. Attempted pilot runtime restore:
+   - `./phase3/phase3-run-wildfly30-pilot.sh --fail-fast`
+   - Runtime probes returned `404`; pilot startup recorded a classloader conflict warning in `./phase3/logs/phase3-wildfly30-pilot.log`.
+2. Executed CA reissue script in current runtime context:
+   - `./phase2/phase2-reissue-ca-material.sh`
+   - Root: `JSIGROUP-Pilot-RootCA` (ID: `-2118228720`)
+   - Subordinate: `JSIGROUP-Pilot-SubCA` (signed by pilot root)
+3. Exported replacement pilot artifacts:
+   - `./phase3/pilot-root.pem`
+   - `./phase3/pilot-sub.pem`
+4. Validation completed with expected CA constraints and signature algorithm.
+
+Pilot replacement certificate highlights:
+- Pilot root subject/issuer: `CN=JSIGROUP Pilot Root CA, O=JSIGROUP, C=CA`
+- Pilot root SHA-256: `35:F5:73:4B:23:9B:8E:6A:D4:EF:FE:FF:2B:D5:D1:81:F7:B8:0E:46:9C:7C:B4:C8:3D:0C:8F:D3:8C:A8:C0:86`
+- Pilot subordinate subject: `CN=JSIGROUP Intermediate CA - AD CS - PILOT, OU=Certificate Authority, O=JSIGROUP, C=CA`
+- Pilot subordinate issuer: `CN=JSIGROUP Pilot Root CA, O=JSIGROUP, C=CA`
+- Pilot subordinate SHA-256: `BC:41:A9:1B:F9:10:16:50:7D:53:6B:85:17:EE:54:8B:A4:3E:F3:84:F7:EC:07:B3:EE:76:5C:0A:BD:AA:A3:FF`
+
+Evidence:
+- `./phase2/logs/phase2-reissue-20260422T152841Z.log`
+- `./phase2/logs/phase2-cert-validation-pilot-jsigroup-ca-20260422T152946Z.txt`
+- `./phase3/pilot-root.pem`
+- `./phase3/pilot-sub.pem`
+
+---
+
+## Test Results
+
+| Test | Result | Date | Notes |
+|------|--------|------|-------|
+| Test 1: Root chain recognition | PENDING | | |
+| Test 2: AD CS subordinate issuance | PENDING | | |
+| Test 3: AD CS enrollment workflow | PENDING | | |
+| Test 4: Chain building & validation | PENDING | | |
+| Test 5: TLS/Schannel validation | PENDING | | |
+| Test 6: CRL publication & retrieval | PENDING | | |
+
+---
+
+## Go/No-Go Decision Record
+
+```
+PHASE 3 GO/NO-GO DECISION
+Date: __/__/____
+
+Test results summary:
+[ ] All mandatory tests passed (go decision)
+[ ] One or more mandatory tests failed (no-go; fallback or remediation required)
+
+Algorithm selected for production:
+[ ] ECC P-384 + SHA-384 (primary)
+[ ] RSA 4096 + SHA-256 (fallback)
+
+Decision: [ ] GO — proceed to Phase 4 key ceremony
+          [ ] NO-GO — run fallback pilot or remediate
+
+Officer A: ________________________  Date: __/__/____
+Officer B: ________________________  Date: __/__/____
+```
