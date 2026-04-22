@@ -379,8 +379,8 @@ Verified technical evidence:
 - Evidence files:
    - ~/rootCA/phase2/root-ca.pem
    - ~/rootCA/phase2/sub-ca.pem
-   - ~/rootCA/phase2/phase2-cert-validation-phase2-wf30-ejbca9-20260419T220700Z.txt
-   - ~/rootCA/phase2/phase2-closeout-report-20260420T092051Z.txt
+   - ~/rootCA/phase2/logs/phase2-cert-validation-phase2-wf30-ejbca9-20260419T220700Z.txt
+   - ~/rootCA/phase2/logs/phase2-closeout-report-20260420T092051Z.txt
 
 Officer A (Name): Jeff Soehner
 Officer A (Signature): Jeff Soehner  Date: 04/20/2026
