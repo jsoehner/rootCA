@@ -56,11 +56,11 @@ ENTRY GATE:
    [x] Naming decision frozen for pilot and downstream docs
 
 PILOT ROOT PREPARATION:
-   [ ] Separate pilot database/schema selected
-   [ ] Separate pilot crypto token or software token selected
-   [ ] RootCAPilot-ECC384-SHA384 profile confirmed present
-   [ ] SubordCAPilot-ECC384-SHA384 profile confirmed present
-   [ ] SubordCAPilot-RSA4096-SHA256 profile confirmed present for fallback
+   [x] Separate pilot database/schema selected
+   [x] Separate pilot crypto token or software token selected
+   [x] RootCAPilot-ECC384-SHA384 profile confirmed present
+   [x] SubordCAPilot-ECC384-SHA384 profile confirmed present
+   [x] SubordCAPilot-RSA4096-SHA256 profile confirmed present for fallback
 
 PILOT ISSUANCE:
    [x] Pilot root created with 90-day validity (retroactive update: completed 2026-04-22 via CLI)
