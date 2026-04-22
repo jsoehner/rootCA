@@ -1,0 +1,40 @@
+Phase 2 Certificate Validation
+Timestamp: 2026-04-22 15:22:39 UTC
+Label: prod-jsigroup-ca
+
+== Root Certificate ==
+Input: /home/jsoehner/rootCA/phase2/root-ca.pem
+subject=CN=JSIGROUP Root CA, O=JSIGROUP, C=CA
+issuer=CN=JSIGROUP Root CA, O=JSIGROUP, C=CA
+serial=5ED28BBDE870EF745E7282805ECF98C20600FA4B
+notBefore=Apr 22 15:12:18 2026 GMT
+notAfter=Apr 19 15:12:17 2036 GMT
+        Signature Algorithm: ecdsa-with-SHA384
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Authority Key Identifier: 
+            X509v3 Subject Key Identifier: 
+            X509v3 Key Usage: critical
+    Signature Algorithm: ecdsa-with-SHA384
+
+== Subordinate Certificate ==
+Input: /home/jsoehner/rootCA/phase2/sub-ca.pem
+subject=CN=JSIGROUP Intermediate CA - AD CS, OU=Certificate Authority, O=JSIGROUP, C=CA
+issuer=CN=JSIGROUP Root CA, O=JSIGROUP, C=CA
+serial=4257B2F95F43F3A1AE02B0593E2ED610D907A0F4
+notBefore=Apr 22 15:12:30 2026 GMT
+notAfter=Apr 21 15:12:29 2031 GMT
+        Signature Algorithm: ecdsa-with-SHA384
+            X509v3 Basic Constraints: critical
+                CA:TRUE, pathlen:0
+            X509v3 Authority Key Identifier: 
+            Authority Information Access: 
+            X509v3 CRL Distribution Points: 
+            X509v3 Subject Key Identifier: 
+            X509v3 Key Usage: critical
+    Signature Algorithm: ecdsa-with-SHA384
+
+Artifacts written:
+- /home/jsoehner/rootCA/phase2/logs/phase2-cert-validation-prod-jsigroup-ca-20260422T152239Z.txt
+- /home/jsoehner/rootCA/phase2/logs/root-prod-jsigroup-ca-20260422T152239Z.txt
+- /home/jsoehner/rootCA/phase2/logs/sub-prod-jsigroup-ca-20260422T152239Z.txt

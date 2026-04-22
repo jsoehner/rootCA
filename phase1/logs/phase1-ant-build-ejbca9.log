@@ -1,0 +1,1266 @@
+Buildfile: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/build.xml
+
+customejbca.message:
+     [echo] No custom changes to merge.
+
+deprecated:check:
+
+customejbca.message:
+
+deprecated:notify:
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp
+
+customejbca.message:
+
+statedumpclean:
+
+configdumpclean:
+
+unidfnrclean:
+
+cmpclientclean:
+
+ctclean:
+
+edition-specific-clean:
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/edition-specific/build-interface
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/edition-specific/build-ejb
+
+edition-specific-ee-clean:
+
+peerconnectorclean:
+
+acmeclean:
+
+caaclean:
+
+estclean:
+
+ejbca-rest-api-clean:
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-api/build
+   [delete] Deleting: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-rest-api.war
+
+ejbca-rest-common-clean:
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-common/build
+
+ejbca-rest-certificate-clean:
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-certificate/build
+
+ejbca-rest-coap-clean:
+
+ejbca-rest-configdump-clean:
+
+ejbca-rest-ca-clean:
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-ca/build
+
+ejbca-rest-cryptotoken-clean:
+
+ejbca-rest-camanagement-clean:
+
+ejbca-rest-endentity-clean:
+
+ejbca-rest-system-clean:
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-system/build
+
+ejbca-rest-ssh-clean:
+
+plugins-clean:
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/plugins/build-plugins
+   [delete] Deleting: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/plugins.jar
+
+plugins-ee-clean:
+
+cesecore-x509ca-clean:
+     [echo] Cleaning cesecore-x509ca
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-x509ca/dist
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-x509ca/build
+
+cesecore-cvcca-clean:
+
+va-clean:
+     [echo] Cleaning va
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/va/build-status
+
+ra-gui-clean:
+     [echo] Cleaning ra
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ra-gui/build
+   [delete] Deleting: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ra-gui.war
+
+p11ng-cliclean:
+
+ssh-clean:
+
+iodef-clean:
+
+mpic-clean:
+
+msae-clean:
+
+cits-clean:
+
+proxy-ca-clean:
+
+clean-optional:
+
+clean:
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb/build
+   [delete] Deleting: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-ejb.jar
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb-cli/build
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb-interface/build
+   [delete] Deleting: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-interface.jar
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-entity/build
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-entity/build-test
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-entity/build-cli
+   [delete] Deleting: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-entity.jar
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-common/build-common
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-common-web/build-common-web
+   [delete] Deleting: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-common-web.jar
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-properties/build
+   [delete] Deleting: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-properties.jar
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/build
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/build-lib
+   [delete] Deleting: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-ws.jar
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws-cli/build
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/clientToolBox/build
+
+clean:
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/admin-gui/build
+   [delete] Deleting: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/adminweb.war
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-cmp-war/build
+   [delete] Deleting: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/cmp.war
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/healthcheck-war/build
+   [delete] Deleting: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/healthcheck.war
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/clearcache-war/build
+   [delete] Deleting: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/clearcache.war
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/certificatestore/build-certstore
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/crlstore/build-crlstore
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-scep-war/build
+   [delete] Deleting: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/scep.war
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-webdist-war/build
+   [delete] Deleting: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/webdist.war
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-common/dist
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-common/build
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-entity/dist
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-entity/build
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-ejb-interface/dist
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-ejb-interface/build
+
+clean:
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-ejb/dist
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-ejb/build
+   [delete] Deleting directory /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist
+
+deprecated:check:
+
+customejbca.message:
+
+deprecated:notify:
+
+fail-unless-appserver-detected:
+     [echo] appserver.home: /home/jsoehner/rootCA/artifacts/appserver/wildfly-30.0.1.Final
+     [echo] appserver.type: jboss
+     [echo] appserver.subtype: jboss7
+
+testforgnujava:
+
+display-properties:
+     [echo] 
+     [echo] ---------- EJBCA 9.3.7 Enterprise (working copy) CONFIGURATION PROPERTIES ----------
+     [echo] appserver.type           = jboss
+     [echo] appserver.subtype        = jboss7
+     [echo] appserver.home           = /home/jsoehner/rootCA/artifacts/appserver/wildfly-30.0.1.Final
+     [echo] java.version(ant.java)   = 21.0.10 (21)
+     [echo] ocsp.signaturealgorithm  = SHA256WithRSA;SHA256withRSAandMGF1;SHA384WithRSA;SHA512WithRSA;SHA224withECDSA;SHA256withECDSA;SHA384withECDSA;SHA512withECDSA;Ed25519;Ed448;ML-DSA-44;ML-DSA-65;ML-DSA-87
+     [echo] datasource.jndi-name     = EjbcaDS
+     [echo] datasource.jndi-name-prefix = java:/
+     [echo] database.name            = mysql
+     [echo] database.url             = jdbc:h2:~/ejbcadb;DB_CLOSE_DELAY=-1;NON_KEYWORDS=VALUE
+     [echo] database.driver          = h2
+     [echo] database.username        = sa
+     [echo] database.password        = ***
+     [echo] database.useSeparateCertificateTable = false
+     [echo] database.valid.connection.sql = select 1
+     [echo] mail.jndi-name           = java:/EjbcaMail
+     [echo] mail.from                = ejbca-donotreply@domain.com
+     [echo] mail.user                = ejbca_user
+     [echo] mail.password            = ***
+     [echo] mail.smtp.host           = localhost
+     [echo] mail.smtp.port           = 25
+     [echo] mail.smtp.auth           = false
+     [echo] mail.debug               = false
+     [echo] httpserver.pubhttp	     = 8080
+     [echo] httpserver.pubhttps	     = 8442
+     [echo] httpserver.privhttps     = 8443
+     [echo] httpsserver.hostname     = localhost
+     [echo] httpsserver.password     = ***
+     [echo] httpserver.external.fqdn = 
+     [echo] unidfnr.enabled          = false
+     [echo] 
+     [echo]       
+
+ejbca.ear.module-dependencies:
+
+customejbca.message:
+
+-build-cesecore-common:
+
+jar:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-common/build/classes
+    [javac] Compiling 437 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-common/build/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] Note: Some input files use or override a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+    [javac] Note: Some input files use unchecked or unsafe operations.
+    [javac] Note: Recompile with -Xlint:unchecked for details.
+     [java] Setting URL to classloader: file:/home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-common/build/classes/
+     [java] Added 1 implementations of org.cesecore.certificates.ocsp.extension.OCSPExtension
+     [java] Added 4 implementations of org.cesecore.authentication.tokens.AuthenticationTokenMetaData
+     [java] Added 0 implementations of org.cesecore.certificates.ca.CvcPlugin
+     [java] Added 1 implementations of org.cesecore.authorization.rules.AccessRulePlugin
+     [java] Added 2 implementations of org.cesecore.configuration.ConfigurationCache
+     [java] Added 3 implementations of org.cesecore.certificates.certificate.certextensions.CustomCertificateExtension
+     [java] Added 3 implementations of org.cesecore.keys.validation.Validator
+     [java] Added 1 implementations of org.cesecore.certificates.ca.CACommon
+     [java] Added 0 implementations of com.keyfactor.util.keys.token.pkcs11.PKCS11SlotListWrapperFactory
+     [java] Added 1 implementations of com.keyfactor.util.certificate.CertificateImplementation
+     [java] Added 1 implementations of com.keyfactor.util.crypto.provider.CryptoProvider
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-common/dist
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-common/dist/cesecore-common.jar
+
+-copy-cesecore-common:
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist
+
+cesecore-common:
+
+-build-cesecore-entity:
+
+jar:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-entity/build/classes
+    [javac] Compiling 34 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-entity/build/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] Note: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-entity/src/org/cesecore/roles/RoleInformation.java uses or overrides a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-entity/dist
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-entity/dist/cesecore-entity.jar
+
+-copy-cesecore-entities:
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/cesecore-entity.jar
+
+cesecore-entity:
+
+-build-cesecore-ejb-interface:
+
+jar:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-ejb-interface/build/classes
+    [javac] Compiling 116 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-ejb-interface/build/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-ejb-interface/dist
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-ejb-interface/dist/cesecore-ejb-interface.jar
+
+-copy-cesecore-ejb-interface:
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist
+
+cesecore-ejb-interface:
+
+-build-cesecore-x509ca:
+
+jar:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-x509ca/build/classes
+    [javac] Compiling 1 source file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-x509ca/build/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+     [java] Added 1 implementations of org.cesecore.certificates.ca.CACommon
+     [java] Setting URL to classloader: file:/home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-x509ca/build/classes/
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-x509ca/dist
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-x509ca/dist/cesecore-x509ca.jar
+
+-copy-cesecore-x509ca:
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist
+
+cesecore-x509ca:
+
+-build-cesecore-ejb:
+
+jar:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-ejb/build/classes
+    [javac] Compiling 42 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-ejb/build/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] Note: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-ejb/src/org/cesecore/authorization/AuthorizationSessionBean.java uses or overrides a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-ejb/dist
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-ejb/dist/cesecore-ejb.jar
+
+-copy-cesecore-ejb:
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist
+
+cesecore-ejb:
+
+ejbca-common:
+
+compile-common:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-common/build-common
+    [javac] Compiling 247 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-common/build-common
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-common/src/org/ejbca/core/model/ca/publisher/GeneralPurposeCustomPublisher.java:295: warning: [removal] finalize() in Object has been deprecated and marked for removal
+    [javac]     protected void finalize() throws Throwable {
+    [javac]                    ^
+    [javac] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-common/src/org/ejbca/core/model/ca/publisher/GeneralPurposeCustomPublisher.java:299: warning: [removal] finalize() in Object has been deprecated and marked for removal
+    [javac]         super.finalize();
+    [javac]              ^
+    [javac] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-common/src/org/ejbca/core/model/ra/ExtendedInformation.java:244: warning: [removal] Float(float) in Float has been deprecated and marked for removal
+    [javac] 			String msg = intres.getLocalizedMessage("endentity.extendedinfoupgrade", new Float(getVersion()));
+    [javac] 			                                                                         ^
+    [javac] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-common/src/org/ejbca/core/model/ra/ExtendedInformation.java:316: warning: [removal] Float(float) in Float has been deprecated and marked for removal
+    [javac]     		data.put(VERSION, new Float(LATEST_VERSION));
+    [javac]     		                  ^
+    [javac] Note: Some input files use or override a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+    [javac] 4 warnings
+
+build-common:
+     [java] Setting URL to classloader: file:/home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-common/build-common/
+     [java] Added 1 implementations of org.cesecore.authentication.tokens.AuthenticationTokenMetaData
+     [java] Added 12 implementations of org.cesecore.configuration.ConfigurationCache
+     [java] Added 2 implementations of org.ejbca.core.model.approval.profile.ApprovalProfile
+     [java] Added 3 implementations of org.cesecore.keys.validation.Validator
+     [java] Added 1 implementations of org.ejbca.core.model.validation.domainblacklist.DomainBlacklistNormalizer
+     [java] Added 3 implementations of org.ejbca.core.model.validation.domainblacklist.DomainBlacklistChecker
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-common.jar
+
+ejbca-entity:
+
+compile:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-entity/build
+    [javac] Compiling 19 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-entity/build
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+
+handlepersistence:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-entity/build/META-INF
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-entity/build/META-INF
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-entity/build-test/META-INF
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-entity/build-test/META-INF
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-entity/build-cli/META-INF
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-entity/build-cli/META-INF
+
+handleorm:
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-entity/build/META-INF
+     [copy] Copying 11 files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-entity/build-test/META-INF
+     [copy] Copying 11 files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-entity/build-cli/META-INF
+
+build:
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-entity.jar
+
+ejbca-ws-common:
+
+compile-library:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/build-lib
+    [javac] Compiling 18 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/build-lib
+
+build-jar:
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-ws.jar
+
+ejbca-ejb-interface:
+
+compile-ejb3:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb-interface/build
+    [javac] Compiling 190 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb-interface/build
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] Note: Some input files use or override a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+
+build:
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-interface.jar
+
+ejbca-common-web:
+
+compile-common-web:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-common-web/build-common-web
+    [javac] Compiling 83 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-common-web/build-common-web
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] Note: Some input files use or override a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+
+build-common-web:
+     [java] Setting URL to classloader: file:/home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-common-web/build-common-web/
+     [java] Added 0 implementations of org.ejbca.core.model.ca.publisher.ICustomPublisher
+     [java] Added 1 implementations of org.cesecore.keys.validation.Validator
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-common-web.jar
+
+scep-war:
+
+compile:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-scep-war/build/WEB-INF/classes
+    [javac] Compiling 1 source file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-scep-war/build/WEB-INF/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+
+build:
+      [war] Building war: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/scep.war
+
+webdist-war:
+
+compile:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-webdist-war/build/WEB-INF/classes
+    [javac] Compiling 1 source file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-webdist-war/build/WEB-INF/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+
+build:
+      [war] Building war: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/webdist.war
+
+cmp-war:
+
+compile:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-cmp-war/build/WEB-INF/classes
+    [javac] Compiling 2 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-cmp-war/build/WEB-INF/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+
+build:
+      [war] Building war: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/cmp.war
+
+healthcheck-ejbca-war:
+
+ejbca-compile:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/healthcheck-war/build/WEB-INF/classes
+    [javac] Compiling 3 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/healthcheck-war/build/WEB-INF/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+
+ejbca-build:
+      [war] Building war: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/healthcheck.war
+
+clearcache-ejbca-war:
+
+ejbca-compile:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/clearcache-war/build/WEB-INF/classes
+    [javac] Compiling 1 source file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/clearcache-war/build/WEB-INF/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+
+ejbca-build:
+      [war] Building war: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/clearcache.war
+
+ejbca-properties:
+
+build-jar:
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-properties/build
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-properties.jar
+
+ejbca-ws-cli:
+
+compile:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws-cli/build
+    [javac] Compiling 53 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws-cli/build
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] Note: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws-cli/src/org/ejbca/core/protocol/ws/client/EJBCAWSRABaseCommand.java uses or overrides a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+
+setup:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ws-cli/lib
+     [copy] Copying 49 files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ws-cli/lib
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ws-cli
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ws-cli
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ws-cli
+
+build:
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ws-cli/ejbca-ws-cli.jar
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-ws-client.jar
+
+edition-specific-interface:
+
+build:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/edition-specific/build-interface/classes
+    [javac] Compiling 34 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/edition-specific/build-interface/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/edition-specific/build-ejb/classes
+    [javac] Compiling 17 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/edition-specific/build-ejb/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+
+jar:
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/edition-specific-interface.jar
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/edition-specific-ejb.jar
+
+peerconnector:
+
+statedump-ejb:
+
+peerconnector-cli:
+
+plugins:
+
+compile:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/plugins/build-plugins
+    [javac] Compiling 4 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/plugins/build-plugins
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] Note: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/plugins/src/org/ejbca/core/model/CertSafePublisher.java uses or overrides a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+
+build:
+     [java] Added 2 implementations of org.ejbca.core.model.ca.publisher.ICustomPublisher
+     [java] Setting URL to classloader: file:/home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/plugins/build-plugins/
+     [java] Added 1 implementations of org.ejbca.core.model.services.IWorker
+     [java] Setting URL to classloader: file:/home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/plugins/build-plugins/
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/plugins.jar
+
+plugins-ee:
+
+ejbca-ejb-cli:
+
+setup:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli/lib
+     [copy] Copying 39 files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli/lib
+     [copy] Copying 21 files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli/lib
+     [copy] Copying 2 files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli
+
+compile:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb-cli/build
+    [javac] Compiling 161 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb-cli/build
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] Note: Some input files use or override a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+
+build:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb-cli/build/conf
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb-cli/build
+     [java] Setting URL to classloader: file:/home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb-cli/build/
+     [java] Added 138 implementations of org.ejbca.ui.cli.infrastructure.command.CliCommandPlugin
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli/ejbca-ejb-cli.jar
+
+iodef:
+
+caa:
+
+mpic:
+
+configdump-ejb:
+
+ejbca-ejb:
+
+compile-ejbca-ejb:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb/build
+    [javac] Compiling 100 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb/build
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] Note: Some input files use or override a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+
+build:
+     [java] Setting URL to classloader: file:/home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb/build/
+     [java] Added 1 implementations of org.cesecore.authorization.rules.AccessRulePlugin
+     [java] Added 1 implementations of org.cesecore.certificates.ocsp.extension.OCSPExtension
+     [java] Added 1 implementations of org.cesecore.certificates.ca.ExtendedUserDataHandler
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-ejb.jar
+
+acme:
+
+ejbca-rest-common:
+
+setup:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-common/build/WEB-INF/classes
+
+compile:
+    [javac] Compiling 92 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-common/build
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] Note: Some input files use or override a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+
+build:
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-rest-common.jar
+
+cits:
+
+-build-proxy-ca:
+
+-copy-proxy-ca:
+
+proxy-ca:
+
+eedition-ejb:
+
+admin-gui:
+
+setup:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/admin-gui/build/WEB-INF/classes
+[native2ascii] Converting 13 files from /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/admin-gui/resources/languages to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/admin-gui/build/languages
+[native2ascii] Converting 1 file from /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/admin-gui/resources/languages to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/admin-gui/build/languages
+
+compile:
+    [javac] Compiling 193 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/admin-gui/build/WEB-INF/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/admin-gui/src/org/ejbca/ui/psm/jsf/JsfDynamicUiPsmFactory.java:414: warning: [removal] setSize(int) in HtmlInputFile has been deprecated and marked for removal
+    [javac]         result.setSize(44);
+    [javac]               ^
+    [javac] Note: Some input files use or override a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+    [javac] 1 warning
+
+build:
+      [war] Building war: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/adminweb.war
+
+ra-gui:
+
+compile:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ra-gui/build/WEB-INF/classes
+    [javac] Compiling 58 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ra-gui/build/WEB-INF/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] Note: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ra-gui/src/org/ejbca/ra/jsfext/RaExceptionHandlerFactory.java uses or overrides a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+
+build:
+      [war] Building war: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ra-gui.war
+
+ejbca-ws:
+
+compile:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/build
+    [javac] Compiling 23 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/build
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+
+build-ejb-jar:
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-ws-ejb.jar
+
+compile-library:
+
+build-jar:
+
+build:
+
+ejbca-db-cli:
+
+ejbca.clients:
+
+clientToolBox:
+
+setup:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/clientToolBox
+     [copy] Copying 36 files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/clientToolBox/lib
+     [copy] Copying 25 files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/clientToolBox/lib
+     [copy] Copying 7 files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/clientToolBox
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/clientToolBox/properties
+
+compile:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/clientToolBox/build
+    [javac] Compiling 1 source file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/clientToolBox/build
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] warning: Implicitly compiled files were not subject to annotation processing.
+    [javac]   Use -proc:none to disable annotation processing or -implicit to specify a policy for implicit compilation.
+    [javac] Note: Some input files use or override a deprecated API.
+    [javac] Note: Recompile with -Xlint:deprecation for details.
+    [javac] 1 warning
+
+build:
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/clientToolBox/clientToolBox.jar
+
+systemtests.build.libs:
+
+check-inproduction:
+
+build-libs:
+
+ct:
+
+va-ejbca-war:
+
+use-ocsp-extensionclass:
+
+ejbca-status-compile:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/va/build-status/WEB-INF/classes
+    [javac] Compiling 2 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/va/build-status/WEB-INF/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+
+extensions-build:
+     [java] Added 1 implementations of org.cesecore.certificates.ocsp.extension.OCSPExtension
+     [java] Setting URL to classloader: file:/home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/va/build-status/WEB-INF/classes/
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-extensions.jar
+
+ejbca-status.war:
+      [war] Building war: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/status.war
+
+ejbca-build:
+
+certstore-war:
+
+ejbca-certstore-compile:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/certificatestore/build-certstore/WEB-INF/classes
+    [javac] Compiling 1 source file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/certificatestore/build-certstore/WEB-INF/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+
+certstore.war:
+      [war] Building war: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/certstore.war
+
+ejbca-build:
+
+crlstore-war:
+
+ejbca-compile:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/crlstore/build-crlstore/WEB-INF/classes
+    [javac] Compiling 1 source file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/crlstore/build-crlstore/WEB-INF/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] warning: Implicitly compiled files were not subject to annotation processing.
+    [javac]   Use -proc:none to disable annotation processing or -implicit to specify a policy for implicit compilation.
+    [javac] 1 warning
+
+ejbca-crlstore.war:
+      [war] Building war: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/crlstore.war
+
+ejbca-build:
+
+est-war:
+
+unidfnr:
+
+ejbca-rest-certificate:
+
+setup:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-certificate/build/WEB-INF/classes
+
+compile:
+    [javac] Compiling 3 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-certificate/build
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+
+build:
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-rest-certificate.jar
+
+ejbca-rest-coap:
+
+ejbca-rest-configdump:
+
+ejbca-rest-ca:
+
+setup:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-ca/build/WEB-INF/classes
+
+compile:
+    [javac] Compiling 1 source file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-ca/build
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+
+build:
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-rest-ca.jar
+
+ejbca-rest-cryptotoken:
+
+ejbca-rest-camanagement:
+
+ejbca-rest-endentity:
+
+ejbca-rest-ssh:
+
+ejbca-rest-system:
+
+setup:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-system/build/WEB-INF/classes
+
+compile:
+    [javac] Compiling 1 source file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-system/build
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+
+build:
+      [jar] Building jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-rest-system.jar
+
+ejbca-rest-api:
+
+setup:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-api/build/WEB-INF/classes
+
+compile:
+    [javac] Compiling 6 source files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-api/build/WEB-INF/classes
+    [javac] Note: Annotation processing is enabled because one or more processors were found
+    [javac]   on the class path. A future release of javac may disable annotation processing
+    [javac]   unless at least one processor is specified by name (-processor), or a search
+    [javac]   path is specified (--processor-path, --processor-module-path), or annotation
+    [javac]   processing is enabled explicitly (-proc:only, -proc:full).
+    [javac]   Use -Xlint:-options to suppress this message.
+    [javac]   Use -proc:none to disable annotation processing.
+    [javac] Note: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-api/src/org/ejbca/util/swagger/SnakeCaseConverter.java uses unchecked or unsafe operations.
+    [javac] Note: Recompile with -Xlint:unchecked for details.
+
+build:
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-api/build/WEB-INF/classes
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-api/build/META-INF
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-rest-api/build/META-INF
+      [war] Building war: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/ejbca-rest-api.war
+
+-build-cesecore-cvcca:
+
+-copy-cesecore-cvcca:
+
+cesecore-cvcca:
+
+ssh:
+
+msae:
+
+ejbca.ear.module-dependencies:
+
+create-log4config-bundle:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp
+      [jar] JARs are never empty, they contain at least a manifest file
+      [jar] Building MANIFEST-only jar: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/dist/log4jconfig.jar
+
+ejbca.ear:
+
+customejbca.message:
+
+doc.war:
+
+customejbca.message:
+
+doc-build-tool:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/docs-tools
+
+doc-external-deps:
+
+doc-confluence:
+
+customejbca.message:
+
+doc-confluence-from-server:
+
+customejbca.message:
+
+doc-confluence-copy-local:
+     [echo] Using local documentation, if any. Set -Ddoc.update=true if you wish to update documentation from Confluence.
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs
+     [copy] Copying 192 files to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs
+
+doc-rest:
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/rest
+     [java] [main] INFO  o.o.codegen.DefaultGenerator - Generating with dryRun=false
+     [java] [main] INFO  o.o.c.ignore.CodegenIgnoreProcessor - No .openapi-generator-ignore file found.
+     [java] [main] INFO  o.o.codegen.DefaultGenerator - OpenAPI Generator: html2 (documentation)
+     [java] [main] INFO  o.o.codegen.DefaultGenerator - Generator 'html2' is considered stable.
+     [java] [main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as importCrl_request. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings importCrl_request=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings importCrl_request=NewModel,ModelA=NewModelA in CLI).
+     [java] [main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as postZipImport_request. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings postZipImport_request=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings postZipImport_request=NewModel,ModelA=NewModelA in CLI).
+     [java] [main] INFO  o.o.codegen.utils.URLPathUtils - 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/ejbca/ejbca-rest-api]
+     [java] [main] INFO  o.o.codegen.utils.URLPathUtils - 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/ejbca/ejbca-rest-api]
+     [java] [main] INFO  o.o.codegen.DefaultGenerator - Model importCrl_request not generated since it's marked as unused (due to form parameters) and `skipFormModel` (global property) set to true (default)
+     [java] [main] INFO  o.o.codegen.DefaultGenerator - Model postZipImport_request not generated since it's marked as unused (due to form parameters) and `skipFormModel` (global property) set to true (default)
+     [java] [main] INFO  o.o.codegen.utils.URLPathUtils - 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/ejbca/ejbca-rest-api]
+     [java] [main] INFO  o.o.codegen.utils.URLPathUtils - 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/ejbca/ejbca-rest-api]
+     [java] [main] INFO  o.o.codegen.utils.URLPathUtils - 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/ejbca/ejbca-rest-api]
+     [java] [main] INFO  o.o.codegen.utils.URLPathUtils - 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/ejbca/ejbca-rest-api]
+     [java] [main] INFO  o.o.codegen.utils.URLPathUtils - 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/ejbca/ejbca-rest-api]
+     [java] [main] INFO  o.o.codegen.utils.URLPathUtils - 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/ejbca/ejbca-rest-api]
+     [java] [main] INFO  o.o.codegen.utils.URLPathUtils - 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/ejbca/ejbca-rest-api]
+     [java] [main] INFO  o.o.codegen.utils.URLPathUtils - 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/ejbca/ejbca-rest-api]
+     [java] [main] INFO  o.o.codegen.utils.URLPathUtils - 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/ejbca/ejbca-rest-api]
+     [java] [main] INFO  o.o.codegen.utils.URLPathUtils - 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/ejbca/ejbca-rest-api]
+     [java] [main] INFO  o.o.codegen.utils.URLPathUtils - 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/ejbca/ejbca-rest-api]
+     [java] [main] INFO  o.o.codegen.utils.URLPathUtils - 'host' (OAS 2.0) or 'servers' (OAS 3.0) not defined in the spec. Default to [http://localhost] for server URL [http://localhost/ejbca/ejbca-rest-api]
+     [java] [main] INFO  o.o.codegen.TemplateManager - writing file /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/rest/index.html
+     [java] [main] INFO  o.o.codegen.TemplateManager - writing file /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/rest/.openapi-generator-ignore
+     [java] [main] INFO  o.o.codegen.TemplateManager - writing file /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/rest/.openapi-generator/VERSION
+     [java] [main] INFO  o.o.codegen.TemplateManager - writing file /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/rest/.openapi-generator/FILES
+     [java] ################################################################################
+     [java] # Thanks for using OpenAPI Generator.                                          #
+     [java] # Please consider donation to help us maintain this project 🙏                 #
+     [java] # https://opencollective.com/openapi_generator/donate                          #
+     [java] ################################################################################
+
+doc-acme:
+
+doc:
+     [echo] WS=/home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/src/org/ejbca/core/protocol/ws/objects
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/jdocswstmp
+  [javadoc] Generating Javadoc
+  [javadoc] Javadoc execution
+  [javadoc] Loading source file /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/edition-specific/src-interface/org/ejbca/core/protocol/ws/objects/CAConstantsWS.java...
+  [javadoc] Loading source file /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/edition-specific/src-interface/org/ejbca/core/protocol/ws/objects/CryptoTokenConstantsWS.java...
+  [javadoc] Loading source file /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/src/org/ejbca/core/protocol/ws/common/CertificateHelper.java...
+  [javadoc] Loading source file /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/src/org/ejbca/core/protocol/ws/common/KeyStoreHelper.java...
+  [javadoc] Constructing Javadoc information...
+  [javadoc] Building index for all the packages and classes...
+  [javadoc] Standard Doclet version 25.0.2+10
+  [javadoc] Building tree for all the packages and classes...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/org/ejbca/core/protocol/ws/objects/CAConstantsWS.html...
+  [javadoc] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/edition-specific/src-interface/org/ejbca/core/protocol/ws/objects/CAConstantsWS.java:33: warning: no comment
+  [javadoc]     public static final String KEYSEQUENCE_FORMAT = "keysequenceformat";
+  [javadoc]                                ^
+  [javadoc] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/edition-specific/src-interface/org/ejbca/core/protocol/ws/objects/CAConstantsWS.java:23: warning: use of default constructor, which does not provide a comment
+  [javadoc] public class CAConstantsWS {
+  [javadoc]        ^
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/org/ejbca/core/protocol/ws/common/CertificateHelper.html...
+  [javadoc] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/src/org/ejbca/core/protocol/ws/common/CertificateHelper.java:53: warning: no comment
+  [javadoc]     public static final int CERT_REQ_TYPE_CRMF		= CertificateConstants.CERT_REQ_TYPE_CRMF;
+  [javadoc]                             ^
+  [javadoc] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/src/org/ejbca/core/protocol/ws/common/CertificateHelper.java:55: warning: no comment
+  [javadoc]     public static final int CERT_REQ_TYPE_PUBLICKEY = CertificateConstants.CERT_REQ_TYPE_PUBLICKEY;
+  [javadoc]                             ^
+  [javadoc] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/src/org/ejbca/core/protocol/ws/common/CertificateHelper.java:54: warning: no comment
+  [javadoc]     public static final int CERT_REQ_TYPE_SPKAC     = CertificateConstants.CERT_REQ_TYPE_SPKAC;
+  [javadoc]                             ^
+  [javadoc] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/src/org/ejbca/core/protocol/ws/common/CertificateHelper.java:30: warning: use of default constructor, which does not provide a comment
+  [javadoc] public class CertificateHelper {
+  [javadoc]        ^
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/org/ejbca/core/protocol/ws/objects/CryptoTokenConstantsWS.html...
+  [javadoc] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/edition-specific/src-interface/org/ejbca/core/protocol/ws/objects/CryptoTokenConstantsWS.java:20: warning: use of default constructor, which does not provide a comment
+  [javadoc] public class CryptoTokenConstantsWS {
+  [javadoc]        ^
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/org/ejbca/core/protocol/ws/common/KeyStoreHelper.html...
+  [javadoc] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/src/org/ejbca/core/protocol/ws/common/KeyStoreHelper.java:38: warning: no comment
+  [javadoc]     public static final byte JKS_MAGIC = (byte)(0xfe);
+  [javadoc]                              ^
+  [javadoc] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/src/org/ejbca/core/protocol/ws/common/KeyStoreHelper.java:37: warning: no comment
+  [javadoc]     public static final byte PEM_MAGIC = (byte)66;
+  [javadoc]                              ^
+  [javadoc] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/src/org/ejbca/core/protocol/ws/common/KeyStoreHelper.java:36: warning: no comment
+  [javadoc]     public static final byte PKCS12_MAGIC = (byte)48;
+  [javadoc]                              ^
+  [javadoc] /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ws/src/org/ejbca/core/protocol/ws/common/KeyStoreHelper.java:33: warning: use of default constructor, which does not provide a comment
+  [javadoc] public class KeyStoreHelper {
+  [javadoc]        ^
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/org/ejbca/core/protocol/ws/common/package-summary.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/org/ejbca/core/protocol/ws/common/package-tree.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/org/ejbca/core/protocol/ws/objects/package-summary.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/org/ejbca/core/protocol/ws/objects/package-tree.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/constant-values.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/overview-tree.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/index.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/allclasses-index.html...
+  [javadoc] Building index for all classes...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/allpackages-index.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/index-all.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/search.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/overview-summary.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/ws/help-doc.html...
+  [javadoc] 11 warnings
+  [javadoc] Generating Javadoc
+  [javadoc] Javadoc execution
+  [javadoc] Loading source file /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-common/src/org/cesecore/audit/enums/EventStatus.java...
+  [javadoc] Loading source file /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-common/src/org/cesecore/audit/enums/EventTypes.java...
+  [javadoc] Loading source file /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-common/src/org/cesecore/audit/enums/ModuleTypes.java...
+  [javadoc] Loading source file /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/cesecore-common/src/org/cesecore/audit/enums/ServiceTypes.java...
+  [javadoc] Loading source file /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb-interface/src/org/ejbca/core/ejb/audit/enums/EjbcaEventTypes.java...
+  [javadoc] Loading source file /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb-interface/src/org/ejbca/core/ejb/audit/enums/EjbcaModuleTypes.java...
+  [javadoc] Loading source file /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/modules/ejbca-ejb-interface/src/org/ejbca/core/ejb/audit/enums/EjbcaServiceTypes.java...
+  [javadoc] Constructing Javadoc information...
+  [javadoc] Building index for all the packages and classes...
+  [javadoc] Standard Doclet version 25.0.2+10
+  [javadoc] Building tree for all the packages and classes...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/logtypes/org/ejbca/core/ejb/audit/enums/EjbcaEventTypes.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/logtypes/org/ejbca/core/ejb/audit/enums/EjbcaModuleTypes.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/logtypes/org/ejbca/core/ejb/audit/enums/EjbcaServiceTypes.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/logtypes/org/cesecore/audit/enums/EventStatus.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/logtypes/org/cesecore/audit/enums/EventTypes.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/logtypes/org/cesecore/audit/enums/ModuleTypes.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/logtypes/org/cesecore/audit/enums/ServiceTypes.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/logtypes/org/cesecore/audit/enums/package-summary.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/logtypes/org/ejbca/core/ejb/audit/enums/package-summary.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/logtypes/index.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/logtypes/allclasses-index.html...
+  [javadoc] Building index for all classes...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/logtypes/allpackages-index.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/logtypes/index-all.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/logtypes/search.html...
+  [javadoc] Generating /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/logtypes/overview-summary.html...
+     [echo] Folder found: false
+
+customejbca.message:
+
+replace-jquery:
+     [echo] Local documentation is now available in file:///home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/htdocs/docs/index.html
+      [war] Building war: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/doc.war
+     [echo] in-test-mode: false
+    [mkdir] Created dir: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/ear/META-INF
+     [copy] Copying 1 file to /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/tmp/ear/META-INF
+     [echo] Enabled module doc.war
+     [echo] Disabled module systemtests-ejb.jar
+     [echo] Disabled module statedump-ejb.jar
+     [echo] Disabled module configdump-ejb.jar
+     [echo] Disabled module peerconnector-ejb.jar
+     [echo] Disabled module cesecore-cvcca.jar
+     [echo] Enabled module cesecore-x509ca.jar
+     [echo] Disabled module proxy-ca.jar
+     [echo] Disabled module unidfnr-ejb.jar
+     [echo] Disabled module peerconnector.rar
+     [echo] Disabled module peerconnector.war
+     [echo] Enabled module ra-gui.war
+     [echo] Disabled module acme.war
+     [echo] Disabled module msae.war
+     [echo] Disabled module cits.war
+     [echo] Disabled module est.war
+     [echo] Enabled module ejbca-rest-api.war
+     [echo] Disabled module swagger-ui.war
+     [echo] Disabled module ssh.war
+
+customejbca.message:
+
+va_replacings_in_application.xml:
+     [echo] Enabled module status.war
+     [echo] Enabled module certstore.war
+     [echo] Enabled module crlstore.war
+
+customejbca.message:
+
+plugin-bootstrap-build:
+      [ear] Building ear: /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca.ear
+
+customejbca.message:
+
+signjar:
+     [echo] Specify -Dsignjar.keystore=/path/keystore.jks if you want to sign the release.
+
+customejbca.message:
+
+signjar.internal:
+
+check-git-hook-prerequisites:
+
+check-git-hook-config:
+
+configure-git-hooks:
+
+build:
+
+BUILD SUCCESSFUL
+Total time: 1 minute 3 seconds

@@ -1,0 +1,26 @@
+Buildfile: ~/rootCA/artifacts/ejbca/Keyfactor-ejbca-ce-7d72bd9/build.xml
+
+customejbca.message:
+     [echo] No custom changes to merge.
+
+appserver.error.message:
+
+deprecated:check:
+
+customejbca.message:
+
+appserver.error.message:
+
+deprecated:notify:
+
+deploy-datasource:
+
+customejbca.message:
+
+appserver.error.message:
+
+BUILD FAILED
+~/rootCA/artifacts/ejbca/Keyfactor-ejbca-ce-7d72bd9/build.xml:856: The following error occurred while executing this line:
+Target "jee:deployDS" does not exist in the project "ejbca". 
+
+Total time: 1 second

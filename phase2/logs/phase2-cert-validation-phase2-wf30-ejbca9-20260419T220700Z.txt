@@ -1,0 +1,40 @@
+Phase 2 Certificate Validation
+Timestamp: 2026-04-19 22:07:00 UTC
+Label: phase2-wf30-ejbca9
+
+== Root Certificate ==
+Input: ~/rootCA/phase2/root-ca.pem
+subject=CN=JSIGROUP Root CA, O=JSIGROUP, C=US
+issuer=CN=JSIGROUP Root CA, O=JSIGROUP, C=US
+serial=5AAE766C0470CB1895735130634980E8299D53C5
+notBefore=Apr 19 20:39:54 2026 GMT
+notAfter=Apr 14 20:39:53 2046 GMT
+        Signature Algorithm: ecdsa-with-SHA384
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Authority Key Identifier: 
+            X509v3 Subject Key Identifier: 
+            X509v3 Key Usage: critical
+    Signature Algorithm: ecdsa-with-SHA384
+
+== Subordinate Certificate ==
+Input: ~/rootCA/phase2/sub-ca.pem
+subject=CN=JSIGROUP Intermediate CA - AD CS, OU=Certificate Authority, O=JSIGROUP, C=US
+issuer=CN=JSIGROUP Root CA, O=JSIGROUP, C=US
+serial=6405EC0EC6619F210888F4F68048F0F7050A1B33
+notBefore=Apr 19 21:56:21 2026 GMT
+notAfter=Apr 16 21:56:20 2036 GMT
+        Signature Algorithm: ecdsa-with-SHA384
+            X509v3 Basic Constraints: critical
+                CA:TRUE, pathlen:0
+            X509v3 Authority Key Identifier: 
+            Authority Information Access: 
+            X509v3 CRL Distribution Points: 
+            X509v3 Subject Key Identifier: 
+            X509v3 Key Usage: critical
+    Signature Algorithm: ecdsa-with-SHA384
+
+Artifacts written:
+- ~/rootCA/phase2/phase2-cert-validation-phase2-wf30-ejbca9-20260419T220700Z.txt
+- ~/rootCA/phase2/root-phase2-wf30-ejbca9-20260419T220700Z.txt
+- ~/rootCA/phase2/sub-phase2-wf30-ejbca9-20260419T220700Z.txt

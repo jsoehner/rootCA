@@ -1,0 +1,122 @@
+[reissue] Starting reissue workflow
+[reissue] Root CA name : JSIGROUP-RootCA
+[reissue] Root DN      : CN=JSIGROUP Root CA,O=JSIGROUP,C=CA
+[reissue] Sub CA name  : JSIGROUP-SubCA
+[reissue] Sub DN       : CN=JSIGROUP Intermediate CA - AD CS,OU=Certificate Authority,O=JSIGROUP,C=CA
+[reissue] Importing certificate profiles from /home/jsoehner/rootCA/phase2/profiles
+Importing certificate and end entity profiles: 
+Filename: 'certprofile_RootCAPilot-ECC384-SHA384-102.xml'
+Certificate profile id '102' already exist in database. Adding with a new profile id instead.
+certprofile.upgrade, 46.0
+Added certificate profile 'RootCAPilot-ECC384-SHA384', '-1' to database.
+Filename: 'certprofile_RootCAProd-ECC384-SHA384-100.xml'
+Certificate profile id '100' already exist in database. Adding with a new profile id instead.
+certprofile.upgrade, 46.0
+Added certificate profile 'RootCAProd-ECC384-SHA384', '-1' to database.
+Filename: 'certprofile_SubordCAPilot-ECC384-SHA384-103.xml'
+Certificate profile id '103' already exist in database. Adding with a new profile id instead.
+certprofile.upgrade, 46.0
+Added certificate profile 'SubordCAPilot-ECC384-SHA384', '-1' to database.
+Filename: 'certprofile_SubordCAPilot-RSA4096-SHA256-104.xml'
+Certificate profile id '104' already exist in database. Adding with a new profile id instead.
+certprofile.upgrade, 46.0
+Added certificate profile 'SubordCAPilot-RSA4096-SHA256', '-1' to database.
+Filename: 'certprofile_SubordCAProd-ECC384-SHA384-101.xml'
+Certificate profile id '101' already exist in database. Adding with a new profile id instead.
+certprofile.upgrade, 46.0
+Added certificate profile 'SubordCAProd-ECC384-SHA384', '-1' to database.
+[reissue] Creating root CA 'JSIGROUP-RootCA'
+Initializing CA
+Generating rootCA keystore:
+CA Type:x509
+CA name: JSIGROUP-RootCA
+SuperAdmin CN: null
+DN: CN=JSIGROUP Root CA,O=JSIGROUP,C=CA
+CA token type: soft
+CA token password: hidden
+Keytype: ECDSA
+Keyspec: secp384r1
+Validity: 7300d
+Policy ID: null
+Signature alg: SHA384withECDSA
+Certificate profile: RootCAProd-ECC384-SHA384
+CA token properties: {}
+Signed by: Self signed
+Initalizing authorization module with caid=1472584536 and superadmin CN 'null'.
+Creating CA...
+CAId for created CA: 1472584536
+Created and published initial CRL.
+CA initialized
+Note that open browser sessions may have to be restarted to interact with this CA.
+[reissue] Root CA ID: 1472584536
+[reissue] Creating subordinate CA 'JSIGROUP-SubCA' signed by root ID 1472584536
+Initializing CA
+Generating rootCA keystore:
+CA Type:x509
+CA name: JSIGROUP-SubCA
+SuperAdmin CN: null
+DN: CN=JSIGROUP Intermediate CA - AD CS,OU=Certificate Authority,O=JSIGROUP,C=CA
+CA token type: soft
+CA token password: hidden
+Keytype: ECDSA
+Keyspec: secp384r1
+Validity: 3650d
+Policy ID: null
+Signature alg: SHA384withECDSA
+Certificate profile: SubordCAProd-ECC384-SHA384
+CA token properties: {}
+Signed by: JSIGROUP-RootCA
+Initalizing authorization module with caid=1790588970 and superadmin CN 'null'.
+Creating CA...
+CAId for created CA: 1790588970
+Created and published initial CRL.
+CA initialized
+Note that open browser sessions may have to be restarted to interact with this CA.
+[reissue] Exporting CA certificates
+Wrote CA certificate to '/home/jsoehner/rootCA/phase2/root-ca.pem' using PEM encoding.
+Wrote CA certificate to '/home/jsoehner/rootCA/phase2/sub-ca.pem' using PEM encoding.
+[reissue] Running certificate validation
+Phase 2 Certificate Validation
+Timestamp: 2026-04-22 15:22:39 UTC
+Label: prod-jsigroup-ca
+
+== Root Certificate ==
+Input: /home/jsoehner/rootCA/phase2/root-ca.pem
+subject=CN=JSIGROUP Root CA, O=JSIGROUP, C=CA
+issuer=CN=JSIGROUP Root CA, O=JSIGROUP, C=CA
+serial=5ED28BBDE870EF745E7282805ECF98C20600FA4B
+notBefore=Apr 22 15:12:18 2026 GMT
+notAfter=Apr 19 15:12:17 2036 GMT
+        Signature Algorithm: ecdsa-with-SHA384
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Authority Key Identifier: 
+            X509v3 Subject Key Identifier: 
+            X509v3 Key Usage: critical
+    Signature Algorithm: ecdsa-with-SHA384
+
+== Subordinate Certificate ==
+Input: /home/jsoehner/rootCA/phase2/sub-ca.pem
+subject=CN=JSIGROUP Intermediate CA - AD CS, OU=Certificate Authority, O=JSIGROUP, C=CA
+issuer=CN=JSIGROUP Root CA, O=JSIGROUP, C=CA
+serial=4257B2F95F43F3A1AE02B0593E2ED610D907A0F4
+notBefore=Apr 22 15:12:30 2026 GMT
+notAfter=Apr 21 15:12:29 2031 GMT
+        Signature Algorithm: ecdsa-with-SHA384
+            X509v3 Basic Constraints: critical
+                CA:TRUE, pathlen:0
+            X509v3 Authority Key Identifier: 
+            Authority Information Access: 
+            X509v3 CRL Distribution Points: 
+            X509v3 Subject Key Identifier: 
+            X509v3 Key Usage: critical
+    Signature Algorithm: ecdsa-with-SHA384
+
+Artifacts written:
+- /home/jsoehner/rootCA/phase2/logs/phase2-cert-validation-prod-jsigroup-ca-20260422T152239Z.txt
+- /home/jsoehner/rootCA/phase2/logs/root-prod-jsigroup-ca-20260422T152239Z.txt
+- /home/jsoehner/rootCA/phase2/logs/sub-prod-jsigroup-ca-20260422T152239Z.txt
+[reissue] Completed successfully
+[reissue] Root cert : /home/jsoehner/rootCA/phase2/root-ca.pem
+[reissue] Sub cert  : /home/jsoehner/rootCA/phase2/sub-ca.pem
+[reissue] Run log   : /home/jsoehner/rootCA/phase2/logs/phase2-reissue-20260422T152145Z.log

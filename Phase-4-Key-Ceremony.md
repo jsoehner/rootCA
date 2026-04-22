@@ -9,15 +9,15 @@
 
 ## 1. Overview
 
-Phase 4 executes the formal **offline key ceremony** to generate the production root CA private key (on HSM) and issue the production root certificate. After this phase, the root private key is immutable and will remain on HSM for the 20-year certificate validity period. This phase is **irreversible**:
+Phase 4 executes the formal **offline key ceremony** to generate the production root CA private key (on HSM) and issue the production root certificate. After this phase, the root private key is immutable and will remain on HSM for the 10-year certificate validity period. This phase is **irreversible**:
 
 - Root private key cannot be exported, backed up, or recovered if HSM fails (disaster recovery path: new key ceremony + reissue subordinates)
-- Root certificate is fixed; cannot be modified (only expires at end of 20-year term)
+- Root certificate is fixed; cannot be modified (only expires at end of 10-year term)
 - All decisions made in Phases 0-3 (algorithm, naming, constraints, policies) are locked in
 
 **Deliverables:**
 - Root CA private key (generated on-HSM; never exported)
-- Root CA certificate (DER-encoded, self-signed, 20-year validity)
+- Root CA certificate (DER-encoded, self-signed, 10-year validity)
 - Root certificate fingerprint and serial number (recorded in formal ceremony log)
 - Signed ceremony attestations (three officers/auditors: Officer A, Officer B, Auditor)
 - Initial root CRL (empty, no revocation entries; issued by root key immediately after cert generation)
@@ -217,7 +217,7 @@ CERTIFICATE VERIFICATION (Officer A & B):
     Issuer: _________________________________________________
     Serial: _________________________________________________
     Not Before: ____/____/____ ____:____ EST
-    Not After: ____/____/____ (20 years from issue date)
+    Not After: ____/____/____ (10 years from issue date)
     Public Key Algorithm: ECDSA
     Public Key Curve: secp384r1 (384-bit)
     Signature Algorithm: ecdsa-with-SHA384
@@ -404,7 +404,7 @@ Server 2025 AD CS in the production JSIGROUP domain.
   - Select Profile: `RootCAProd-ECC384-SHA384`
   - Confirm Settings:
     - Subject: CN=JSIGROUP Root CA,O=JSIGROUP,C=CA
-    - Validity: 20 years (auto-calculated from today)
+    - Validity: 10 years (auto-calculated from today)
     - Crypto Token: RootCA-HSM-Primary (with PIN already activated from Step 3)
   - Click: "Generate CA" or "Create Root Certificate"
 - [ ] **Wait for issuance** (typically 10-30 seconds)
@@ -417,7 +417,7 @@ Server 2025 AD CS in the production JSIGROUP domain.
 - [ ] Officer B: Verify certificate contents:
   ```bash
   openssl x509 -in root-ca-prod.cer -text -noout | head -40
-  # Verify: Subject, Serial, Validity (20 years), Signature Algorithm (ecdsa-with-SHA384)
+  # Verify: Subject, Serial, Validity (10 years), Signature Algorithm (ecdsa-with-SHA384)
   ```
 - [ ] Calculate root certificate fingerprints:
   ```bash
@@ -554,7 +554,7 @@ If ceremony completes **but root certificate cannot be exported** to distributio
 ✓ Root certificate issued and signed by root private key
 ✓ Root certificate contains all required extensions (Basic Constraints: CA:TRUE, Key Usage: keyCertSign, cRLSign)
 ✓ Root certificate signature algorithm confirmed: ecdsa-with-SHA384 (or fallback RSA-SHA256 if applicable)
-✓ Root certificate validity: 20 years (from ceremony date to expiry date in certificate)
+✓ Root certificate validity: 10 years (from ceremony date to expiry date in certificate)
 ✓ Both officers and auditor physically present and signed ceremony log
 ✓ Network confirmed offline throughout ceremony  (Ethernet disconnected, WiFi blocked)
 ✓ All PINs entered correctly; no lock-out events or authentication failures
@@ -581,7 +581,7 @@ openssl x509 -in root-ca-prod.cer -text -noout -verify
 #     Subject: CN=JSIGROUP Root CA,O=JSIGROUP,C=CA (self-signed: issuer == subject)
 #     Validity:
 #       Not Before: Apr 19 ____:____ 2026 GMT
-#       Not After : Apr 19 ____:____ 2046 GMT  (20 years later)
+#       Not After : Apr 19 ____:____ 2036 GMT  (10 years later)
 #     Public Key Algorithm: id-ecPublicKey
 #       Public-Key: (384 bit) [ECDSA curve secp384r1]
 #     X509v3 Extensions:

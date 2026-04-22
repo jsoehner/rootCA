@@ -11,8 +11,8 @@
 Phase 2 defines the certificate profiles and constraints that EJBCA will use to issue the root CA certificate and subordinate intermediate CA certificates. All profiles are created in EJBCA and tested (including constraint validation and extension rendering) before Phase 3 pilot testing.
 
 **Deliverables:**
-- Root CA certificate profile (ECC P-384 + SHA-384, CA-only usages, 20-year validity)
-- Subordinate CA certificate profile (ECC P-384 or RSA 4096 per fallback decision, pathLen=0, 10-year validity)
+- Root CA certificate profile (ECC P-384 + SHA-384, CA-only usages, 10-year validity)
+- Subordinate CA certificate profile (ECC P-384 or RSA 4096 per fallback decision, pathLen=0, 5-year validity)
 - Extension policy document (AIA/CRL/OCSP strategy, publication endpoints, refresh cadence)
 - Pilot test profiles (matching production but with 90-day validity for rapid iteration)
 - Formal profile validation checklist (all extensions render correctly, constraints enforced)
@@ -27,7 +27,7 @@ Phase 2 defines the certificate profiles and constraints that EJBCA will use to 
 |-----------|-------|
 | **EJBCA Profile Name** | `RootCAProd-ECC384-SHA384` (production) or fallback variants below |
 | **Certificate Subject** | `CN=JSIGROUP Root CA,O=JSIGROUP,C=CA` |
-| **Validity** | 20 years from ceremony date (e.g., 2026-04-19 to 2046-04-19) |
+| **Validity** | 10 years from ceremony date (e.g., 2026-04-19 to 2036-04-19) |
 | **Signature Algorithm** | ECDSA with SHA-384 (OID 1.2.840.10045.4.3.3) |
 | **Key Size** | ECC P-384 (NIST FIPS 186-4, 384-bit curve) |
 | **Self-Signed** | Yes (root certificate must be self-signed) |
@@ -61,7 +61,7 @@ Phase 2 defines the certificate profiles and constraints that EJBCA will use to 
    - **Signature Algorithm:** `SHA384withECDSA` or `SHA256withECDSA` (depending on EJBCA/JDK support; validate with vendor)
    - **Key Algorithm:** `ECDSA`
    - **EC Key Size:** `NIST P-384` or `384-bit` (equivalent)
-  - **Validity:** `7300` days (20 years; EJBCA calculates NotAfter from ceremony date)
+  - **Validity:** `3650` days (10 years; EJBCA calculates NotAfter from ceremony date)
    - **Version:** X.509 v3
 
 4. **Extensions Tab:**
@@ -91,7 +91,7 @@ Phase 2 defines the certificate profiles and constraints that EJBCA will use to 
 |-----------|-------------------|--------------------------|
 | **Profile Name** | `SubordCAProd-ECC384-SHA384` | `SubordCAProd-RSA4096-SHA256` |
 | **Subject DN** | `CN=JSIGROUP Intermediate CA - AD CS,O=JSIGROUP,OU=Certificate Authority,C=CA` | Same |
-| **Validity** | 10 years (3650 days) | Same |
+| **Validity** | 5 years (1825 days) | Same |
 | **Signature Algorithm** | SHA384withECDSA | SHA256withRSA |
 | **Key Algorithm** | ECDSA | RSA |
 | **Key Size** | 384-bit (NIST P-384) | 4096-bit |
@@ -129,7 +129,7 @@ Phase 2 defines the certificate profiles and constraints that EJBCA will use to 
    - **Signature Algorithm:** `SHA384withECDSA`
    - **Key Algorithm:** `ECDSA`
    - **EC Key Size:** `NIST P-384`
-   - **Validity:** `3650` days (10 years)
+  - **Validity:** `1825` days (5 years)
    - **Type:** Subordinate CA (if available) or generic CA
 
 4. **Extensions Tab:**
@@ -153,7 +153,7 @@ Phase 2 defines the certificate profiles and constraints that EJBCA will use to 
 
 ### 4.1 Rapid Iteration Test Profiles
 
-To enable fast pilot cycles, create additional profiles with **90-day validity** (instead of 20yr/10yr production):
+To enable fast pilot cycles, create additional profiles with **90-day validity** (instead of 10yr/5yr production):
 
 | Profile | Validity | Signature Algorithm | Rationale |
 |---------|----------|-------------------|-----------|

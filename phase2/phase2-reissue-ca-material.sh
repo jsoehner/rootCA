@@ -19,8 +19,8 @@ ROOT_DN="${ROOT_DN:-CN=JSIGROUP Root CA,O=JSIGROUP,C=CA}"
 SUB_DN="${SUB_DN:-CN=JSIGROUP Intermediate CA - AD CS,OU=Certificate Authority,O=JSIGROUP,C=CA}"
 ROOT_PROFILE="${ROOT_PROFILE:-RootCAProd-ECC384-SHA384}"
 SUB_PROFILE="${SUB_PROFILE:-SubordCAProd-ECC384-SHA384}"
-ROOT_VALIDITY_DAYS="${ROOT_VALIDITY_DAYS:-7300}"
-SUB_VALIDITY_DAYS="${SUB_VALIDITY_DAYS:-3650}"
+ROOT_VALIDITY_DAYS="${ROOT_VALIDITY_DAYS:-3650}"
+SUB_VALIDITY_DAYS="${SUB_VALIDITY_DAYS:-1825}"
 ROOT_CERT_OUT="${ROOT_CERT_OUT:-$PHASE2_DIR/root-ca.pem}"
 SUB_CERT_OUT="${SUB_CERT_OUT:-$PHASE2_DIR/sub-ca.pem}"
 LABEL="${LABEL:-reissue-jsigroup-ca}"
@@ -38,8 +38,8 @@ Options:
   --sub-dn DN             Subordinate subject DN (default: CN=JSIGROUP Intermediate CA - AD CS,OU=Certificate Authority,O=JSIGROUP,C=CA)
   --root-profile NAME     Root certificate profile (default: RootCAProd-ECC384-SHA384)
   --sub-profile NAME      Subordinate certificate profile (default: SubordCAProd-ECC384-SHA384)
-  --root-validity DAYS    Root validity in days (default: 7300)
-  --sub-validity DAYS     Subordinate validity in days (default: 3650)
+  --root-validity DAYS    Root validity in days (default: 3650)
+  --sub-validity DAYS     Subordinate validity in days (default: 1825)
   --root-cert-out PATH    Output PEM path for root cert (default: ./phase2/root-ca.pem)
   --sub-cert-out PATH     Output PEM path for subordinate cert (default: ./phase2/sub-ca.pem)
   --label NAME            Label for validation report (default: reissue-jsigroup-ca)
@@ -96,7 +96,8 @@ require_health() {
 
 ca_id_by_name() {
   local target="$1"
-  run_ejbca_cli ca listcas | awk -v target="$target" '
+  # Force non-interactive execution and cap runtime to avoid hangs.
+  timeout 30 "$EJBCA_HOME/bin/ejbca.sh" ca listcas </dev/null | awk -v target="$target" '
     /^CA Name: / {name = substr($0, 10)}
     /^ Id: / {if (name == target) {print $2; exit 0}}
   '
@@ -124,7 +125,14 @@ fi
 require_health
 
 echo "[reissue] Importing certificate profiles from $PROFILES_DIR" | tee -a "$RUN_LOG"
-run_ejbca_cli ca importprofiles -d "$PROFILES_DIR" >> "$RUN_LOG" 2>&1
+if ! run_ejbca_cli ca importprofiles -d "$PROFILES_DIR" >> "$RUN_LOG" 2>&1; then
+  if grep -q "already exist in database" "$RUN_LOG"; then
+    echo "[reissue] Profile import reported existing profiles; continuing" | tee -a "$RUN_LOG"
+  else
+    echo "ERROR: Failed to import certificate profiles" | tee -a "$RUN_LOG"
+    exit 1
+  fi
+fi
 
 ROOT_ID_EXISTING="$(ca_id_by_name "$ROOT_CA_NAME" || true)"
 SUB_ID_EXISTING="$(ca_id_by_name "$SUB_CA_NAME" || true)"
@@ -142,8 +150,9 @@ if [[ "$FORCE" != "1" ]]; then
   fi
 fi
 
-TOKEN_PASS_ROOT="$(openssl rand -base64 24 | tr -dc 'A-Za-z0-9' | head -c 24)"
-TOKEN_PASS_SUB="$(openssl rand -base64 24 | tr -dc 'A-Za-z0-9' | head -c 24)"
+# Use hex output to avoid pipefail issues from head/tr pipelines.
+TOKEN_PASS_ROOT="$(openssl rand -hex 12)"
+TOKEN_PASS_SUB="$(openssl rand -hex 12)"
 
 if [[ -z "$ROOT_ID_EXISTING" ]]; then
   echo "[reissue] Creating root CA '$ROOT_CA_NAME'" | tee -a "$RUN_LOG"

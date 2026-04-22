@@ -1,0 +1,122 @@
+[reissue] Starting reissue workflow
+[reissue] Root CA name : JSIGROUP-Pilot-RootCA
+[reissue] Root DN      : CN=JSIGROUP Pilot Root CA,O=JSIGROUP,C=CA
+[reissue] Sub CA name  : JSIGROUP-Pilot-SubCA
+[reissue] Sub DN       : CN=JSIGROUP Intermediate CA - AD CS - PILOT,OU=Certificate Authority,O=JSIGROUP,C=CA
+[reissue] Importing certificate profiles from /home/jsoehner/rootCA/phase2/profiles
+Importing certificate and end entity profiles: 
+Filename: 'certprofile_RootCAPilot-ECC384-SHA384-102.xml'
+Certificate profile id '102' already exist in database. Adding with a new profile id instead.
+certprofile.upgrade, 46.0
+Added certificate profile 'RootCAPilot-ECC384-SHA384', '-1' to database.
+Filename: 'certprofile_RootCAProd-ECC384-SHA384-100.xml'
+Certificate profile id '100' already exist in database. Adding with a new profile id instead.
+certprofile.upgrade, 46.0
+Added certificate profile 'RootCAProd-ECC384-SHA384', '-1' to database.
+Filename: 'certprofile_SubordCAPilot-ECC384-SHA384-103.xml'
+Certificate profile id '103' already exist in database. Adding with a new profile id instead.
+certprofile.upgrade, 46.0
+Added certificate profile 'SubordCAPilot-ECC384-SHA384', '-1' to database.
+Filename: 'certprofile_SubordCAPilot-RSA4096-SHA256-104.xml'
+Certificate profile id '104' already exist in database. Adding with a new profile id instead.
+certprofile.upgrade, 46.0
+Added certificate profile 'SubordCAPilot-RSA4096-SHA256', '-1' to database.
+Filename: 'certprofile_SubordCAProd-ECC384-SHA384-101.xml'
+Certificate profile id '101' already exist in database. Adding with a new profile id instead.
+certprofile.upgrade, 46.0
+Added certificate profile 'SubordCAProd-ECC384-SHA384', '-1' to database.
+[reissue] Creating root CA 'JSIGROUP-Pilot-RootCA'
+Initializing CA
+Generating rootCA keystore:
+CA Type:x509
+CA name: JSIGROUP-Pilot-RootCA
+SuperAdmin CN: null
+DN: CN=JSIGROUP Pilot Root CA,O=JSIGROUP,C=CA
+CA token type: soft
+CA token password: hidden
+Keytype: ECDSA
+Keyspec: secp384r1
+Validity: 90d
+Policy ID: null
+Signature alg: SHA384withECDSA
+Certificate profile: RootCAPilot-ECC384-SHA384
+CA token properties: {}
+Signed by: Self signed
+Initalizing authorization module with caid=-2118228720 and superadmin CN 'null'.
+Creating CA...
+CAId for created CA: -2118228720
+Created and published initial CRL.
+CA initialized
+Note that open browser sessions may have to be restarted to interact with this CA.
+[reissue] Root CA ID: -2118228720
+[reissue] Creating subordinate CA 'JSIGROUP-Pilot-SubCA' signed by root ID -2118228720
+Initializing CA
+Generating rootCA keystore:
+CA Type:x509
+CA name: JSIGROUP-Pilot-SubCA
+SuperAdmin CN: null
+DN: CN=JSIGROUP Intermediate CA - AD CS - PILOT,OU=Certificate Authority,O=JSIGROUP,C=CA
+CA token type: soft
+CA token password: hidden
+Keytype: ECDSA
+Keyspec: secp384r1
+Validity: 90d
+Policy ID: null
+Signature alg: SHA384withECDSA
+Certificate profile: SubordCAPilot-ECC384-SHA384
+CA token properties: {}
+Signed by: JSIGROUP-Pilot-RootCA
+Initalizing authorization module with caid=1089675525 and superadmin CN 'null'.
+Creating CA...
+CAId for created CA: 1089675525
+Created and published initial CRL.
+CA initialized
+Note that open browser sessions may have to be restarted to interact with this CA.
+[reissue] Exporting CA certificates
+Wrote CA certificate to '/home/jsoehner/rootCA/phase3/pilot-root.pem' using PEM encoding.
+Wrote CA certificate to '/home/jsoehner/rootCA/phase3/pilot-sub.pem' using PEM encoding.
+[reissue] Running certificate validation
+Phase 2 Certificate Validation
+Timestamp: 2026-04-22 15:29:46 UTC
+Label: pilot-jsigroup-ca
+
+== Root Certificate ==
+Input: /home/jsoehner/rootCA/phase3/pilot-root.pem
+subject=CN=JSIGROUP Pilot Root CA, O=JSIGROUP, C=CA
+issuer=CN=JSIGROUP Pilot Root CA, O=JSIGROUP, C=CA
+serial=4A87C97FE5FF0B43515D43F8D48DC8902722F8C8
+notBefore=Apr 22 15:19:18 2026 GMT
+notAfter=Jul 21 15:19:17 2026 GMT
+        Signature Algorithm: ecdsa-with-SHA384
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Authority Key Identifier: 
+            X509v3 Subject Key Identifier: 
+            X509v3 Key Usage: critical
+    Signature Algorithm: ecdsa-with-SHA384
+
+== Subordinate Certificate ==
+Input: /home/jsoehner/rootCA/phase3/pilot-sub.pem
+subject=CN=JSIGROUP Intermediate CA - AD CS - PILOT, OU=Certificate Authority, O=JSIGROUP, C=CA
+issuer=CN=JSIGROUP Pilot Root CA, O=JSIGROUP, C=CA
+serial=24F6CCC698C595181957893FDACE2D70E672AC0B
+notBefore=Apr 22 15:19:33 2026 GMT
+notAfter=Jul 21 15:19:17 2026 GMT
+        Signature Algorithm: ecdsa-with-SHA384
+            X509v3 Basic Constraints: critical
+                CA:TRUE, pathlen:0
+            X509v3 Authority Key Identifier: 
+            Authority Information Access: 
+            X509v3 CRL Distribution Points: 
+            X509v3 Subject Key Identifier: 
+            X509v3 Key Usage: critical
+    Signature Algorithm: ecdsa-with-SHA384
+
+Artifacts written:
+- /home/jsoehner/rootCA/phase2/logs/phase2-cert-validation-pilot-jsigroup-ca-20260422T152946Z.txt
+- /home/jsoehner/rootCA/phase2/logs/root-pilot-jsigroup-ca-20260422T152946Z.txt
+- /home/jsoehner/rootCA/phase2/logs/sub-pilot-jsigroup-ca-20260422T152946Z.txt
+[reissue] Completed successfully
+[reissue] Root cert : /home/jsoehner/rootCA/phase3/pilot-root.pem
+[reissue] Sub cert  : /home/jsoehner/rootCA/phase3/pilot-sub.pem
+[reissue] Run log   : /home/jsoehner/rootCA/phase2/logs/phase2-reissue-20260422T152841Z.log

@@ -11,7 +11,7 @@ mkdir -p "$OUTDIR"
 # -----------------------------------------------------------------------
 # Helper: emit XML header/footer and common boilerplate
 # type_int: 8=RootCA 2=SubCA
-# validity: "7300d" "3650d" "90d"
+# validity: "3650d" "1825d" "90d"
 # keyalg: "ECDSA" or "RSA"
 # keyspec list: space-separated, e.g. "secp384r1" or "4096"
 # keyusage: space-separated 9 booleans (digitalSig..decipherOnly)
@@ -450,11 +450,11 @@ ROOT_KU="true false false false false true true false false"
 # Sub CA: keyCertSign + cRLSign only (no digitalSig per Phase 2 spec)
 SUB_KU="false false false false false true true false false"
 
-# 1. RootCAProd-ECC384-SHA384  (type=8, 20yr, ECDSA P-384, no pathLen constraint)
-emit_profile "RootCAProd-ECC384-SHA384" 100 8 "7300d" "ECDSA" "secp384r1" "$ROOT_KU" "false" 0 "$CDP" "$AIA"
+# 1. RootCAProd-ECC384-SHA384  (type=8, 10yr, ECDSA P-384, no pathLen constraint)
+emit_profile "RootCAProd-ECC384-SHA384" 100 8 "3650d" "ECDSA" "secp384r1" "$ROOT_KU" "false" 0 "$CDP" "$AIA"
 
-# 2. SubordCAProd-ECC384-SHA384 (type=2, 10yr, ECDSA P-384, pathLen=0)
-emit_profile "SubordCAProd-ECC384-SHA384" 101 2 "3650d" "ECDSA" "secp384r1" "$SUB_KU" "true" 0 "$CDP" "$AIA"
+# 2. SubordCAProd-ECC384-SHA384 (type=2, 5yr, ECDSA P-384, pathLen=0)
+emit_profile "SubordCAProd-ECC384-SHA384" 101 2 "1825d" "ECDSA" "secp384r1" "$SUB_KU" "true" 0 "$CDP" "$AIA"
 
 # 3. RootCAPilot-ECC384-SHA384 (type=8, 90d, ECDSA P-384, no pathLen constraint)
 emit_profile "RootCAPilot-ECC384-SHA384" 102 8 "90d" "ECDSA" "secp384r1" "$ROOT_KU" "false" 0 "$CDP" "$AIA"

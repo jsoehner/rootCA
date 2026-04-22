@@ -15,11 +15,6 @@ Thumbs.db
 __pycache__/
 *.pyc
 
-# Phase execution outputs
-phase1/logs/
-phase2/logs/
-phase3/logs/
-
 # Keep generated profiles and reports out of git unless explicitly needed
 phase2/profiles/
 

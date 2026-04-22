@@ -1,0 +1,20 @@
+[reissue] Starting reissue workflow
+[reissue] Root CA name : JSIGROUP-RootCA-10Y
+[reissue] Root DN      : CN=JSIGROUP Root CA,O=JSIGROUP,C=CA
+[reissue] Sub CA name  : JSIGROUP-SubCA-5Y
+[reissue] Sub DN       : CN=JSIGROUP Intermediate CA - AD CS,OU=Certificate Authority,O=JSIGROUP,C=CA
+[reissue] Importing certificate profiles from /home/jsoehner/rootCA/phase2/profiles
++ cd /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7
++ ./bin/ejbca.sh ca importprofiles -d /home/jsoehner/rootCA/phase2/profiles
+Importing certificate and end entity profiles: 
+Filename: 'certprofile_RootCAPilot-ECC384-SHA384-102.xml'
+Certificate profile 'RootCAPilot-ECC384-SHA384' already exist in database.
+Filename: 'certprofile_RootCAProd-ECC384-SHA384-100.xml'
+Certificate profile 'RootCAProd-ECC384-SHA384' already exist in database.
+Filename: 'certprofile_SubordCAPilot-ECC384-SHA384-103.xml'
+Certificate profile 'SubordCAPilot-ECC384-SHA384' already exist in database.
+Filename: 'certprofile_SubordCAPilot-RSA4096-SHA256-104.xml'
+Certificate profile 'SubordCAPilot-RSA4096-SHA256' already exist in database.
+Filename: 'certprofile_SubordCAProd-ECC384-SHA384-101.xml'
+Certificate profile 'SubordCAProd-ECC384-SHA384' already exist in database.
+[reissue] Profile import reported existing profiles; continuing

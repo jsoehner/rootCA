@@ -45,7 +45,7 @@ On offline EJBCA host:
 2. Verify profile constraints before signing:
    - Basic Constraints: CA:TRUE, pathLen=0 (critical)
    - Key Usage: keyCertSign, cRLSign (critical)
-   - Validity: 10 years
+   - Validity: 5 years
 3. Officer A and Officer B perform dual-control token activation.
 4. Sign subordinate CSR with root key on HSM.
 5. Export artifacts:

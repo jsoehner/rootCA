@@ -1,0 +1,116 @@
+Buildfile: ~/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/build.xml
+
+customejbca.message:
+     [echo] No custom changes to merge.
+
+runinstall:
+
+check:bootstrapdone:
+
+ejbca:prompt:
+    [input] skipping input as property ca.name has already been set.
+    [input] skipping input as property ca.dn has already been set.
+    [input] skipping input as property ca.keytype has already been set.
+    [input] skipping input as property ca.keyspec has already been set.
+    [input] skipping input as property ca.signaturealgorithm has already been set.
+    [input] skipping input as property ca.validity has already been set.
+    [input] skipping input as property ca.policy has already been set.
+     [echo] To set httpsserver.hostname you need to configure conf/web.properties. See sample config file conf/web.properties.sample.
+    [input] skipping input as property httpsserver.hostname has already been set.
+     [echo] 
+     [echo] Common Name (CN) of httpsserver dn is by default taken from the httpsserver.hostname.
+    [input] skipping input as property httpsserver.dn has already been set.
+    [input] skipping input as property superadmin.cn has already been set.
+    [input] skipping input as property superadmin.dn has already been set.
+    [input] skipping input as property superadmin.batch has already been set.
+    [input] skipping input as property superadmin.password has already been set.
+    [input] skipping input as property ca.tokenpassword has already been set.
+
+ejbca:deploytrustprompt:
+    [input] skipping input as property java.trustpassword has already been set.
+
+ejbca:deployprompt:
+    [input] skipping input as property httpsserver.password has already been set.
+
+ejbca:init:
+     [echo] 
+     [echo] ------------------- CA Properties ----------------
+     [echo] ca.name                : ManagementCA
+     [echo] ca.dn                  : CN=ManagementCA,O=EJBCA Sample,C=SE
+     [echo] ca.tokentype           : soft
+     [echo] ca.keytype             : RSA
+     [echo] ca.keyspec             : 2048
+     [echo] ca.signaturealgorithm  : SHA256WithRSA
+     [echo] ca.validity            : 3650
+     [echo] ca.policy              : null
+     [echo] ca.tokenproperties     : ${ca.tokenproperties}
+     [echo] httpsserver.hostname   : localhost
+     [echo] httpsserver.dn         : CN=localhost,O=EJBCA Sample,C=SE
+     [echo] httpsserver.tokentype  : P12
+     [echo] superadmin.cn          : admin
+     [echo] superadmin.dn          : CN=admin
+     [echo] superadmin.batch       : true
+     [echo] appserver.home         : ~/rootCA/artifacts/appserver/wildfly-30.0.1.Final
+     [echo]         
+
+ejbca:install:
+
+ejbca:initCA:
+     [echo] Initializing CA with 'ManagementCA' 'CN=ManagementCA,O=EJBCA Sample,C=SE' 'soft' '<ca.tokenpassword hidden>' '2048' 'RSA' '3650' 'null' 'SHA256WithRSA'   -superadmincn 'admin'...
+     [java] WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.wildfly.security.manager.WildFlySecurityManager (file:~/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli/lib/jboss-client.jar)
+     [java] WARNING: Please consider reporting this to the maintainers of class org.wildfly.security.manager.WildFlySecurityManager
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+
+ejbca:adminweb:
+     [java] WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.wildfly.security.manager.WildFlySecurityManager (file:~/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli/lib/jboss-client.jar)
+     [java] WARNING: Please consider reporting this to the maintainers of class org.wildfly.security.manager.WildFlySecurityManager
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+     [java] WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.wildfly.security.manager.WildFlySecurityManager (file:~/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli/lib/jboss-client.jar)
+     [java] WARNING: Please consider reporting this to the maintainers of class org.wildfly.security.manager.WildFlySecurityManager
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+     [echo] batch tomcat
+     [java] WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.wildfly.security.manager.WildFlySecurityManager (file:~/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli/lib/jboss-client.jar)
+     [java] WARNING: Please consider reporting this to the maintainers of class org.wildfly.security.manager.WildFlySecurityManager
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+     [java] WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.wildfly.security.manager.WildFlySecurityManager (file:~/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli/lib/jboss-client.jar)
+     [java] WARNING: Please consider reporting this to the maintainers of class org.wildfly.security.manager.WildFlySecurityManager
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+
+ejbca:setclearpwd:
+     [java] WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.wildfly.security.manager.WildFlySecurityManager (file:~/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli/lib/jboss-client.jar)
+     [java] WARNING: Please consider reporting this to the maintainers of class org.wildfly.security.manager.WildFlySecurityManager
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+
+ejbca:batchsuperadmin:
+     [echo] batch superadmin
+     [java] WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.wildfly.security.manager.WildFlySecurityManager (file:~/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli/lib/jboss-client.jar)
+     [java] WARNING: Please consider reporting this to the maintainers of class org.wildfly.security.manager.WildFlySecurityManager
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+
+ejbca:deploytrustprompt:
+    [input] skipping input as property java.trustpassword has already been set.
+
+ejbca:javatruststore:
+    [input] skipping input as property ca.name has already been set.
+     [echo] Getting root certificate in DER format...
+     [echo] ca getcacert "ManagementCA" /tmp/rootca.der -der
+     [java] WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.wildfly.security.manager.WildFlySecurityManager (file:~/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/dist/ejbca-ejb-cli/lib/jboss-client.jar)
+     [java] WARNING: Please consider reporting this to the maintainers of class org.wildfly.security.manager.WildFlySecurityManager
+     [java] WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+     [echo] Adding to or creating keystore: ~/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/p12/truststore.p12
+
+ejbca:javatruststore-removeold:
+     [exec] Certificate was added to keystore
+     [exec] [Storing ~/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/p12/truststore.p12]
+   [delete] Deleting: /tmp/rootca.der
+
+BUILD SUCCESSFUL
+Total time: 36 seconds

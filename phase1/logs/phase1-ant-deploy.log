@@ -1,0 +1,12 @@
+Buildfile: ~/rootCA/artifacts/ejbca/Keyfactor-ejbca-ce-7d72bd9/build.xml
+
+customejbca.message:
+     [echo] No custom changes to merge.
+
+appserver.error.message:
+
+deploy:
+     [echo] 'ant deploy' is a deprecated target from outdated installation instructions, please use updated installation guides and the 'deployear' target
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
