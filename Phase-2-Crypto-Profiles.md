@@ -271,7 +271,7 @@ Fallback Profiles (RSA):
   [x] Signature Algorithm: sha256withRSAEncryption
   [x] Basic Constraints: ca:TRUE, pathLen=0 (critical)
 
-PHASE 2 SIGN-OFF:
+  PHASE 2 SIGN-OFF:
   [x] All profiles created and tested in EJBCA
   [x] All extensions validated via openssl x509 inspection
   [x] Test certificates deleted; token confirmed empty
@@ -287,8 +287,8 @@ PHASE 2 SIGN-OFF:
   - Actual Phase 2 technical issuance used `JSIGROUP` in the CA names and subject DNs.
   - Reconcile this with any remaining `JSIGROUP` references in later-phase ceremony documents before formal sign-off.
   
-  Officer A Signature: Jeff Soehner  Date: 04/20/2026
-  Officer B Signature: Jeff Soehner  Date: 04/20/2026
+  Officer A Signature: ____________________  Date: __/__/____
+  Officer B Signature: ____________________  Date: __/__/____
 ```
 
 ### 5.4 Compact Phase 2 Sign-Off Template
@@ -297,21 +297,23 @@ Use this block to close Phase 2 quickly once manual items are complete.
 
 ```
 PHASE 2 FORMAL SIGN-OFF (COMPACT)
-Date: ____/____/______
+Date: _04_/_23_/_2026_
 
-[ ] Test certificates deleted
-[ ] Token object inventory verified empty
+[x] Test certificates deleted
+[x] Token object inventory verified empty
 [ ] Officer A approval captured
 [ ] Officer B approval captured
 
 Officer A (Name): ______________________
-Officer A (Signature): _________________  Date: __/__/__
+Officer A (Signature): _________________  Date: __/__/____
 
 Officer B (Name): ______________________
-Officer B (Signature): _________________  Date: __/__/__
+Officer B (Signature): _________________  Date: __/__/____
 
-Recorded By: ___________________________  Date: __/__/__
-Evidence Set: phase2/logs/phase2-closeout-report-*.txt
+Recorded By: ___________________________  Date: __/__/____
+Evidence Set:
+- phase2/logs/phase2-cleanup-verification-20260423T003737Z.txt
+- phase2/logs/phase2-closeout-report-20260423T003847Z.txt
 ```
 
 ---

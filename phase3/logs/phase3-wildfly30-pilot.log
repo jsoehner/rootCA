@@ -1793,4 +1793,59 @@ L3WAVJkf7IYpXV8c+7yRptWYFeAdvdJ5hPI1K7Ba8jdxCljtqCwJ];tokenproperties={certSignK
 [0m[0m19:33:59,929 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 19:33:59-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
 [0m[0m19:34:04,095 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 19:34:04-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
 [0m[0m20:00:00,002 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m20:07:16,118 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:07:16-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m20:07:16,335 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:07:16-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m20:07:16,380 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:07:16-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m20:07:16,410 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:07:16-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m20:07:16,452 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:07:16-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m20:07:20,792 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:07:20-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m20:07:20,959 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:07:20-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m20:07:21,012 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:07:21-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m20:07:21,038 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:07:21-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m20:07:21,070 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:07:21-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m20:07:43,569 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:07:43-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m20:07:43,717 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:07:43-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m20:07:43,747 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:07:43-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m20:07:43,773 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:07:43-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m20:07:43,798 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:07:43-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m20:10:13,102 INFO  [org.cesecore.certificates.ca.CaSessionBean] (default task-1) CA with name JSIGROUP-RootCA does not exist.
+[0m[0m20:10:24,941 INFO  [org.cesecore.certificates.ca.CaSessionBean] (default task-1) CA with name JSIGROUP-RootCA does not exist.
+[0m[0m20:10:25,153 INFO  [org.ejbca.ui.web.protocol.OCSPServlet] (default task-1: 79203073) Request is missing last part of URL defined in RFC 2560 A.1.1.
+[0m[0m20:10:25,154 INFO  [org.ejbca.ui.web.protocol.OCSPServlet] (default task-1: 79203073) Error processing OCSP request. Message: Request is missing last part of URL defined in RFC 2560 A.1.1.
+[0m[0m20:10:33,703 INFO  [org.cesecore.certificates.ca.CaSessionBean] (default task-1) CA with name JSIGROUP-RootCA does not exist.
+[0m[0m20:10:34,098 INFO  [org.ejbca.ui.web.protocol.OCSPServlet] (default task-1: 50699895) Request is missing last part of URL defined in RFC 2560 A.1.1.
+[0m[0m20:10:34,098 INFO  [org.ejbca.ui.web.protocol.OCSPServlet] (default task-1: 50699895) Error processing OCSP request. Message: Request is missing last part of URL defined in RFC 2560 A.1.1.
+[0m[0m20:10:53,078 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:10:53-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m20:10:53,243 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:10:53-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m20:10:53,282 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:10:53-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m20:10:53,315 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:10:53-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m20:10:53,354 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:10:53-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m20:11:00,045 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:11:00-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m20:11:00,207 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:11:00-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m20:11:00,237 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:11:00-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m20:11:00,268 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:11:00-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m20:11:00,297 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:11:00-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m20:11:06,417 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:11:06-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m20:11:06,589 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:11:06-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m20:11:06,626 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:11:06-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m20:11:06,691 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:11:06-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m20:11:06,723 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:11:06-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m20:11:24,827 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:11:24-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m20:13:40,511 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:13:40-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m20:13:44,850 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:13:44-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m20:28:20,740 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:28:20-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m20:30:34,254 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:30:34-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m20:30:39,334 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 20:30:39-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m20:30:40,151 INFO  [org.ejbca.ui.web.protocol.OCSPServlet] (default task-2: 96466142) Request is missing last part of URL defined in RFC 2560 A.1.1.
+[0m[0m20:30:40,151 INFO  [org.ejbca.ui.web.protocol.OCSPServlet] (default task-2: 96466142) Error processing OCSP request. Message: Request is missing last part of URL defined in RFC 2560 A.1.1.
+[0m[0m20:30:42,459 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-22 20:30:42-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m20:30:46,905 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-22 20:30:46-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m20:30:56,542 INFO  [org.ejbca.ui.web.protocol.OCSPServlet] (default task-2: 94102198) Request is missing last part of URL defined in RFC 2560 A.1.1.
+[0m[0m20:30:56,543 INFO  [org.ejbca.ui.web.protocol.OCSPServlet] (default task-2: 94102198) Error processing OCSP request. Message: Request is missing last part of URL defined in RFC 2560 A.1.1.
+[0m[0m20:32:39,821 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-22 20:32:39-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m20:32:43,960 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-22 20:32:43-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m20:32:44,599 INFO  [org.ejbca.ui.web.protocol.OCSPServlet] (default task-2: 82871551) Request is missing last part of URL defined in RFC 2560 A.1.1.
+[0m[0m20:32:44,600 INFO  [org.ejbca.ui.web.protocol.OCSPServlet] (default task-2: 82871551) Error processing OCSP request. Message: Request is missing last part of URL defined in RFC 2560 A.1.1.
+[0m[0m20:38:47,692 INFO  [org.ejbca.ui.web.protocol.OCSPServlet] (default task-2: 49459247) Request is missing last part of URL defined in RFC 2560 A.1.1.
+[0m[0m20:38:47,692 INFO  [org.ejbca.ui.web.protocol.OCSPServlet] (default task-2: 49459247) Error processing OCSP request. Message: Request is missing last part of URL defined in RFC 2560 A.1.1.
 [0m

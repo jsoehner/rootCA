@@ -1,9 +1,0 @@
-[reissue] Starting reissue workflow
-[reissue] Root CA name : JSIGROUP-RootCA
-[reissue] Root DN      : CN=JSIGROUP Root CA,O=JSIGROUP,C=CA
-[reissue] Sub CA name  : JSIGROUP-SubCA
-[reissue] Sub DN       : CN=JSIGROUP Intermediate CA - AD CS,OU=Certificate Authority,O=JSIGROUP,C=CA
-[reissue] Creating root CA 'JSIGROUP-RootCA'
-+ cd /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7
-+ ./bin/ejbca.sh ca init --caname JSIGROUP-RootCA --dn 'CN=JSIGROUP Root CA,O=JSIGROUP,C=CA' --tokenType soft --tokenPass Ix0ByQR3GNNUiVKWvHpx6NKn --keyspec secp384r1 --keytype ECDSA -v 7300 --policy null -s SHA384withECDSA -certprofile RootCAProd-ECC384-SHA384
-Error: Certificate profile with name 'RootCAProd-ECC384-SHA384' does not exist.

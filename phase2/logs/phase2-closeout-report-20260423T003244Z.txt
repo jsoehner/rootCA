@@ -1,10 +1,10 @@
 Phase 2 Closeout Preparation Report
-Timestamp UTC: 2026-04-20 09:20:51 UTC
+Timestamp UTC: 2026-04-23 00:32:44 UTC
 
 Evidence Files
-[x] ~/rootCA/phase2/root-ca.pem
-[x] ~/rootCA/phase2/sub-ca.pem
-[x] ~/rootCA/phase2/phase2-cert-validation-phase2-wf30-ejbca9-20260419T220700Z.txt
+[x] /home/jsoehner/rootCA/phase2/root-ca.pem
+[x] /home/jsoehner/rootCA/phase2/sub-ca.pem
+[x] /home/jsoehner/rootCA/phase2/logs/phase2-cert-validation-prod-jsigroup-ca-final-20260422-20260423T003244Z.txt
 
 Runtime Readiness
 healthcheck_http=200

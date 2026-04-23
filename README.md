@@ -1,7 +1,7 @@
 # JSIGROUP Offline EJBCA Root CA Project
 
-Date: 2026-04-20
-Status: Phase 1 complete and signed off; Phase 2 technical work complete and pending formal sign-off; Phase 3 queued but not started
+Date: 2026-04-23
+Status: Phase 1 complete and signed off; Phase 2 complete and formally closed (closeout evidence refreshed); Phase 3 ready for execution
 
 ## Purpose
 
@@ -39,14 +39,14 @@ Governance and implementation phases:
 
 1. Phase 0: Governance approved and signed off.
 2. Phase 1: Completed and signed off.
-3. Phase 2: **Complete and signed off (2026-04-20); certificate material reissued (2026-04-22).**
+3. Phase 2: **Complete and signed off (2026-04-20); closeout evidence refreshed (2026-04-23).**
 	- Verified evidence set present under `~/rootCA/phase2` and `~/rootCA/phase2/logs`.
 	- Exported replacement CA artifacts verified (canonical identity `O=JSIGROUP, C=CA`):
 	  - Root: `JSIGROUP-RootCA`, SHA-256 fingerprint `95:C8:A0:64:BE:34:54:53:2C:8C:4C:CE:6F:4E:E3:59:65:3E:A0:11:B0:5B:3A:D9:8B:35:85:5E:88:95:D7:71`
 	  - Subordinate: `JSIGROUP-SubCA`, SHA-256 fingerprint `18:47:22:5F:41:70:1D:11:92:E1:3E:72:64:B0:8F:E5:AF:51:BF:D7:90:58:84:58:1D:A0:78:2E:24:EF:DA:3E`
 	- Runtime checkpoint healthy (`admin=200`, `ocsp=200`) during reissue run.
 	- NitroKey HSM token verified empty (serial `DENK0402828`; PKCS#15 profile object only).
-	- Signed off by: Jeff Soehner, 2026-04-20. Reissue details: [Phase-2-Execution-Log.md](Phase-2-Execution-Log.md).
+	- Signed off by: Jeff Soehner, 2026-04-20. Closeout refresh details: [Phase-2-Execution-Log.md](Phase-2-Execution-Log.md).
 4. Phase 3: **Ready to start.** Phase 2 sign-off complete; entry authorized.
 5. Phase 4: Not started. Still blocked by Phase 3 go decision.
 6. Phase 5: Not started. Still blocked by Phase 4 production ceremony.

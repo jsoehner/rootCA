@@ -25,6 +25,13 @@ probe_code() {
 
 health_code="$(probe_code "http://127.0.0.1:8080/ejbca/publicweb/healthcheck/ejbcahealth")"
 ocsp_code="$(probe_code "http://127.0.0.1:8080/ejbca/publicweb/status/ocsp")"
+latest_cleanup="$(ls -1t "$LOG_DIR"/phase2-cleanup-verification-*.txt 2>/dev/null | head -n 1 || true)"
+cleanup_item_status="[ ]"
+if [[ -n "$latest_cleanup" ]] \
+  && grep -Fq "[x] No obvious transient test or CSR artifacts found" "$latest_cleanup" \
+  && grep -Fq "[x] Token inventory verified empty" "$latest_cleanup"; then
+  cleanup_item_status="[x]"
+fi
 
 {
   echo "Phase 2 Closeout Preparation Report"
@@ -50,7 +57,12 @@ ocsp_code="$(probe_code "http://127.0.0.1:8080/ejbca/publicweb/status/ocsp")"
   fi
   echo
   echo "Manual Sign-off Items"
-  echo "[ ] Test certificates deleted and token confirmed empty"
+  if [[ -n "$latest_cleanup" ]]; then
+    echo "$cleanup_item_status Test certificates deleted and token confirmed empty"
+    echo "    Source: $latest_cleanup"
+  else
+    echo "[ ] Test certificates deleted and token confirmed empty"
+  fi
   echo "[ ] Officer A signature captured"
   echo "[ ] Officer B signature captured"
   echo

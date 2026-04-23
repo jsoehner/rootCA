@@ -117,14 +117,30 @@ probe_pkcs11_inventory() {
     return 0
   fi
 
+  local object_type
   local token_output
-  if ! token_output="$(pkcs11-tool --module "$PKCS11_MODULE" --login --pin "$PKCS11_PIN" --list-objects 2>&1 || true)"; then
-    token_output="pkcs11-tool invocation failed"
-  fi
-  echo "$token_output"
-  if grep -qiE 'no objects|no object' <<<"$token_output"; then
-    echo "[x] Token inventory verified empty"
-  elif [[ -z "$token_output" ]]; then
+  local meaningful_output
+  local has_objects="0"
+  local login_failed="0"
+
+  # Check concrete object classes and ignore profile metadata-only listings.
+  for object_type in privkey pubkey cert data; do
+    token_output="$(timeout 20 pkcs11-tool --module "$PKCS11_MODULE" --login --pin "$PKCS11_PIN" --list-objects --type "$object_type" 2>&1 || true)"
+    echo "$token_output"
+
+    if grep -qiE 'CKR_PIN_INCORRECT|CKR_PIN_LOCKED|C_Login failed|Aborting' <<<"$token_output"; then
+      login_failed="1"
+    fi
+
+    meaningful_output="$(printf '%s\n' "$token_output" | sed '/^Using slot /d;/^$/d')"
+    if [[ -n "$meaningful_output" ]]; then
+      has_objects="1"
+    fi
+  done
+
+  if [[ "$login_failed" == "1" ]]; then
+    echo "[ ] Token inventory not checked: login failed"
+  elif [[ "$has_objects" == "0" ]]; then
     echo "[x] Token inventory verified empty"
   else
     echo "[ ] Token inventory not empty or verification inconclusive"

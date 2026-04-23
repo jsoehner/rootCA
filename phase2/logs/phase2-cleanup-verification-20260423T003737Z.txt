@@ -1,16 +1,21 @@
 Phase 2 Cleanup Verification
-Timestamp UTC: 2026-04-20 20:57:42 UTC
+Timestamp UTC: 2026-04-23 00:37:37 UTC
 
 Retained Evidence Files
 [x] /home/jsoehner/rootCA/phase2/root-ca.pem
 [x] /home/jsoehner/rootCA/phase2/sub-ca.pem
-[x] /home/jsoehner/rootCA/phase2/phase2-cert-validation-phase2-wf30-ejbca9-20260419T220700Z.txt
+[x] /home/jsoehner/rootCA/phase2/logs/phase2-cert-validation-prod-jsigroup-ca-final-20260422-20260423T003244Z.txt
 
 Transient Artifact Scan
 [x] No obvious transient test or CSR artifacts found in /home/jsoehner/rootCA/phase2
 
 PKCS#11 Token Inventory
-[ ] Token inventory not checked: module not found at /usr/lib64/pkcs11/libsc-hsm-pkcs11.so
+Module path: /usr/lib64/pkcs11/opensc-pkcs11.so
+Using slot 0 with a present token (0x0)
+Using slot 0 with a present token (0x0)
+Using slot 0 with a present token (0x0)
+Using slot 0 with a present token (0x0)
+[x] Token inventory verified empty
 
 Operator Interpretation
 - root-ca.pem and sub-ca.pem are retained evidence and should remain in place.

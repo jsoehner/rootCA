@@ -1,0 +1,47 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            25:33:f7:65:5b:dc:36:e5:0f:e3:40:68:8a:60:c7:2b:a8:af:5b:48
+        Signature Algorithm: ecdsa-with-SHA384
+        Issuer: CN=JSIGROUP Root CA, O=JSIGROUP, C=CA
+        Validity
+            Not Before: Apr 22 23:22:49 2026 GMT
+            Not After : Apr 19 23:22:48 2036 GMT
+        Subject: CN=JSIGROUP Root CA, O=JSIGROUP, C=CA
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (384 bit)
+                pub:
+                    04:7d:a1:06:95:a7:b6:ad:1b:ba:2a:b5:d0:6e:7d:
+                    ab:80:e9:c8:71:d2:73:6c:e6:5a:9f:37:3c:59:fe:
+                    b1:42:65:6d:a6:ff:be:ba:da:83:90:c5:34:fb:ee:
+                    9f:ba:e0:4e:dd:dd:d6:c6:05:4b:b2:ff:88:4f:5a:
+                    70:45:d6:9d:f1:df:af:d4:37:e1:05:a3:25:82:44:
+                    e3:73:69:af:2b:fe:82:60:00:7d:c7:e6:16:eb:8f:
+                    03:53:eb:6d:99:84:05
+                ASN1 OID: secp384r1
+                NIST CURVE: P-384
+        X509v3 extensions:
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Authority Key Identifier: 
+                E3:09:F1:47:63:56:F4:58:1E:AC:C7:58:33:C4:6C:65:B3:E1:C7:E0
+            Authority Information Access: 
+                CA Issuers - URI:http://ca.jsiggroup.local/root.cer
+            X509v3 CRL Distribution Points: 
+                Full Name:
+                  URI:http://ca.jsiggroup.local/crl/root.crl
+
+            X509v3 Subject Key Identifier: 
+                E3:09:F1:47:63:56:F4:58:1E:AC:C7:58:33:C4:6C:65:B3:E1:C7:E0
+            X509v3 Key Usage: critical
+                Digital Signature, Certificate Sign, CRL Sign
+    Signature Algorithm: ecdsa-with-SHA384
+    Signature Value:
+        30:65:02:31:00:c4:cc:fe:c1:fd:b8:9f:05:87:ee:43:ad:13:
+        13:c4:97:da:55:70:60:63:38:67:68:ed:d1:51:24:1a:f0:96:
+        3b:b9:c6:5f:c2:7e:40:cd:33:5c:84:7c:67:a6:ba:4e:55:02:
+        30:6e:82:c6:5a:a2:00:14:d2:1a:2f:75:80:54:99:1f:ec:86:
+        29:5d:5f:1c:fb:bc:91:a6:d5:98:15:e0:1d:bd:d2:79:84:f2:
+        35:2b:b0:5a:f2:37:71:0a:58:ed:a8:2c:09

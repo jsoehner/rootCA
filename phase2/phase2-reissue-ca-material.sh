@@ -84,6 +84,15 @@ run_ejbca_cli() {
   )
 }
 
+run_ejbca_cli_timeout() {
+  local seconds="$1"
+  shift
+  (
+    cd "$EJBCA_HOME"
+    timeout "$seconds" ./bin/ejbca.sh "$@"
+  )
+}
+
 require_health() {
   local code
   code="$(curl --max-time 5 -s -o /dev/null -w '%{http_code}' "$HEALTH_URL" || true)"
@@ -125,19 +134,24 @@ fi
 require_health
 
 echo "[reissue] Importing certificate profiles from $PROFILES_DIR" | tee -a "$RUN_LOG"
-if ! run_ejbca_cli ca importprofiles -d "$PROFILES_DIR" >> "$RUN_LOG" 2>&1; then
+if ! run_ejbca_cli_timeout 120 ca importprofiles -d "$PROFILES_DIR" >> "$RUN_LOG" 2>&1; then
   if grep -q "already exist in database" "$RUN_LOG"; then
     echo "[reissue] Profile import reported existing profiles; continuing" | tee -a "$RUN_LOG"
+  elif grep -q "Timed out" "$RUN_LOG"; then
+    echo "ERROR: Profile import timed out" | tee -a "$RUN_LOG"
+    exit 1
   else
     echo "ERROR: Failed to import certificate profiles" | tee -a "$RUN_LOG"
     exit 1
   fi
 fi
 
-ROOT_ID_EXISTING="$(ca_id_by_name "$ROOT_CA_NAME" || true)"
-SUB_ID_EXISTING="$(ca_id_by_name "$SUB_CA_NAME" || true)"
+ROOT_ID_EXISTING=""
+SUB_ID_EXISTING=""
 
 if [[ "$FORCE" != "1" ]]; then
+  ROOT_ID_EXISTING="$(ca_id_by_name "$ROOT_CA_NAME" || true)"
+  SUB_ID_EXISTING="$(ca_id_by_name "$SUB_CA_NAME" || true)"
   if [[ -n "$ROOT_ID_EXISTING" ]]; then
     echo "ERROR: Root CA '$ROOT_CA_NAME' already exists (ID $ROOT_ID_EXISTING)." | tee -a "$RUN_LOG"
     echo "       Use a new --root-ca-name or pass --force to reuse/export existing material." | tee -a "$RUN_LOG"
@@ -150,13 +164,17 @@ if [[ "$FORCE" != "1" ]]; then
   fi
 fi
 
+if [[ "$FORCE" == "1" ]]; then
+  echo "[reissue] Force mode enabled; skipping CA creation and reusing existing CA names" | tee -a "$RUN_LOG"
+fi
+
 # Use hex output to avoid pipefail issues from head/tr pipelines.
 TOKEN_PASS_ROOT="$(openssl rand -hex 12)"
 TOKEN_PASS_SUB="$(openssl rand -hex 12)"
 
-if [[ -z "$ROOT_ID_EXISTING" ]]; then
+if [[ "$FORCE" != "1" && -z "$ROOT_ID_EXISTING" ]]; then
   echo "[reissue] Creating root CA '$ROOT_CA_NAME'" | tee -a "$RUN_LOG"
-  run_ejbca_cli ca init \
+  run_ejbca_cli_timeout 180 ca init \
     --caname "$ROOT_CA_NAME" \
     --dn "$ROOT_DN" \
     --tokenType soft \
@@ -166,20 +184,26 @@ if [[ -z "$ROOT_ID_EXISTING" ]]; then
     -v "$ROOT_VALIDITY_DAYS" \
     --policy null \
     -s SHA384withECDSA \
-    -certprofile "$ROOT_PROFILE" >> "$RUN_LOG" 2>&1
+    -certprofile "$ROOT_PROFILE" >> "$RUN_LOG" 2>&1 || {
+      echo "ERROR: Root CA creation failed or timed out" | tee -a "$RUN_LOG"
+      exit 1
+    }
 fi
 
-ROOT_ID="$(ca_id_by_name "$ROOT_CA_NAME" || true)"
-if [[ -z "$ROOT_ID" ]]; then
-  echo "ERROR: Could not resolve root CA ID for '$ROOT_CA_NAME'" | tee -a "$RUN_LOG"
-  exit 1
+ROOT_ID=""
+if [[ "$FORCE" != "1" ]]; then
+  ROOT_ID="$(ca_id_by_name "$ROOT_CA_NAME" || true)"
+  if [[ -z "$ROOT_ID" ]]; then
+    echo "ERROR: Could not resolve root CA ID for '$ROOT_CA_NAME'" | tee -a "$RUN_LOG"
+    exit 1
+  fi
+
+  echo "[reissue] Root CA ID: $ROOT_ID" | tee -a "$RUN_LOG"
 fi
 
-echo "[reissue] Root CA ID: $ROOT_ID" | tee -a "$RUN_LOG"
-
-if [[ -z "$SUB_ID_EXISTING" ]]; then
+if [[ "$FORCE" != "1" && -z "$SUB_ID_EXISTING" ]]; then
   echo "[reissue] Creating subordinate CA '$SUB_CA_NAME' signed by root ID $ROOT_ID" | tee -a "$RUN_LOG"
-  run_ejbca_cli ca init \
+  run_ejbca_cli_timeout 180 ca init \
     --caname "$SUB_CA_NAME" \
     --dn "$SUB_DN" \
     --signedby "$ROOT_ID" \
@@ -190,12 +214,30 @@ if [[ -z "$SUB_ID_EXISTING" ]]; then
     -v "$SUB_VALIDITY_DAYS" \
     --policy null \
     -s SHA384withECDSA \
-    -certprofile "$SUB_PROFILE" >> "$RUN_LOG" 2>&1
+    -certprofile "$SUB_PROFILE" >> "$RUN_LOG" 2>&1 || {
+      echo "ERROR: Subordinate CA creation failed or timed out" | tee -a "$RUN_LOG"
+      exit 1
+    }
 fi
 
 echo "[reissue] Exporting CA certificates" | tee -a "$RUN_LOG"
-run_ejbca_cli ca getcacert --caname "$ROOT_CA_NAME" -f "$ROOT_CERT_OUT" >> "$RUN_LOG" 2>&1
-run_ejbca_cli ca getcacert --caname "$SUB_CA_NAME" -f "$SUB_CERT_OUT" >> "$RUN_LOG" 2>&1
+run_ejbca_cli_timeout 120 ca getcacert --caname "$ROOT_CA_NAME" -f "$ROOT_CERT_OUT" >> "$RUN_LOG" 2>&1 || {
+  echo "ERROR: Failed to export root CA certificate for '$ROOT_CA_NAME'" | tee -a "$RUN_LOG"
+  exit 1
+}
+run_ejbca_cli_timeout 120 ca getcacert --caname "$SUB_CA_NAME" -f "$SUB_CERT_OUT" >> "$RUN_LOG" 2>&1 || {
+  echo "ERROR: Failed to export subordinate CA certificate for '$SUB_CA_NAME'" | tee -a "$RUN_LOG"
+  exit 1
+}
+
+if [[ ! -s "$ROOT_CERT_OUT" ]]; then
+  echo "ERROR: Exported root certificate is missing or empty: $ROOT_CERT_OUT" | tee -a "$RUN_LOG"
+  exit 1
+fi
+if [[ ! -s "$SUB_CERT_OUT" ]]; then
+  echo "ERROR: Exported subordinate certificate is missing or empty: $SUB_CERT_OUT" | tee -a "$RUN_LOG"
+  exit 1
+fi
 
 echo "[reissue] Running certificate validation" | tee -a "$RUN_LOG"
 "$VALIDATE_SCRIPT" --root-cert "$ROOT_CERT_OUT" --sub-cert "$SUB_CERT_OUT" --label "$LABEL" | tee -a "$RUN_LOG"
