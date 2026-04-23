@@ -1792,4 +1792,5 @@ L3WAVJkf7IYpXV8c+7yRptWYFeAdvdJ5hPI1K7Ba8jdxCljtqCwJ];tokenproperties={certSignK
 [0m[0m19:33:44,241 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 19:33:44-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
 [0m[0m19:33:59,929 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 19:33:59-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
 [0m[0m19:34:04,095 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-22 19:34:04-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m20:00:00,002 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
 [0m
