@@ -2127,4 +2127,12 @@ Caused by: java.security.NoSuchAlgorithmException: no such algorithm: 1.2.840.10
 [0m[0m05:00:04,960 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 05:00:04-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
 [0m[0m05:00:05,338 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 05:00:05-04:00;RA_ADDEEPROFILE;SUCCESS;RA;EJBCA;ejbca;;;;msg=End entity profile ADCS2025_SubCA_EE_Profile added.
 [0m[0m06:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m07:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m08:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m09:00:00,004 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m10:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m11:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m12:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m13:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m14:00:00,004 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
 [0m

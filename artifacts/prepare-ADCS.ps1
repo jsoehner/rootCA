@@ -49,6 +49,22 @@ Path for two-pass state tracking JSON file.
 .PARAMETER AutoReboot
 When set, reboot automatically at the end of pass 1.
 
+.PARAMETER OverwriteExistingKey
+When true, remove/replace an existing CA private key container if present.
+
+.PARAMETER ServicingRepairMode
+Controls when DISM/SFC servicing repair is executed.
+Allowed: Never, OnComponentStoreError, Always.
+
+.PARAMETER DismSourceWim
+Optional WIM source path for DISM restore (example: D:\sources\install.wim:1).
+
+.PARAMETER RunSfcAfterDism
+When true, run SFC after DISM repair.
+
+.PARAMETER MaxRepairAttempts
+Maximum number of repair/reboot cycles before script halts with guidance. Default: 2.
+
 .PARAMETER TranscriptFile
 Path for transcript log output. If blank, a timestamped file is created under WorkRoot\logs.
 
@@ -62,6 +78,14 @@ Uses USER DEFAULTS and writes a transcript log.
 .EXAMPLE
 .\prepare-ADCS.ps1 -KeyAlgorithm RSA_4096 -EnableTranscript:$false
 Overrides defaults for a single execution.
+
+.EXAMPLE
+.\prepare-ADCS.ps1 -OverwriteExistingKey:$true
+Allows replacing an existing key container for the same CA name.
+
+.EXAMPLE
+.\prepare-ADCS.ps1 -ServicingRepairMode OnComponentStoreError -DismSourceWim "D:\sources\install.wim:1"
+Runs DISM/SFC only when servicing corruption is detected, using explicit media source.
 #>
 
 [CmdletBinding()]
@@ -79,8 +103,14 @@ param(
     [string]$InfFile,
     [string]$StateFile,
     [switch]$AutoReboot,
+    [Nullable[bool]]$OverwriteExistingKey,
+    [ValidateSet("Never","OnComponentStoreError","Always")]
+    [string]$ServicingRepairMode,
+    [string]$DismSourceWim,
+    [Nullable[bool]]$RunSfcAfterDism,
     [string]$TranscriptFile,
     [Nullable[bool]]$EnableTranscript
+    ,[int]$MaxRepairAttempts
 )
 
 Set-StrictMode -Version Latest
@@ -99,8 +129,13 @@ $Script:UserDefaults = @{
     InfFile                   = "C:\certs\subca.inf"
     StateFile                 = "C:\certs\adcs-reset-state.json"
     AutoReboot                = $false
+    OverwriteExistingKey      = $true
+    ServicingRepairMode       = "OnComponentStoreError"
+    DismSourceWim             = ""
+    RunSfcAfterDism           = $true
     TranscriptFile            = ""
     EnableTranscript          = $true
+    MaxRepairAttempts         = 2
 }
 # ========================================================================
 
@@ -141,15 +176,37 @@ $WorkRoot = [string](Resolve-Setting -Name "WorkRoot" -CliValue $WorkRoot)
 $RequestFile = [string](Resolve-Setting -Name "RequestFile" -CliValue $RequestFile)
 $InfFile = [string](Resolve-Setting -Name "InfFile" -CliValue $InfFile)
 $StateFile = [string](Resolve-Setting -Name "StateFile" -CliValue $StateFile)
+$ServicingRepairMode = [string](Resolve-Setting -Name "ServicingRepairMode" -CliValue $ServicingRepairMode)
+$DismSourceWim = [string](Resolve-Setting -Name "DismSourceWim" -CliValue $DismSourceWim)
 $TranscriptFile = [string](Resolve-Setting -Name "TranscriptFile" -CliValue $TranscriptFile)
-$ShouldAutoReboot = [bool](
-    if ($Script:ProvidedParameters.ContainsKey("AutoReboot")) { [bool]$AutoReboot }
-    else { [bool]$Script:UserDefaults.AutoReboot }
-)
-$ShouldEnableTranscript = [bool](
-    if ($Script:ProvidedParameters.ContainsKey("EnableTranscript")) { [bool]$EnableTranscript }
-    else { [bool]$Script:UserDefaults.EnableTranscript }
-)
+if ($Script:ProvidedParameters.ContainsKey("MaxRepairAttempts")) {
+    $RepairAttemptLimit = [int]$MaxRepairAttempts
+} else {
+    $RepairAttemptLimit = [int]$Script:UserDefaults.MaxRepairAttempts
+}
+if ($Script:ProvidedParameters.ContainsKey("AutoReboot")) {
+    $ShouldAutoReboot = [bool]$AutoReboot
+} else {
+    $ShouldAutoReboot = [bool]$Script:UserDefaults.AutoReboot
+}
+
+if ($Script:ProvidedParameters.ContainsKey("OverwriteExistingKey")) {
+    $ShouldOverwriteExistingKey = [bool]$OverwriteExistingKey
+} else {
+    $ShouldOverwriteExistingKey = [bool]$Script:UserDefaults.OverwriteExistingKey
+}
+
+if ($Script:ProvidedParameters.ContainsKey("RunSfcAfterDism")) {
+    $ShouldRunSfcAfterDism = [bool]$RunSfcAfterDism
+} else {
+    $ShouldRunSfcAfterDism = [bool]$Script:UserDefaults.RunSfcAfterDism
+}
+
+if ($Script:ProvidedParameters.ContainsKey("EnableTranscript")) {
+    $ShouldEnableTranscript = [bool]$EnableTranscript
+} else {
+    $ShouldEnableTranscript = [bool]$Script:UserDefaults.EnableTranscript
+}
 
 if ([string]::IsNullOrWhiteSpace($TranscriptFile)) {
     $TranscriptFile = Join-Path -Path $WorkRoot -ChildPath ("logs\prepare-ADCS-{0}.log" -f (Get-Date -Format "yyyyMMdd-HHmmss"))
@@ -157,6 +214,7 @@ if ([string]::IsNullOrWhiteSpace($TranscriptFile)) {
 
 Assert-AllowedValue -Name "CAType" -Value $CAType -Allowed @("StandaloneSubordinateCA","EnterpriseSubordinateCA")
 Assert-AllowedValue -Name "KeyAlgorithm" -Value $KeyAlgorithm -Allowed @("ECC_P384","RSA_4096")
+Assert-AllowedValue -Name "ServicingRepairMode" -Value $ServicingRepairMode -Allowed @("Never","OnComponentStoreError","Always")
 
 function Write-Info([string]$Message) {
     Write-Host "[INFO] $Message" -ForegroundColor Cyan
@@ -169,6 +227,68 @@ function Write-Warn([string]$Message) {
 function Write-Step([string]$Message) {
     Write-Host ""
     Write-Host "== $Message ==" -ForegroundColor Green
+}
+
+function Request-OperatorReboot {
+    param(
+        [string]$Reason,
+        [int]$CountdownSeconds = 10
+    )
+
+    Write-Warn "A reboot is recommended: $Reason"
+
+    if ($ShouldAutoReboot) {
+        Write-Info "AutoReboot is enabled. Rebooting in $CountdownSeconds seconds..."
+        Start-Sleep -Seconds $CountdownSeconds
+        Restart-Computer -Force
+        return
+    }
+
+    try {
+        while ($true) {
+            $answer = [string](Read-Host "Do you want to reboot this server now? (Y/N)")
+            $normalized = $answer.Trim().ToLowerInvariant()
+
+            if ($normalized -match '(^|\W)y(es)?(\W|$)') {
+                Write-Info "Operator approved reboot. Restarting now..."
+                Restart-Computer -Force
+                break
+            }
+
+            if ($normalized -match '(^|\W)n(o)?(\W|$)') {
+                Write-Info "Operator declined immediate reboot. Please reboot before rerunning this script."
+                break
+            }
+
+            Write-Warn "Response not recognized. Enter Y/Yes or N/No."
+        }
+    } catch {
+        Write-Warn "Could not prompt for reboot interactively. Reboot manually before rerunning this script."
+    }
+}
+
+function Remove-MachineCngKeyIfPresent {
+    param(
+        [string]$KeyName,
+        [string]$ProviderName = "Microsoft Software Key Storage Provider"
+    )
+
+    if ([string]::IsNullOrWhiteSpace($KeyName)) {
+        return
+    }
+
+    try {
+        $provider = [System.Security.Cryptography.CngProvider]::new($ProviderName)
+        $options = [System.Security.Cryptography.CngKeyOpenOptions]::MachineKey
+        $key = [System.Security.Cryptography.CngKey]::Open($KeyName, $provider, $options)
+        $key.Delete()
+        $key.Dispose()
+        Write-Info "Deleted machine CNG key container: $KeyName"
+    } catch [System.Security.Cryptography.CryptographicException] {
+        Write-Info "No machine CNG key container found for: $KeyName"
+    } catch {
+        Write-Warn "Unable to delete machine CNG key container '$KeyName': $($_.Exception.Message)"
+    }
 }
 
 function Start-ExecutionTranscript {
@@ -206,6 +326,42 @@ function Stop-ExecutionTranscript {
     }
 }
 
+function Invoke-ServicingRepair {
+    param([string]$Reason)
+
+    Write-Step "Component Store Repair"
+    Write-Warn "Trigger: $Reason"
+
+    $dismArgs = @("/Online", "/Cleanup-Image", "/RestoreHealth")
+    if (-not [string]::IsNullOrWhiteSpace($DismSourceWim)) {
+        $dismArgs += "/Source:wim:$DismSourceWim"
+        $dismArgs += "/LimitAccess"
+        Write-Info "DISM source set to: $DismSourceWim"
+    } else {
+        Write-Info "No explicit DISM source provided; using default servicing sources."
+    }
+
+    Write-Info "Running: DISM $($dismArgs -join ' ')"
+    & dism.exe @dismArgs
+    $dismExit = $LASTEXITCODE
+    if ($dismExit -ne 0) {
+        throw "DISM restore failed with exit code $dismExit."
+    }
+    Write-Info "DISM completed successfully."
+
+    if ($ShouldRunSfcAfterDism) {
+        Write-Info "Running: SFC /SCANNOW"
+        & sfc.exe /SCANNOW
+        $sfcExit = $LASTEXITCODE
+        if ($sfcExit -ne 0) {
+            throw "SFC failed with exit code $sfcExit."
+        }
+        Write-Info "SFC completed successfully."
+    } else {
+        Write-Info "RunSfcAfterDism disabled; skipping SFC."
+    }
+}
+
 function Assert-Elevation {
     $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
     $principal = [Security.Principal.WindowsPrincipal]::new($identity)
@@ -225,16 +381,21 @@ function Save-State([string]$Stage) {
     if ($stateDir) {
         Ensure-Directory -Path $stateDir
     }
-
-    @{
-        Stage                    = $Stage
-        CaCommonName             = $CaCommonName
-        CADistinguishedNameSuffix= $CADistinguishedNameSuffix
-        CAType                   = $CAType
-        KeyAlgorithm             = $KeyAlgorithm
-        RequestFile              = $RequestFile
-        UpdatedUtc               = (Get-Date).ToUniversalTime().ToString("o")
-    } | ConvertTo-Json | Set-Content -LiteralPath $StateFile -Encoding UTF8
+    $currentState = @{}
+    if (Test-Path -LiteralPath $StateFile) {
+        try {
+            $currentState = Get-Content -LiteralPath $StateFile -Raw | ConvertFrom-Json
+        } catch {}
+    }
+    $currentState.Stage = $Stage
+    $currentState.CaCommonName = $CaCommonName
+    $currentState.CADistinguishedNameSuffix = $CADistinguishedNameSuffix
+    $currentState.CAType = $CAType
+    $currentState.KeyAlgorithm = $KeyAlgorithm
+    $currentState.RequestFile = $RequestFile
+    $currentState.UpdatedUtc = (Get-Date).ToUniversalTime().ToString("o")
+    if ($null -eq $currentState.RepairAttempts) { $currentState | Add-Member -MemberType NoteProperty -Name RepairAttempts -Value 0 }
+    $currentState | ConvertTo-Json | Set-Content -LiteralPath $StateFile -Encoding UTF8
 }
 
 function Get-State {
@@ -420,6 +581,7 @@ function Remove-AdcsConfiguration {
     Remove-MatchingCertificates -StoreLocationName LocalMachine -StoreName My   -SubjectNeedle $CaCommonName
     Remove-MatchingCertificates -StoreLocationName LocalMachine -StoreName CA   -SubjectNeedle $CaCommonName
     Remove-MatchingCertificates -StoreLocationName LocalMachine -StoreName Root -SubjectNeedle $CaCommonName
+    Remove-MachineCngKeyIfPresent -KeyName $CaCommonName
 
     Write-Step "Cleaning work folder"
     Ensure-Directory -Path $WorkRoot
@@ -432,20 +594,105 @@ function Remove-AdcsConfiguration {
     Write-Host ""
     Write-Host "Pass 1 complete." -ForegroundColor Green
     Write-Host "Reboot the server now, then run this same script again in an elevated prompt." -ForegroundColor Green
-
-    if ($ShouldAutoReboot) {
-        Write-Info "Rebooting in 10 seconds..."
-        Start-Sleep -Seconds 10
-        Restart-Computer -Force
-    }
+    Request-OperatorReboot -Reason "Pass 1 cleanup completed; pass 2 requires a rebooted host state."
 }
 
 function Install-AdcsRoleAndPrepareSubca {
+    # Track repair attempts in state file
+    $state = Get-State
+    if ($null -eq $state) { $state = @{} }
+    if ($state.PSObject.Properties['RepairAttempts'] -eq $null) { $state | Add-Member -MemberType NoteProperty -Name RepairAttempts -Value 0 }
+
+    if ($state.PSObject.Properties['RepairAttempts'] -eq $null) { $state | Add-Member -MemberType NoteProperty -Name RepairAttempts -Value 0 }
+    if ($state.RepairAttempts -ge $RepairAttemptLimit) {
+        Write-Warn "Maximum repair/reboot attempts ($RepairAttemptLimit) reached."
+        Write-Host "" -ForegroundColor Yellow
+        Write-Host "ADCS role cannot be repaired automatically. Manual intervention is required." -ForegroundColor Yellow
+        Write-Host "Try the following steps before rerunning this script:" -ForegroundColor Yellow
+        Write-Host "1. Mount the exact Windows Server installation media matching your OS version." -ForegroundColor Yellow
+        Write-Host "2. Run: DISM /Online /Cleanup-Image /RestoreHealth /Source:wim:<DriveLetter>:\sources\install.wim:1 /LimitAccess" -ForegroundColor Yellow
+        Write-Host "3. Run: SFC /SCANNOW" -ForegroundColor Yellow
+        Write-Host "4. Reboot the server." -ForegroundColor Yellow
+        Write-Host "5. If this still fails, perform an in-place upgrade/repair install or OS rebuild." -ForegroundColor Yellow
+        Write-Host "" -ForegroundColor Yellow
+        throw "Halting to prevent endless repair loop. See above for next steps."
+    }
     Write-Step "Installing ADCS role binaries"
     Import-Module ServerManager -ErrorAction Stop
     Import-Module ADCSDeployment -ErrorAction Stop
 
+    if ($ServicingRepairMode -eq "Always") {
+        Invoke-ServicingRepair -Reason "ServicingRepairMode=Always"
+    }
+
     $caFeature = Get-WindowsFeature -Name ADCS-Cert-Authority
+    $certSvc = Get-Service -Name CertSvc -ErrorAction SilentlyContinue
+
+    if ($caFeature.Installed -and -not $certSvc) {
+        Write-Warn "ADCS feature is marked installed but CertSvc service is missing."
+        Write-Info "Attempting in-place ADCS role repair..."
+
+        try {
+            Install-WindowsFeature -Name ADCS-Cert-Authority -IncludeManagementTools | Out-Null
+            $certSvc = Get-Service -Name CertSvc -ErrorAction SilentlyContinue
+
+            if (-not $certSvc) {
+                Write-Warn "In-place install did not restore CertSvc; trying uninstall/reinstall cycle."
+                Uninstall-WindowsFeature -Name ADCS-Cert-Authority -IncludeManagementTools -Restart:$false | Out-Null
+                Install-WindowsFeature -Name ADCS-Cert-Authority -IncludeManagementTools | Out-Null
+                $certSvc = Get-Service -Name CertSvc -ErrorAction SilentlyContinue
+            }
+        } catch {
+            $repairError = $_.Exception.Message
+            if ($repairError -match "0x80073701|referenced assembly could not be found") {
+                if ($state.PSObject.Properties['RepairAttempts'] -eq $null) { $state | Add-Member -MemberType NoteProperty -Name RepairAttempts -Value 0 }
+                $state.RepairAttempts++
+                $state | ConvertTo-Json | Set-Content -LiteralPath $StateFile -Encoding UTF8
+                                if ($ServicingRepairMode -eq "Never") {
+                            Request-OperatorReboot -Reason "Component store corruption detected while ServicingRepairMode is Never."
+                                        throw @"
+Windows component store appears unhealthy (0x80073701), and ServicingRepairMode=Never.
+Set ServicingRepairMode to OnComponentStoreError or Always to run DISM/SFC from this script.
+"@
+                                }
+
+                                Write-Warn "Detected component-store corruption; running servicing repair workflow."
+                                Invoke-ServicingRepair -Reason "ADCS role repair hit 0x80073701"
+
+                                Write-Info "Retrying ADCS role repair after servicing repair."
+                                Install-WindowsFeature -Name ADCS-Cert-Authority -IncludeManagementTools | Out-Null
+                                $certSvc = Get-Service -Name CertSvc -ErrorAction SilentlyContinue
+
+                                if (-not $certSvc) {
+                                        Write-Warn "CertSvc still missing after retry; attempting uninstall/reinstall cycle."
+                                    if ($state.PSObject.Properties['RepairAttempts'] -eq $null) { $state | Add-Member -MemberType NoteProperty -Name RepairAttempts -Value 0 }
+                                    $state.RepairAttempts++
+                                    $state | ConvertTo-Json | Set-Content -LiteralPath $StateFile -Encoding UTF8
+                                    try {
+                                        Uninstall-WindowsFeature -Name ADCS-Cert-Authority -IncludeManagementTools -Restart:$false | Out-Null
+                                        Install-WindowsFeature -Name ADCS-Cert-Authority -IncludeManagementTools | Out-Null
+                                        $certSvc = Get-Service -Name CertSvc -ErrorAction SilentlyContinue
+                                    } catch {
+                                        Request-OperatorReboot -Reason "ADCS role reinstall failed after DISM/SFC repair."
+                                        throw
+                                    }
+                                }
+                        } else {
+                                throw
+            }
+        }
+
+        if (-not $certSvc) {
+            if ($state.PSObject.Properties['RepairAttempts'] -eq $null) { $state | Add-Member -MemberType NoteProperty -Name RepairAttempts -Value 0 }
+            $state.RepairAttempts++
+            $state | ConvertTo-Json | Set-Content -LiteralPath $StateFile -Encoding UTF8
+                        Request-OperatorReboot -Reason "CertSvc remains missing after repair attempts."
+            throw "CertSvc service is still missing after ADCS role repair. Run DISM/SFC, reboot, and rerun this script."
+        }
+
+        Write-Info "ADCS role repair completed and CertSvc service is present."
+    }
+
     if (-not $caFeature.Installed) {
         Install-WindowsFeature -Name ADCS-Cert-Authority -IncludeManagementTools | Out-Null
         Write-Info "Installed ADCS Certification Authority role and management tools."
@@ -461,6 +708,12 @@ function Install-AdcsRoleAndPrepareSubca {
     Write-Info "Created INF template: $InfFile"
 
     Write-Step "Configuring subordinate CA and generating CSR"
+    if ($ShouldOverwriteExistingKey) {
+        Remove-MachineCngKeyIfPresent -KeyName $CaCommonName
+    } else {
+        Write-Info "OverwriteExistingKey is disabled; existing key containers will be preserved."
+    }
+
     $configPath = "HKLM:\SYSTEM\CurrentControlSet\Services\CertSvc\Configuration"
     if (Test-Path -LiteralPath $configPath) {
         Write-Warn "CA configuration already exists. Skipping Install-AdcsCertificationAuthority."
@@ -471,15 +724,23 @@ function Install-AdcsRoleAndPrepareSubca {
             Ensure-Directory -Path $requestDir
         }
 
-        Install-AdcsCertificationAuthority `
-            -CAType $CAType `
-            -CACommonName $CaCommonName `
-            -CADistinguishedNameSuffix $CADistinguishedNameSuffix `
-            -CryptoProviderName $crypto.CryptoProviderName `
-            -KeyLength $crypto.KeyLength `
-            -HashAlgorithmName $crypto.HashAlgorithmName `
-            -OutputCertRequestFile $RequestFile `
-            -Force
+        $installArgs = @{
+            CAType                    = $CAType
+            CACommonName              = $CaCommonName
+            CADistinguishedNameSuffix = $CADistinguishedNameSuffix
+            CryptoProviderName        = $crypto.CryptoProviderName
+            KeyLength                 = $crypto.KeyLength
+            HashAlgorithmName         = $crypto.HashAlgorithmName
+            OutputCertRequestFile     = $RequestFile
+            Force                     = $true
+        }
+
+        $installCmd = Get-Command Install-AdcsCertificationAuthority -ErrorAction Stop
+        if ($ShouldOverwriteExistingKey -and $installCmd.Parameters.ContainsKey("OverwriteExistingKey")) {
+            $installArgs.OverwriteExistingKey = $true
+        }
+
+        Install-AdcsCertificationAuthority @installArgs
 
         Write-Info "Generated subordinate CA request: $RequestFile"
     }
@@ -490,6 +751,8 @@ function Install-AdcsRoleAndPrepareSubca {
     Write-Info "KeyAlgorithm: $KeyAlgorithm"
     Write-Info "CAType      : $CAType"
     Write-Info "CA Name     : $CaCommonName"
+    Write-Info "OverwriteKey: $ShouldOverwriteExistingKey"
+    Write-Info "SvcRepair   : $ServicingRepairMode"
     Write-Info "Request file: $RequestFile"
     Write-Info "Next: transfer the request file to EJBCA for signing."
 }
