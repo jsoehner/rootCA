@@ -1848,4 +1848,283 @@ L3WAVJkf7IYpXV8c+7yRptWYFeAdvdJ5hPI1K7Ba8jdxCljtqCwJ];tokenproperties={certSignK
 [0m[0m20:32:44,600 INFO  [org.ejbca.ui.web.protocol.OCSPServlet] (default task-2: 82871551) Error processing OCSP request. Message: Request is missing last part of URL defined in RFC 2560 A.1.1.
 [0m[0m20:38:47,692 INFO  [org.ejbca.ui.web.protocol.OCSPServlet] (default task-2: 49459247) Request is missing last part of URL defined in RFC 2560 A.1.1.
 [0m[0m20:38:47,692 INFO  [org.ejbca.ui.web.protocol.OCSPServlet] (default task-2: 49459247) Error processing OCSP request. Message: Request is missing last part of URL defined in RFC 2560 A.1.1.
+[0m[0m21:00:00,002 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m22:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m23:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m00:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m01:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m02:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m03:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m04:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m05:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m06:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m07:00:00,002 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m08:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m09:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m10:00:00,002 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m11:00:00,002 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m12:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m13:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m14:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m15:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m16:00:00,002 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m17:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m18:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m19:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m20:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m21:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m22:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m23:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m00:00:00,004 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m01:00:00,002 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m02:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m03:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m04:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m04:21:23,085 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:21:23-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m04:21:23,352 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:21:23-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m04:21:23,406 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:21:23-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m04:21:23,464 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:21:23-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m04:21:23,522 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:21:23-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:22:09,652 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:22:09-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m04:22:09,922 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:22:09-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m04:22:10,009 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:22:10-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m04:22:10,066 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:22:10-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m04:22:10,112 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:22:10-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:27:18,077 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:27:18-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m04:27:18,290 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:27:18-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m04:27:18,351 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:27:18-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m04:27:18,415 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:27:18-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m04:27:18,465 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:27:18-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:27:50,995 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:27:50-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m04:27:51,161 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:27:51-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m04:27:51,217 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:27:51-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m04:27:51,316 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:27:51-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m04:27:51,357 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:27:51-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:28:08,302 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:28:08-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:28:08,482 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:28:08-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/endentityprofilesrules/1/create_end_entity;resource1=/ra_functionality/create_end_entity
+[0m[0m04:28:08,522 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:28:08-04:00;RA_ADDENDENTITY;FAILURE;RA;CORE;ejbca;-2118228720;;jsi-pilot-adcs-sub-20260424T082746Z;msg=Userdata did not fulfill end entity profile EMPTY, dn 'CN=JSIGROUP Intermediate CA - AD CS - PILOT,OU=Certificate Authority,O=JSIGROUP,C=CA': Couldn't find certificate profile (380872775) among available certificate profiles..
+[0m[0m04:37:22,012 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:37:22-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m04:37:22,158 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:37:22-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m04:37:22,185 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:37:22-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m04:37:22,215 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:37:22-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m04:37:22,242 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:37:22-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:37:37,519 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:37:37-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:37:37,733 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:37:37-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/endentityprofilesrules/1/create_end_entity;resource1=/ra_functionality/create_end_entity
+[0m[0m04:37:37,743 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:37:37-04:00;RA_ADDENDENTITY;FAILURE;RA;CORE;ejbca;-2118228720;;jsi-pilot-adcs-sub-20260424T083717Z;msg=Userdata did not fulfill end entity profile EMPTY, dn 'CN=JSIGROUP Intermediate CA - AD CS - PILOT,OU=Certificate Authority,O=JSIGROUP,C=CA': Couldn't find certificate profile (380872775) among available certificate profiles..
+[0m[0m04:40:10,650 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:40:10-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m04:40:10,805 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:40:10-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m04:40:10,835 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:40:10-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m04:40:10,872 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:40:10-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m04:40:10,909 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:40:10-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:40:26,916 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:40:26-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:40:27,071 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:40:27-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/endentityprofilesrules/1/create_end_entity;resource1=/ra_functionality/create_end_entity
+[0m[0m04:40:27,084 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:40:27-04:00;RA_ADDENDENTITY;FAILURE;RA;CORE;ejbca;-2118228720;;jsi-pilot-adcs-sub-20260424T084005Z;msg=Userdata did not fulfill end entity profile EMPTY, dn 'CN=JSIGROUP Intermediate CA - AD CS - PILOT,OU=Certificate Authority,O=JSIGROUP,C=CA': Couldn't find certificate profile (380872775) among available certificate profiles..
+[0m[0m04:54:39,946 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:54:39-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:54:40,006 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:54:40-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:55:42,051 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:55:42-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:55:42,511 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:55:42-04:00;RA_ADDEEPROFILE;SUCCESS;RA;EJBCA;ejbca;;;;msg=End entity profile SubCA_EE_Profile added.
+[0m[0m04:56:02,347 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:56:02-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m04:56:02,578 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:56:02-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m04:56:02,615 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:56:02-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m04:56:02,667 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:56:02-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m04:56:02,705 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:56:02-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:56:20,501 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:56:20-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:56:20,657 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:56:20-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/endentityprofilesrules/198381618/create_end_entity;resource1=/ra_functionality/create_end_entity
+[0m[0m04:56:20,667 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:56:20-04:00;RA_ADDENDENTITY;FAILURE;RA;CORE;ejbca;-2118228720;;jsi-pilot-adcs-sub-20260424T085556Z;msg=Userdata did not fulfill end entity profile SubCA_EE_Profile, dn 'CN=JSIGROUP Intermediate CA - AD CS - PILOT,OU=Certificate Authority,O=JSIGROUP,C=CA': Wrong number of ORGANIZATIONALUNIT fields in Subject DN..
+[0m[0m04:56:37,232 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:56:37-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m04:56:37,455 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:56:37-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m04:56:37,509 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:56:37-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m04:56:37,548 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:56:37-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m04:56:37,595 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:56:37-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:56:54,031 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:56:54-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:56:54,229 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:56:54-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/endentityprofilesrules/198381618/create_end_entity;resource1=/ra_functionality/create_end_entity
+[0m[0m04:56:54,239 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:56:54-04:00;RA_ADDENDENTITY;FAILURE;RA;CORE;ejbca;-2118228720;;jsi-pilot-adcs-sub-20260424T085632Z;msg=Userdata did not fulfill end entity profile SubCA_EE_Profile, dn 'CN=JSIGROUP Intermediate CA - AD CS - PILOT,O=JSIGROUP,C=CA': Wrong number of ORGANIZATION fields in Subject DN..
+[0m[0m04:57:08,207 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:57:08-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m04:57:08,416 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:57:08-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m04:57:08,456 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:57:08-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m04:57:08,508 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:57:08-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m04:57:08,546 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:57:08-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:57:25,108 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:57:25-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:57:25,334 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:57:25-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/endentityprofilesrules/198381618/create_end_entity;resource1=/ra_functionality/create_end_entity
+[0m[0m04:57:25,350 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:57:25-04:00;RA_ADDENDENTITY;FAILURE;RA;CORE;ejbca;-2118228720;;jsi-pilot-adcs-sub-20260424T085702Z;msg=Userdata did not fulfill end entity profile SubCA_EE_Profile, dn 'CN=JSIGROUP Intermediate CA - AD CS - PILOT': Couldn't find certificate profile (380872775) among available certificate profiles..
+[0m[0m04:58:27,140 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:58:27-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:58:55,184 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:58:55-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:58:55,597 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:58:55-04:00;RA_ADDEEPROFILE;SUCCESS;RA;EJBCA;ejbca;;;;msg=End entity profile SubCA_EE_Profile_v2 added.
+[0m[0m04:59:21,668 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:59:21-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m04:59:21,911 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:59:21-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m04:59:21,945 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:59:21-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m04:59:21,970 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:59:21-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m04:59:21,999 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:59:21-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:59:38,591 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:59:38-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m04:59:38,740 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:59:38-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/endentityprofilesrules/198381619/create_end_entity;resource1=/ra_functionality/create_end_entity
+[0m[0m04:59:38,758 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-24 04:59:38-04:00;RA_ADDENDENTITY;SUCCESS;RA;CORE;ejbca;-2118228720;;jsi-pilot-adcs-sub-20260424T085916Z;msg=Added end entity jsi-pilot-adcs-sub-20260424T085916Z.;caid=-2118228720;cardnumber=;certificateprofileid=380872775;endentityprofileid=198381619;status=10;subjectAltName=;subjectDN=CN=JSIGROUP Intermediate CA - AD CS - PILOT;subjectEmail=;tokentype=1;type=1;username=B64:anNpLXBpbG90LWFkY3Mtc3ViLTIwMjYwNDI0VDA4NTkxNlo=
+[0m[0m04:59:44,255 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 04:59:44-04:00;CA_USERAUTH;SUCCESS;CA;EJBCA;ejbca;-2118228720;;jsi-pilot-adcs-sub-20260424T085916Z;msg=Authenticated user jsi-pilot-adcs-sub-20260424T085916Z.
+[0m[31m04:59:44,292 ERROR [org.cesecore.certificates.certificate.request.PKCS10RequestMessage] (default task-1) Signature could not be processed.: org.bouncycastle.pkcs.PKCSException: unable to process signature: exception on setup: java.security.NoSuchAlgorithmException: no such algorithm: 1.2.840.10045.4.3 for provider BC
+	at deployment.ejbca.ear//org.bouncycastle.pkcs.PKCS10CertificationRequest.isSignatureValid(PKCS10CertificationRequest.java:288)
+	at deployment.ejbca.ear//org.cesecore.certificates.certificate.request.PKCS10RequestMessage.verify(PKCS10RequestMessage.java:439)
+	at deployment.ejbca.ear//org.cesecore.certificates.certificate.request.PKCS10RequestMessage.verify(PKCS10RequestMessage.java:425)
+	at deployment.ejbca.ear.cesecore-ejb.jar//org.cesecore.certificates.certificate.CertificateCreateSessionBean.createCertificate(CertificateCreateSessionBean.java:239)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.jboss.as.ee@30.0.1.Final//org.jboss.as.ee.component.ManagedReferenceMethodInterceptor.processInvocation(ManagedReferenceMethodInterceptor.java:35)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext$Invocation.proceed(InterceptorContext.java:509)
+	at org.jboss.as.weld.common@30.0.1.Final//org.jboss.as.weld.interceptors.Jsr299BindingsInterceptor.delegateInterception(Jsr299BindingsInterceptor.java:62)
+	at org.jboss.as.weld.common@30.0.1.Final//org.jboss.as.weld.interceptors.Jsr299BindingsInterceptor.doMethodInterception(Jsr299BindingsInterceptor.java:72)
+	at org.jboss.as.weld.common@30.0.1.Final//org.jboss.as.weld.interceptors.Jsr299BindingsInterceptor.processInvocation(Jsr299BindingsInterceptor.java:85)
+	at org.jboss.as.ee@30.0.1.Final//org.jboss.as.ee.component.interceptors.UserInterceptorFactory$1.processInvocation(UserInterceptorFactory.java:46)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.component.invocationmetrics.ExecutionTimeInterceptor.processInvocation(ExecutionTimeInterceptor.java:26)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.jpa@30.0.1.Final//org.jboss.as.jpa.interceptor.SBInvocationInterceptor.processInvocation(SBInvocationInterceptor.java:30)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ee@30.0.1.Final//org.jboss.as.ee.concurrent.ConcurrentContextInterceptor.processInvocation(ConcurrentContextInterceptor.java:28)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InitialInterceptor.processInvocation(InitialInterceptor.java:40)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:53)
+	at org.jboss.as.ee@30.0.1.Final//org.jboss.as.ee.component.interceptors.ComponentDispatcherInterceptor.processInvocation(ComponentDispatcherInterceptor.java:35)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.component.pool.PooledInstanceInterceptor.processInvocation(PooledInstanceInterceptor.java:34)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.component.interceptors.AdditionalSetupInterceptor.processInvocation(AdditionalSetupInterceptor.java:39)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.tx.CMTTxInterceptor.invokeInCallerTx(CMTTxInterceptor.java:184)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.tx.CMTTxInterceptor.required(CMTTxInterceptor.java:375)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.tx.CMTTxInterceptor.processInvocation(CMTTxInterceptor.java:143)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext$Invocation.proceed(InterceptorContext.java:509)
+	at org.jboss.weld.core@5.1.2.Final//org.jboss.weld.module.ejb.AbstractEJBRequestScopeActivationInterceptor.aroundInvoke(AbstractEJBRequestScopeActivationInterceptor.java:78)
+	at org.jboss.as.weld.common@30.0.1.Final//org.jboss.as.weld.ejb.EjbRequestScopeActivationInterceptor.processInvocation(EjbRequestScopeActivationInterceptor.java:72)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.component.interceptors.CurrentInvocationContextInterceptor.processInvocation(CurrentInvocationContextInterceptor.java:24)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.component.invocationmetrics.WaitTimeInterceptor.processInvocation(WaitTimeInterceptor.java:30)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.security.IdentityOutflowInterceptor.processInvocation(IdentityOutflowInterceptor.java:56)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.security.SecurityDomainInterceptor.processInvocation(SecurityDomainInterceptor.java:27)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.deployment.processors.StartupAwaitInterceptor.processInvocation(StartupAwaitInterceptor.java:27)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.component.interceptors.ShutDownInterceptorFactory$1.processInvocation(ShutDownInterceptorFactory.java:47)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.component.interceptors.LoggingInterceptor.processInvocation(LoggingInterceptor.java:50)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ee@30.0.1.Final//org.jboss.as.ee.component.NamespaceContextInterceptor.processInvocation(NamespaceContextInterceptor.java:33)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.ContextClassLoaderInterceptor.processInvocation(ContextClassLoaderInterceptor.java:60)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.run(InterceptorContext.java:438)
+	at org.wildfly.security.elytron-base@2.2.2.Final//org.wildfly.security.manager.WildFlySecurityManager.doChecked(WildFlySecurityManager.java:633)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.AccessCheckingInterceptor.processInvocation(AccessCheckingInterceptor.java:57)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:53)
+	at org.jboss.as.ee@30.0.1.Final//org.jboss.as.ee.component.ViewService$View.invoke(ViewService.java:181)
+	at org.jboss.as.ee@30.0.1.Final//org.jboss.as.ee.component.ViewDescription$1.processInvocation(ViewDescription.java:174)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.security.IdentityInterceptor.lambda$processInvocation$0(IdentityInterceptor.java:30)
+	at org.wildfly.security.elytron-base@2.2.2.Final//org.wildfly.security.auth.server.SecurityIdentity.runAsFunctionEx(SecurityIdentity.java:421)
+	at org.wildfly.security.elytron-base@2.2.2.Final//org.wildfly.security.auth.server.Scoped.runAsFunctionEx(Scoped.java:161)
+	at org.wildfly.security.elytron-base@2.2.2.Final//org.wildfly.security.auth.server.Scoped.runAsSupplierEx(Scoped.java:229)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.security.IdentityInterceptor.processInvocation(IdentityInterceptor.java:30)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:53)
+	at org.jboss.as.ee@30.0.1.Final//org.jboss.as.ee.component.ProxyInvocationHandler.invoke(ProxyInvocationHandler.java:64)
+	at deployment.ejbca.ear.cesecore-ejb.jar//org.cesecore.certificates.certificate.CertificateCreateSessionLocal$$$view64.createCertificate(Unknown Source)
+	at deployment.ejbca.ear.ejbca-ejb.jar//org.ejbca.core.ejb.ca.sign.SignSessionBean.createCertificate(SignSessionBean.java:573)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.jboss.as.ee@30.0.1.Final//org.jboss.as.ee.component.ManagedReferenceMethodInterceptor.processInvocation(ManagedReferenceMethodInterceptor.java:35)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext$Invocation.proceed(InterceptorContext.java:509)
+	at org.jboss.as.weld.common@30.0.1.Final//org.jboss.as.weld.interceptors.Jsr299BindingsInterceptor.delegateInterception(Jsr299BindingsInterceptor.java:62)
+	at org.jboss.as.weld.common@30.0.1.Final//org.jboss.as.weld.interceptors.Jsr299BindingsInterceptor.doMethodInterception(Jsr299BindingsInterceptor.java:72)
+	at org.jboss.as.weld.common@30.0.1.Final//org.jboss.as.weld.interceptors.Jsr299BindingsInterceptor.processInvocation(Jsr299BindingsInterceptor.java:85)
+	at org.jboss.as.ee@30.0.1.Final//org.jboss.as.ee.component.interceptors.UserInterceptorFactory$1.processInvocation(UserInterceptorFactory.java:46)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.component.invocationmetrics.ExecutionTimeInterceptor.processInvocation(ExecutionTimeInterceptor.java:26)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.jpa@30.0.1.Final//org.jboss.as.jpa.interceptor.SBInvocationInterceptor.processInvocation(SBInvocationInterceptor.java:30)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ee@30.0.1.Final//org.jboss.as.ee.concurrent.ConcurrentContextInterceptor.processInvocation(ConcurrentContextInterceptor.java:28)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InitialInterceptor.processInvocation(InitialInterceptor.java:40)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:53)
+	at org.jboss.as.ee@30.0.1.Final//org.jboss.as.ee.component.interceptors.ComponentDispatcherInterceptor.processInvocation(ComponentDispatcherInterceptor.java:35)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.component.pool.PooledInstanceInterceptor.processInvocation(PooledInstanceInterceptor.java:34)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.component.interceptors.AdditionalSetupInterceptor.processInvocation(AdditionalSetupInterceptor.java:39)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.tx.CMTTxInterceptor.invokeInOurTx(CMTTxInterceptor.java:237)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.tx.CMTTxInterceptor.required(CMTTxInterceptor.java:373)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.tx.CMTTxInterceptor.processInvocation(CMTTxInterceptor.java:143)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext$Invocation.proceed(InterceptorContext.java:509)
+	at org.jboss.weld.core@5.1.2.Final//org.jboss.weld.module.ejb.AbstractEJBRequestScopeActivationInterceptor.aroundInvoke(AbstractEJBRequestScopeActivationInterceptor.java:87)
+	at org.jboss.as.weld.common@30.0.1.Final//org.jboss.as.weld.ejb.EjbRequestScopeActivationInterceptor.processInvocation(EjbRequestScopeActivationInterceptor.java:72)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.component.interceptors.CurrentInvocationContextInterceptor.processInvocation(CurrentInvocationContextInterceptor.java:24)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.component.invocationmetrics.WaitTimeInterceptor.processInvocation(WaitTimeInterceptor.java:30)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.security.IdentityOutflowInterceptor.processInvocation(IdentityOutflowInterceptor.java:56)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.security.SecurityDomainInterceptor.processInvocation(SecurityDomainInterceptor.java:27)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.deployment.processors.StartupAwaitInterceptor.processInvocation(StartupAwaitInterceptor.java:27)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.component.interceptors.ShutDownInterceptorFactory$1.processInvocation(ShutDownInterceptorFactory.java:47)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.deployment.processors.EjbSuspendInterceptor.processInvocation(EjbSuspendInterceptor.java:40)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.component.interceptors.LoggingInterceptor.processInvocation(LoggingInterceptor.java:50)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.as.ee@30.0.1.Final//org.jboss.as.ee.component.NamespaceContextInterceptor.processInvocation(NamespaceContextInterceptor.java:33)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.ContextClassLoaderInterceptor.processInvocation(ContextClassLoaderInterceptor.java:60)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.run(InterceptorContext.java:438)
+	at org.wildfly.security.elytron-base@2.2.2.Final//org.wildfly.security.manager.WildFlySecurityManager.doChecked(WildFlySecurityManager.java:633)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.AccessCheckingInterceptor.processInvocation(AccessCheckingInterceptor.java:57)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:422)
+	at org.jboss.invocation@2.0.0.Final//org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:53)
+	at org.jboss.as.ee@30.0.1.Final//org.jboss.as.ee.component.ViewService$View.invoke(ViewService.java:181)
+	at org.wildfly.security.elytron-base@2.2.2.Final//org.wildfly.security.auth.server.SecurityIdentity.runAsFunctionEx(SecurityIdentity.java:421)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.remote.AssociationImpl.invokeWithIdentity(AssociationImpl.java:637)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.remote.AssociationImpl.invokeMethod(AssociationImpl.java:615)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.remote.AssociationImpl.lambda$receiveInvocationRequest$0(AssociationImpl.java:213)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.remote.AssociationImpl.execute(AssociationImpl.java:304)
+	at org.jboss.as.ejb3@30.0.1.Final//org.jboss.as.ejb3.remote.AssociationImpl.receiveInvocationRequest(AssociationImpl.java:257)
+	at org.jboss.ejb-client@5.0.5.Final//org.jboss.ejb.protocol.remote.EJBServerChannel$ReceiverImpl.handleInvocationRequest(EJBServerChannel.java:477)
+	at org.jboss.ejb-client@5.0.5.Final//org.jboss.ejb.protocol.remote.EJBServerChannel$ReceiverImpl.handleMessage(EJBServerChannel.java:212)
+	at org.jboss.remoting@5.0.27.Final//org.jboss.remoting3.remote.RemoteConnectionChannel.lambda$handleMessageData$3(RemoteConnectionChannel.java:432)
+	at org.jboss.remoting@5.0.27.Final//org.jboss.remoting3.EndpointImpl$TrackingExecutor.lambda$execute$0(EndpointImpl.java:993)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.ContextClassLoaderSavingRunnable.run(ContextClassLoaderSavingRunnable.java:35)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.EnhancedQueueExecutor.safeRun(EnhancedQueueExecutor.java:1990)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.EnhancedQueueExecutor$ThreadBody.doRunTask(EnhancedQueueExecutor.java:1486)
+	at org.jboss.threads@2.4.0.Final//org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1377)
+	at org.jboss.xnio@3.8.11.Final//org.xnio.XnioWorker$WorkerThreadFactory$1$1.run(XnioWorker.java:1282)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.bouncycastle.operator.OperatorCreationException: exception on setup: java.security.NoSuchAlgorithmException: no such algorithm: 1.2.840.10045.4.3 for provider BC
+	at deployment.ejbca.ear//org.bouncycastle.operator.jcajce.JcaContentVerifierProviderBuilder.createSignature(JcaContentVerifierProviderBuilder.java:259)
+	at deployment.ejbca.ear//org.bouncycastle.operator.jcajce.JcaContentVerifierProviderBuilder.access$300(JcaContentVerifierProviderBuilder.java:33)
+	at deployment.ejbca.ear//org.bouncycastle.operator.jcajce.JcaContentVerifierProviderBuilder$2.get(JcaContentVerifierProviderBuilder.java:178)
+	at deployment.ejbca.ear//org.bouncycastle.pkcs.PKCS10CertificationRequest.isSignatureValid(PKCS10CertificationRequest.java:278)
+	... 147 more
+Caused by: java.security.NoSuchAlgorithmException: no such algorithm: 1.2.840.10045.4.3 for provider BC
+	at java.base/sun.security.jca.GetInstance.getService(GetInstance.java:87)
+	at java.base/sun.security.jca.GetInstance.getInstance(GetInstance.java:206)
+	at java.base/java.security.Signature.getInstance(Signature.java:403)
+	at deployment.ejbca.ear//org.bouncycastle.jcajce.util.NamedJcaJceHelper.createSignature(NamedJcaJceHelper.java:114)
+	at deployment.ejbca.ear//org.bouncycastle.operator.jcajce.OperatorHelper.createSignature(OperatorHelper.java:367)
+	at deployment.ejbca.ear//org.bouncycastle.operator.jcajce.JcaContentVerifierProviderBuilder.createSignature(JcaContentVerifierProviderBuilder.java:251)
+	... 150 more
+
+[0m[0m05:00:00,006 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m05:00:04,960 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 05:00:04-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m05:00:05,338 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-24 05:00:05-04:00;RA_ADDEEPROFILE;SUCCESS;RA;EJBCA;ejbca;;;;msg=End entity profile ADCS2025_SubCA_EE_Profile added.
+[0m[0m06:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
 [0m

@@ -61,6 +61,7 @@ Governance and implementation phases:
 ## Immediate Next Actions
 
 1. Begin Phase 3 using [Phase-3-Pilot-Testing.md](Phase-3-Pilot-Testing.md) — pilot environment isolation and subordinate issuance from the 90-day pilot hierarchy (§1.2 operator runbook).
+	- For external AD CS subordinate CSR signing, use `./phase3/phase3-sign-adcs-subordinate-csr.sh` and provide an end entity profile that permits `SubordCAPilot-ECC384-SHA384` (the default `EMPTY` profile may reject custom SubCA profiles).
 2. Preserve the Phase 2 evidence set under [phase2](phase2), including regenerated artifacts and logs under `phase2/logs`.
 3. After Phase 3 go/no-go decision, proceed to Phase 4 key ceremony.
 

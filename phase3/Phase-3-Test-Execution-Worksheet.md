@@ -61,10 +61,14 @@ Objective:
 Preconditions:
 - AD CS subordinate CSR generated on pilot Windows CA host.
 - Subordinate signing profile available in EJBCA.
+- EJBCA end entity profile `ADCS2025_SubCA_EE_Profile` available and mapped to the intended subordinate certificate profile.
+- CSR PoPO pre-check passes:
+   - `openssl req -in ~/JSI-Root.jsigroup.local_jsigroup-JSI-ROOT-CA-1.req -verify -noout`
 
 Steps:
 1. Export subordinate CSR from Windows CA host.
-2. Sign CSR in EJBCA using `SubordCAPilot-ECC384-SHA384`.
+2. Sign CSR in EJBCA using CLI helper:
+   - `./phase3/phase3-sign-adcs-subordinate-csr.sh --csr ~/JSI-Root.jsigroup.local_jsigroup-JSI-ROOT-CA-1.req --ee-profile ADCS2025_SubCA_EE_Profile`
 3. Export signed subordinate certificate as `pilot-sub-from-adcs.cer`.
 4. Install signed subordinate cert into AD CS setup flow.
 5. Run on Windows CA host:

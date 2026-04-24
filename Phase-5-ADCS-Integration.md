@@ -41,13 +41,17 @@ On Windows Server 2025 AD CS host:
 ### 3.2 Sign CSR on Offline EJBCA Root
 
 On offline EJBCA host:
-1. Import CSR into EJBCA using subordinate profile approved in Phase 2.
+1. Validate CSR integrity and PoPO before EJBCA signing:
+   - `openssl req -in subordinate.req -verify -noout`
+   - If verification fails, regenerate CSR on AD CS before continuing.
+2. Import/sign CSR in EJBCA using subordinate profile approved in Phase 2 and an EE profile mapped for ADCS subordinate issuance (`ADCS2025_SubCA_EE_Profile`).
 2. Verify profile constraints before signing:
    - Basic Constraints: CA:TRUE, pathLen=0 (critical)
    - Key Usage: keyCertSign, cRLSign (critical)
    - Validity: 5 years
 3. Officer A and Officer B perform dual-control token activation.
-4. Sign subordinate CSR with root key on HSM.
+4. Sign subordinate CSR with root key on HSM (CLI helper path):
+   - `./phase3/phase3-sign-adcs-subordinate-csr.sh --csr subordinate.req --ee-profile ADCS2025_SubCA_EE_Profile`
 5. Export artifacts:
    - subordinate-ca.cer
    - root-ca.cer

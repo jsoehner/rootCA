@@ -241,18 +241,32 @@ All tests below must **PASS** before proceeding to Phase 4 production ceremony.
 **Steps:**
 1. Generate subordinate CSR on pilot AD CS (standard Windows CA setup → create subordinate CA config)
 2. Submit CSR to pilot EJBCA root via offline transfer (USB key or email)
-3. In pilot EJBCA: use `SubordCAPilot-ECC384-SHA384` profile to sign CSR
+3. In pilot EJBCA, ensure end entity profile `ADCS2025_SubCA_EE_Profile` is present and mapped to the intended subordinate CA certificate profile.
+4. Pre-check CSR PoPO before EJBCA issuance:
+    ```bash
+    openssl req -in ~/JSI-Root.jsigroup.local_jsigroup-JSI-ROOT-CA-1.req -verify -noout
+    ```
+    If this check fails, regenerate CSR on AD CS before continuing.
+4. Sign CSR via CLI helper:
+   ```bash
+   ./phase3/phase3-sign-adcs-subordinate-csr.sh \
+     --csr ~/JSI-Root.jsigroup.local_jsigroup-JSI-ROOT-CA-1.req \
+       --ee-profile ADCS2025_SubCA_EE_Profile
+   ```
+   Output artifacts:
+   - `./phase3/pilot-sub-from-adcs.pem`
+   - `./phase3/pilot-sub-from-adcs.cer`
 4. Verify certificate issued:
    - [ ] Subject: `CN=JSIGROUP Intermediate CA - AD CS - PILOT,...`
    - [ ] Not After: 90 days from signing date
    - [ ] Contains critical Basic Constraints: ca:TRUE, pathLen=0
    - [ ] Contains critical Key Usage: keyCertSign, cRLSign
-5. Return signed subordinate cert to pilot AD CS
+5. Return signed subordinate cert (`pilot-sub-from-adcs.cer`) to pilot AD CS
 6. Install subordinate cert in pilot AD CS; complete CA setup (Windows configures crypto container, validates certificate)
 7. Restart AD CS; verify service healthcheck: all tests pass (`certutil -pulse`)
 
 **Expected Result:** PASS  
-**Failure Criteria:** CSR signing fails, AD CS service fails to start, cert validation errors in Event Viewer  
+**Failure Criteria:** CSR signing fails, AD CS service fails to start, cert validation errors in Event Viewer. If EJBCA reports PoPO failure, treat CSR as invalid and regenerate on AD CS.  
 **Log Output:** EJBCA issuance log entry; Windows AD CS certutil pulse output; Event Viewer screenshot
 
 ---

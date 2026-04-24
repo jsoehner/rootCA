@@ -1,0 +1,13 @@
+==================================================================
+  Phase 3 — Sign AD CS Subordinate CSR
+  Timestamp : 20260424T082618Z
+  CSR       : /home/jsoehner/JSI-Root.jsigroup.local_jsigroup-JSI-ROOT-CA-1.req
+  Output    : /home/jsoehner/rootCA/phase3/pilot-sub-from-adcs.pem
+  Out (DER) : /home/jsoehner/rootCA/phase3/pilot-sub-from-adcs.cer
+  Issuing CA: JSIGROUP-Pilot-RootCA
+  Profile   : SubordCAPilot-ECC384-SHA384
+  Subject DN: CN=JSIGROUP Intermediate CA - AD CS - PILOT,OU=Certificate Authority,O=JSIGROUP,C=CA
+  EE User   : jsi-pilot-adcs-sub-20260424T082618Z
+==================================================================
+[sign-csr]   CSR validated OK.
+[sign-csr]   Health endpoint: HTTP 200 — OK

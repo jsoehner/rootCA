@@ -318,6 +318,68 @@ Immediate next action:
 
 ---
 
+### Entry 8 — External AD CS CSR Signing Workflow Update (2026-04-24)
+
+Objective:
+- Operationalize a repeatable CLI-only signing workflow for externally generated AD CS subordinate CSRs.
+
+Actions completed:
+1. Added signing helper script:
+   - `./phase3/phase3-sign-adcs-subordinate-csr.sh`
+2. Validated CSR intake for Windows `certreq` format:
+   - Handles `BEGIN NEW CERTIFICATE REQUEST` by normalizing to standard PKCS#10 PEM.
+3. Confirmed runtime and CA/profile presence checks in script preflight.
+4. Observed and documented issuance constraint in current EJBCA state:
+   - `ra addendentity` can fail with:
+     - `Couldn't find certificate profile (...) among available certificate profiles`
+   - Root cause: selected end entity profile does not permit `SubordCAPilot-ECC384-SHA384`.
+
+Lesson learned and workflow change:
+- External CSR signing now requires an explicit end entity profile that allows the subordinate CA certificate profile used for signing.
+- The helper script now accepts `--ee-profile` and fails with actionable remediation if profile permissions are insufficient.
+
+Impact on Test 2:
+- Test 2 remains pending until the pilot signing end entity profile is created/imported and used with:
+  - `./phase3/phase3-sign-adcs-subordinate-csr.sh --csr <path> --ee-profile <profile>`
+
+---
+
+### Entry 9 — ADCS2025 EE Profile Naming And CSR PoPO Validation Update (2026-04-24)
+
+Objective:
+- Finalize end entity profile naming for Windows Server 2025 AD CS subordinate issuance and validate signing readiness.
+
+Actions completed:
+1. Imported renamed EE profile for pilot AD CS subordinate issuance:
+    - Profile name: `ADCS2025_SubCA_EE_Profile`
+    - Source XML: `./phase3/profiles/entityprofile_ADCS2025_SubCA_EE_Profile-198381620.xml`
+2. Cleaned profile XML workspace to keep only the active ADCS2025 profile definition:
+    - Removed:
+       - `./phase3/profiles/entityprofile_SubCA_EE_Profile-198381618.xml`
+       - `./phase3/profiles/entityprofile_SubCA_EE_Profile_v2-198381619.xml`
+3. Updated signing helper defaults to use ADCS2025 profile:
+    - `./phase3/phase3-sign-adcs-subordinate-csr.sh`
+4. Added early CSR PoPO validation in signing helper:
+    - Script now runs `openssl req -verify -noout` after header normalization and fails fast if invalid.
+
+Observed blocker:
+- Current CSR (`~/JSI-Root.jsigroup.local_jsigroup-JSI-ROOT-CA-1.req`) fails PoPO validation:
+   - `CSR self-signature verification failed (PoPO invalid)`
+- This directly explains EJBCA issuance failure observed earlier:
+   - `Could not create certificate: POPO verification failed.`
+
+Operational next step:
+- Regenerate subordinate CSR on AD CS and rerun signing helper with ADCS2025 profile.
+
+Validated rerun command:
+```bash
+./phase3/phase3-sign-adcs-subordinate-csr.sh \
+   --csr ~/JSI-Root.jsigroup.local_jsigroup-JSI-ROOT-CA-1.req \
+   --ee-profile ADCS2025_SubCA_EE_Profile
+```
+
+---
+
 ## Test Results
 
 | Test | Result | Date | Notes |
