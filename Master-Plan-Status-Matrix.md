@@ -19,7 +19,7 @@ Workspace: ~/rootCA
 | Phase 0 | Governance and policy approval | ✅ Closed (Signed Off) | CA-Policy.md (Status: APPROVED AND SIGNED OFF) | Closed |
 | Phase 1 | Offline platform baseline | ✅ Closed (Signed Off) | Phase-1-Platform-Setup.md, Phase-1-Execution-Log.md | Closed |
 | **Phase 2** | Crypto profiles and validation | ✅ Closed (Formal Sign-Off Complete) | Phase-2-Crypto-Profiles.md, Phase-2-Execution-Log.md, phase2/logs/phase2-closeout-report-20260423T003847Z.txt, phase2/logs/phase2-cleanup-verification-20260423T003737Z.txt | Closed |
-| **Phase 3** | Pilot interoperability and go/no-go | 🟡 **IN PROGRESS** | Phase-3-Pilot-Testing.md, phase3/Phase-3-Execution-Log.md | Open (Execution Underway) |
+| **Phase 3** | Pilot interoperability and go/no-go | 🟡 **IN PROGRESS** | Phase-3-Pilot-Testing.md, phase3/logs/Phase-3-Execution-Log.md | Open (Execution Underway) |
 | Phase 4 | Production key ceremony | 🔴 Blocked | Phase-4-Key-Ceremony.md | Blocked by Phase 3 GO decision |
 | Phase 5 | AD CS integration and trust rollout | 🔴 Blocked | Phase-5-ADCS-Integration.md | Blocked by Phase 4 completion |
 | Phase 6 | Steady-state operations and audit | 🔴 Blocked | Phase-6-Steady-State-Operations.md | Blocked by Phase 5 completion |

@@ -134,7 +134,7 @@ openssl x509 -in ~/rootCA/phase3/pilot-root.pem -noout \
 | `pilot-root.pem` subject/issuer | `CN=JSIGROUP Pilot Root CA, O=JSIGROUP, C=CA` (self-signed) |
 | `pilot-root.pem` validity | notAfter = Jul 21 2026 |
 
-Verified clean on 2026-04-22 (see Entry 4 in [phase3/Phase-3-Execution-Log.md](phase3/Phase-3-Execution-Log.md)).
+Verified clean on 2026-04-22 (see Entry 4 in [phase3/logs/Phase-3-Execution-Log.md](phase3/logs/Phase-3-Execution-Log.md)).
 
 ---
 
@@ -269,13 +269,13 @@ All tests below must **PASS** before proceeding to Phase 4 production ceremony.
 3. In pilot EJBCA, ensure end entity profile `ADCS2025_SubCA_EE_Profile` is present and mapped to the intended subordinate CA certificate profile.
 4. Pre-check CSR PoPO before EJBCA issuance:
     ```bash
-    openssl req -in ~/JSI-Root.jsigroup.local_jsigroup-JSI-ROOT-CA-1.req -verify -noout
+    openssl req -in <path-to-your-new-csr.req> -verify -noout
     ```
     If this check fails, regenerate CSR on AD CS before continuing.
 4. Sign CSR via CLI helper:
    ```bash
    ./phase3/phase3-sign-adcs-subordinate-csr.sh \
-     --csr ~/JSI-Root.jsigroup.local_jsigroup-JSI-ROOT-CA-1.req \
+     --csr <path-to-your-new-csr.req> \
        --ee-profile ADCS2025_SubCA_EE_Profile
    ```
    Output artifacts:

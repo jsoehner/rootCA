@@ -2,7 +2,7 @@
 
 Date Prepared: 2026-04-22  
 Scope: Mandatory Phase 3 interoperability tests (Tests 1-6)  
-Gate Use: Populate results in phase3/Phase-3-Execution-Log.md and complete GO/NO-GO block.
+Gate Use: Populate results in phase3/logs/Phase-3-Execution-Log.md and complete GO/NO-GO block.
 
 ---
 
@@ -72,12 +72,12 @@ Preconditions:
 - Subordinate signing profile available in EJBCA.
 - EJBCA end entity profile `ADCS2025_SubCA_EE_Profile` available and mapped to the intended subordinate certificate profile.
 - CSR PoPO pre-check passes:
-   - `openssl req -in ~/JSI-Root.jsigroup.local_jsigroup-JSI-ROOT-CA-1.req -verify -noout`
+   - `openssl req -in <path-to-your-new-csr.req> -verify -noout`
 
 Steps:
 1. Export subordinate CSR from Windows CA host.
 2. Sign CSR in EJBCA using CLI helper:
-   - `./phase3/phase3-sign-adcs-subordinate-csr.sh --csr ~/JSI-Root.jsigroup.local_jsigroup-JSI-ROOT-CA-1.req --ee-profile ADCS2025_SubCA_EE_Profile`
+   - `./phase3/phase3-sign-adcs-subordinate-csr.sh --csr <path-to-your-new-csr.req> --ee-profile ADCS2025_SubCA_EE_Profile`
 3. Export signed subordinate certificate as `pilot-sub-from-adcs.cer`.
 4. Install signed subordinate cert into AD CS setup flow.
 5. Run on Windows CA host:
