@@ -2135,4 +2135,7 @@ Caused by: java.security.NoSuchAlgorithmException: no such algorithm: 1.2.840.10
 [0m[0m12:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
 [0m[0m13:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
 [0m[0m14:00:00,004 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m15:00:00,006 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m16:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m17:00:00,002 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
 [0m

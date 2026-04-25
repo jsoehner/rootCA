@@ -59,6 +59,15 @@ Objective:
 - Confirm pilot root signs AD CS subordinate and AD CS service starts healthy.
 
 Preconditions:
+- Windows Server 2022/2025 pilot host has ADCS-Cert-Authority installed and healthy.
+  If installation failed (error 0x80073701), run the repair script first:
+  - Script location (Linux): `~/rootCA/artifacts/Repair-ADCS-Install.ps1`
+  - Copy to Windows host, then run elevated:
+    ```powershell
+    .\Repair-ADCS-Install.ps1
+    # or offline: .\Repair-ADCS-Install.ps1 -RepairSource "E:\sources\install.wim"
+    ```
+  - Logs written to: `C:\Temp\phase3-adcs-repair\`
 - AD CS subordinate CSR generated on pilot Windows CA host.
 - Subordinate signing profile available in EJBCA.
 - EJBCA end entity profile `ADCS2025_SubCA_EE_Profile` available and mapped to the intended subordinate certificate profile.

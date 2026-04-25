@@ -176,6 +176,31 @@ Retroactive lessons learned:
 | **Domain** | Pilot domain (e.g., `pilot.jsiggroup.local`) | Separate from production JSIGROUP domain |
 | **Subordinate CA Cert** | Issued by pilot root; installed in pilot AD CS | Tests full issuance chain |
 
+#### Windows Host Preparation Scripts
+
+If ADCS installation fails on the Windows Server 2022/2025 pilot host (error `0x80073701 ERROR_SXS_ASSEMBLY_MISSING` or similar component store corruption), use the repair script from the artifacts folder:
+
+```powershell
+# Copy from Linux host first:
+# scp ~/rootCA/artifacts/Repair-ADCS-Install.ps1 user@pilot-windows-host:C:\certs\
+
+# Online repair (Windows Update / WSUS access):
+.\Repair-ADCS-Install.ps1
+
+# Offline repair (mount WS2022 ISO on E: first):
+.\Repair-ADCS-Install.ps1 -RepairSource "E:\sources\install.wim"
+
+# Skip repair if component store is already healthy, reinstall only:
+.\Repair-ADCS-Install.ps1 -SkipRepair
+```
+
+For initial ADCS role configuration after installation, also see:
+```
+~/rootCA/artifacts/prepare-ADCS.ps1
+```
+
+Script logs and evidence are written to `C:\Temp\phase3-adcs-repair\` on the Windows host.
+
 ### 2.3 Pilot Infrastructure Isolation
 
 ```

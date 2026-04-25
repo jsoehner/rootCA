@@ -380,6 +380,42 @@ Validated rerun command:
 
 ---
 
+### Entry 10 -- Windows AD CS Host Repair Script Added (2026-04-25)
+
+Objective:
+- Resolve Windows Server 2022 component store corruption (`0x80073701 ERROR_SXS_ASSEMBLY_MISSING`) that was blocking ADCS reinstallation on the pilot Windows host.
+
+Actions completed:
+1. Diagnosed CBS log error: missing assembly `Microsoft-Windows-CertificateServices-CAManagement-Deployment-LanguagePack` at build `10.0.20348.3692` while OS was at `10.0.20348.4163`.
+2. Created repair and reinstall script:
+   - `~/rootCA/artifacts/Repair-ADCS-Install.ps1`
+3. Script automates:
+   - DISM ScanHealth and RestoreHealth (online or offline WIM source)
+   - SFC /scannow with reboot checkpoint
+   - Clean ADCS feature removal (`-Remove`)
+   - ADCS-Cert-Authority + RSAT tools reinstall
+   - Feature state verification
+   - Inline next-step guidance for CSR generation and Linux signing workflow
+4. References added to:
+   - `~/rootCA/Phase-3-Pilot-Testing.md` (Section 2.2)
+   - `~/rootCA/phase3/Phase-3-Test-Execution-Worksheet.md` (Test 2 preconditions)
+
+Usage on Windows pilot host:
+```powershell
+# Online repair:
+.\Repair-ADCS-Install.ps1
+
+# Offline repair (mount WS2022 ISO first):
+.\Repair-ADCS-Install.ps1 -RepairSource "E:\sources\install.wim"
+```
+
+Logs saved to: `C:\Temp\phase3-adcs-repair\` on the Windows host.
+
+Impact on Test 2:
+- Test 2 remains PENDING pending a fresh CSR from the repaired Windows host.
+
+---
+
 ## Test Results
 
 | Test | Result | Date | Notes |

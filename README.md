@@ -25,6 +25,10 @@ Governance and implementation phases:
 - [Phase-5-ADCS-Integration.md](Phase-5-ADCS-Integration.md)
 - [Phase-6-Steady-State-Operations.md](Phase-6-Steady-State-Operations.md)
 
+Windows pilot host PowerShell scripts (copy to Windows Server before use):
+- [artifacts/Repair-ADCS-Install.ps1](artifacts/Repair-ADCS-Install.ps1) -- Repairs component store corruption (`0x80073701`) and reinstalls ADCS-Cert-Authority. Use when ADCS installation fails on the pilot Windows Server 2022/2025 host.
+- [artifacts/prepare-ADCS.ps1](artifacts/prepare-ADCS.ps1) -- Initial ADCS role configuration after installation.
+
 ## Execution Order
 
 1. Phase 0: Approve governance and sign CA policy.
