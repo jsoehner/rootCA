@@ -637,8 +637,7 @@ function Install-AdcsRoleAndPrepareSubca {
             $certSvc = Get-Service -Name CertSvc -ErrorAction SilentlyContinue
 
             if (-not $certSvc) {
-                Write-Warn "In-place install did not restore CertSvc; trying uninstall/reinstall cycle."
-                Uninstall-WindowsFeature -Name ADCS-Cert-Authority -Restart:$false | Out-Null
+                Write-Warn "In-place install did not restore CertSvc."
                 Install-WindowsFeature -Name ADCS-Cert-Authority | Out-Null
                 $certSvc = Get-Service -Name CertSvc -ErrorAction SilentlyContinue
             }
@@ -664,12 +663,11 @@ Set ServicingRepairMode to OnComponentStoreError or Always to run DISM/SFC from 
                                 $certSvc = Get-Service -Name CertSvc -ErrorAction SilentlyContinue
 
                                 if (-not $certSvc) {
-                                        Write-Warn "CertSvc still missing after retry; attempting uninstall/reinstall cycle."
+                                        Write-Warn "CertSvc still missing after retry."
                                     if ($state.PSObject.Properties['RepairAttempts'] -eq $null) { $state | Add-Member -MemberType NoteProperty -Name RepairAttempts -Value 0 }
                                     $state.RepairAttempts++
                                     $state | ConvertTo-Json | Set-Content -LiteralPath $StateFile -Encoding UTF8
                                     try {
-                                        Uninstall-WindowsFeature -Name ADCS-Cert-Authority -Restart:$false | Out-Null
                                         Install-WindowsFeature -Name ADCS-Cert-Authority | Out-Null
                                         $certSvc = Get-Service -Name CertSvc -ErrorAction SilentlyContinue
                                     } catch {
