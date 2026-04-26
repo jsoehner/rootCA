@@ -1,0 +1,42 @@
+Phase 3 Pilot Certificate Validation
+Timestamp  : 2026-04-26 13:01:09 UTC
+Label      : pilot-ecc-root
+Root cert  : /home/jsoehner/rootCA/phase3/pilot-root.pem
+
+== Root CA Certificate ==
+subject=CN=JSIGROUp Pilot Root CA, O=JSIGROUp, C=US
+issuer=CN=JSIGROUp Pilot Root CA, O=JSIGROUp, C=US
+serial=2E36A5DBA8B45D5BF9AE190A557555D6A017915A
+notBefore=Apr 22 11:18:12 2026 GMT
+notAfter=Jul 21 11:18:11 2026 GMT
+
+-- Signature Algorithm --
+        Signature Algorithm: ecdsa-with-SHA384
+    Signature Algorithm: ecdsa-with-SHA384
+
+-- Key Extensions --
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 Authority Key Identifier: 
+            X509v3 Subject Key Identifier: 
+            X509v3 Key Usage: critical
+
+-- Self-signed check --
+  [PASS] Root is self-signed (subject == issuer)
+
+-- Basic Constraints: CA:TRUE --
+  [PASS] Root has CA:TRUE
+
+-- Key Usage: keyCertSign + cRLSign --
+  [PASS] Root Key Usage includes keyCertSign and cRLSign
+
+-- Self-signature verification --
+  [PASS] Root self-signature verifies
+
+== Validation Summary ==
+  PASS : 4
+  FAIL : 0
+  RESULT: ALL CHECKS PASSED — evidence suitable for Phase 3 go/no-go record
+
+Evidence artifacts:
+  /home/jsoehner/rootCA/phase3/logs/phase3-cert-validation-pilot-ecc-root-20260426T130109Z.txt
