@@ -24,3 +24,7 @@ artifacts/
 # Local env overrides
 .env
 .env.*
+
+# Pem and Crt files
+*.pem
+*.crt

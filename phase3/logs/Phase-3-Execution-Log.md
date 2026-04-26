@@ -40,9 +40,9 @@
 ```
 [x] Pilot root CA created with 90-day validity using RootCAPilot-ECC384-SHA384
 [x] Pilot root certificate exported (PEM) to ./phase3/pilot-root.pem
-[ ] Pilot subordinate CSR generated on Windows AD CS
-[ ] Pilot subordinate signed using SubordCAPilot-ECC384-SHA384
-[ ] Pilot subordinate certificate exported
+[x] Pilot subordinate CSR generated on Windows AD CS
+[x] Pilot subordinate signed using SubordCAPilot-ECC384-SHA384 (see Entry 8–9 for DN/profile troubleshooting)
+[x] Pilot subordinate certificate exported (PEM/DER) to ./phase3/pilot-sub-from-adcs.pem and .cer
 ```
 
 ### Windows Validation (Test Matrix — Phase-3-Pilot-Testing.md §3)
@@ -380,6 +380,19 @@ Validated rerun command:
 
 ---
 
+### Lessons Learned — Subject DN and End Entity Profile Mapping (2026-04-26)
+
+Multiple failed attempts to sign the AD CS subordinate CSR were due to mismatches between the CSR Subject DN and the requirements of the EJBCA end entity profile. Key points:
+
+- The end entity profile must allow the exact DN structure present in the CSR (e.g., correct number of OU and O fields).
+- DN normalization is required: extra or missing OU/O fields will cause registration to fail with errors like "Wrong number of ORGANIZATIONALUNIT fields in Subject DN."
+- The helper script now enforces early PoPO validation and explicit end entity profile selection to avoid silent failures.
+- Successful issuance was achieved only after aligning the CSR DN with the profile and using the correct EE profile (`ADCS2025_SubCA_EE_Profile`).
+
+This should be referenced for future subordinate onboarding and profile design.
+
+---
+
 ### Entry 10 -- Windows AD CS Host Repair Script Added (2026-04-25)
 
 Objective:
@@ -426,6 +439,15 @@ Impact on Test 2:
 | Test 4: Chain building & validation | PENDING | | |
 | Test 5: TLS/Schannel validation | PENDING | | |
 | Test 6: CRL publication & retrieval | PENDING | | |
+
+---
+
+## Next Steps (as of 2026-04-26)
+
+- Execute Windows interoperability tests (Test 1–6) using the worksheet in phase3/Phase-3-Test-Execution-Worksheet.md.
+- Capture and save all evidence files as specified.
+- Update this log and the worksheet with PASS/FAIL results and notes for each test.
+- Complete the GO/NO-GO decision block once all tests are complete.
 
 ---
 

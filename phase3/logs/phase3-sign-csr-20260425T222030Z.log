@@ -1,0 +1,30 @@
+==================================================================
+  Phase 3 — Sign AD CS Subordinate CSR
+  Timestamp : 20260425T222030Z
+  CSR       : /home/jsoehner/rootCA/clean.req
+  Output    : /home/jsoehner/rootCA/phase3/pilot-sub-from-adcs.pem
+  Out (DER) : /home/jsoehner/rootCA/phase3/pilot-sub-from-adcs.cer
+  Issuing CA: JSIGROUP-Pilot-RootCA
+  Profile   : SubordCAPilot-ECC384-SHA384
+  EE profile: ADCS2025_SubCA_EE_Profile
+  Subject DN: CN=JSIGROUP Intermediate CA - AD CS - PILOT,OU=Certificate Authority,O=JSIGROUP,C=CA
+  EE User   : jsi-pilot-adcs-sub-20260425T222030Z
+==================================================================
+[sign-csr]   CSR validated OK.
+[sign-csr]   Health endpoint: HTTP 200 — OK
+[sign-csr]   CA 'JSIGROUP-Pilot-RootCA' confirmed present.
+[sign-csr]   Profile 'SubordCAPilot-ECC384-SHA384' confirmed present.
+Using certificate profile: SubordCAPilot-ECC384-SHA384, with id: 380872775
+Using entity profile: ADCS2025_SubCA_EE_Profile, with id: 198381620
+Trying to add end entity:
+Username: jsi-pilot-adcs-sub-20260425T222030Z
+Password: <password hidden>
+DN: CN=JSIGROUP Intermediate CA - AD CS - PILOT,OU=Certificate Authority,O=JSIGROUP,C=CA
+CA Name: JSIGROUP-Pilot-RootCA
+SubjectAltName: null
+Email: null
+Type: 1
+Token: USERGENERATED
+Certificate profile: 380872775
+End entity profile: 198381620
+Given userdata doesn't fulfill end entity profile. : Wrong number of ORGANIZATIONALUNIT fields in Subject DN.

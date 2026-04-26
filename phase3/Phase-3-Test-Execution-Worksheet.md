@@ -35,7 +35,10 @@ Steps:
 2. Copy `pilot-root.cer` to Windows endpoint.
 3. Install into Local Machine Trusted Root Certification Authorities.
 4. Run on Windows (elevated CMD):
-   - `certutil -store root > C:\\Temp\\phase3-evidence\\test1-certutil-store-root.txt`
+   - `certutil -store root > C:\Temp\phase3-evidence\test1-certutil-store-root.txt`
+
+**Note:** For initial CRL generation before starting ADCS, if you receive 'The RPC server is not listening' or similar errors, use the documented CLI bootstrap CRL procedure to generate and copy a CRL from EJBCA to `C:\Windows\System32\CertSrv\CertEnroll\`. See Publish-CRL-AIA-HTTP.md for step-by-step instructions.
+
 5. Verify pilot root CN appears and no trust warning is present.
 
 PASS criteria:
@@ -81,7 +84,7 @@ Steps:
 3. Export signed subordinate certificate as `pilot-sub-from-adcs.cer`.
 4. Install signed subordinate cert into AD CS setup flow.
 5. Run on Windows CA host:
-   - `certutil -pulse > C:\\Temp\\phase3-evidence\\test2-certutil-pulse.txt`
+   - `certutil -pulse > C:\Temp\phase3-evidence\test2-certutil-pulse.txt`
 6. Check Event Viewer for AD CS start errors.
 
 PASS criteria:
@@ -114,6 +117,7 @@ Preconditions:
 Steps:
 1. On Windows endpoint, submit enrollment request:
    - `certreq -submit -config "pilot-adcs.pilot.jsiggroup.local\\JSIGROUP Intermediate CA - AD CS - PILOT" request.inf C:\\Temp\\phase3-evidence\\test3-issued.cer > C:\\Temp\\phase3-evidence\\test3-certreq-submit.txt`
+      - `certreq -submit -config "pilot-adcs.pilot.jsigroup.local\\JSIGROUP Intermediate CA - AD CS - PILOT" request.inf C:\\Temp\\phase3-evidence\\test3-issued.cer > C:\\Temp\\phase3-evidence\\test3-certreq-submit.txt`
 2. Open MMC Certificates snap-in and confirm issued cert in Personal store.
 3. Confirm full chain appears clean (root -> subordinate -> end-entity).
 
@@ -176,8 +180,10 @@ Steps:
 1. Bind pilot-issued cert to IIS site on test server.
 2. From Windows client, browse to target URL:
    - `https://pilot-web.pilot.jsiggroup.local`
+      - `https://pilot-web.pilot.jsigroup.local`
 3. Run on Windows client:
    - `certutil -ssl https://pilot-web.pilot.jsiggroup.local > C:\\Temp\\phase3-evidence\\test5-certutil-ssl.txt`
+      - `certutil -ssl https://pilot-web.pilot.jsigroup.local > C:\\Temp\\phase3-evidence\\test5-certutil-ssl.txt`
 4. Confirm browser and Schannel report no trust/chain errors.
 
 PASS criteria:
