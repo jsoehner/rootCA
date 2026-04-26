@@ -1,14 +1,14 @@
 # Master Plan Status Matrix
 
-Date: 2026-04-23
+Date: 2026-04-26
 Workspace: ~/rootCA
 
 ---
 
 ## 🎯 Overall Project Status
 
-**Current Focus:** Phase 2 closeout refresh completed; Phase 3 execution remains authorized.
-**Gate Status:** Phase 2 is formally closed with refreshed 2026-04-23 evidence; Phase 3 remains open for execution.
+**Current Focus:** Phase 3 execution underway — Test 2 (AD CS subordinate issuance) PASSED; Tests 1, 3–6 pending.
+**Gate Status:** Phase 2 formally closed; Phase 3 open. Test 2 PASSED on 2026-04-25 with fresh VM after component store repair on original host failed.
 
 ---
 
@@ -37,6 +37,7 @@ Workspace: ~/rootCA
 *   **Closeout:** Phase 2 closeout helper was run, and the closeout report was generated under `phase2/logs/`.
 *   **GO:** Phase 2 formal sign-off complete on 2026-04-20; refreshed closeout verification completed on 2026-04-23. All prerequisites for Phase 3 are met.
 *   **Retroactive Phase 3 Update (2026-04-22):** Pilot root creation/export completed using CLI-only workflow (`phase3-step3-pilot-root.sh`) with validation evidence in `phase3/`.
+*   **Test 2 PASSED (2026-04-25):** New Windows Server 2022 VM provisioned after original host suffered irreparable component store corruption. Subordinate CSR generated, DN-only subject aligned with `ADCS2025_SubCA_EE_Profile`, signed via CLI helper at timestamp `20260425T222205Z`. Certificate: ECC P-384, `CA:TRUE pathLen:0`, valid 90 days.
 
 ---
 

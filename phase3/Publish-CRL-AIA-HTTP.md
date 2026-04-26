@@ -16,7 +16,7 @@ After installing the subordinate CA certificate and before starting the ADCS ser
 5. Copy the generated `.crl` file to your HTTP CDP directory (e.g., `C:\inetpub\wwwroot\crl`).
 6. Verify HTTP access to the CRL from another machine:
    ```
-   certutil -url http://ca.jsigroup.local/crl/<YourCAName>.crl
+   certutil -url http://ca.jsiggroup.local/crl/<YourCAName>.crl
    ```
 7. Start the ADCS service.
 
@@ -70,8 +70,8 @@ This step is required to avoid revocation errors and allow the CA service to sta
    - Open Certification Authority MMC.
    - Right-click the CA > Properties > Extensions tab.
    - For both CRL Distribution Point (CDP) and Authority Information Access (AIA), add:
-     - `http://ca.jsigroup.local/crl/<CaName><CRLNameSuffix><DeltaCRLAllowed>.crl`
-     - `http://ca.jsigroup.local/<CaName>.cer`
+     - `http://ca.jsiggroup.local/crl/<CaName><CRLNameSuffix><DeltaCRLAllowed>.crl`
+     - `http://ca.jsiggroup.local/<CaName>.cer`
    - Check "Include in the CDP extension of issued certificates" and "Include in the AIA extension of issued certificates" as appropriate.
    - For each, check "Publish CRLs to this location" and "Publish CA certificate to this location" as needed.
 4. **Publish the CRL and CA certificate:**
@@ -86,7 +86,7 @@ This step is required to avoid revocation errors and allow the CA service to sta
 6. **Verify HTTP access:**
    - From a client:
      ```
-     certutil -url http://ca.jsigroup.local/crl/<YourCAName>.crl
+     certutil -url http://ca.jsiggroup.local/crl/<YourCAName>.crl
      ```
 
 ---
@@ -106,10 +106,10 @@ This step is required to avoid revocation errors and allow the CA service to sta
    - In Certification Authority MMC > Properties > Extensions:
      - For CDP, include both LDAP and HTTP locations:
        - `ldap:///CN=<CATruncatedName>,CN=CDP,CN=Public Key Services,CN=Services,CN=Configuration,DC=jsigroup,DC=local?certificateRevocationList?base?objectClass=cRLDistributionPoint`
-       - `http://ca.jsigroup.local/crl/<CaName><CRLNameSuffix><DeltaCRLAllowed>.crl`
+       - `http://ca.jsiggroup.local/crl/<CaName><CRLNameSuffix><DeltaCRLAllowed>.crl`
      - For AIA, include both LDAP and HTTP:
        - `ldap:///CN=<CATruncatedName>,CN=AIA,CN=Public Key Services,CN=Services,CN=Configuration,DC=jsigroup,DC=local?cACertificate?base?objectClass=certificationAuthority`
-       - `http://ca.jsigroup.local/<CaName>.cer`
+       - `http://ca.jsiggroup.local/<CaName>.cer`
      - Check "Include in the CDP/AIA extension of issued certificates" and "Publish to this location" as appropriate.
 4. **Publish to AD and HTTP:**
    - AD publishing is automatic for LDAP entries.
@@ -120,7 +120,7 @@ This step is required to avoid revocation errors and allow the CA service to sta
 5. **Verify both LDAP and HTTP access:**
    - HTTP:
      ```
-     certutil -url http://ca.jsigroup.local/crl/<YourCAName>.crl
+     certutil -url http://ca.jsiggroup.local/crl/<YourCAName>.crl
      ```
    - LDAP:
      ```
@@ -131,4 +131,4 @@ This step is required to avoid revocation errors and allow the CA service to sta
 
 **Note:**
 - Replace `<YourCAName>` and `<CATruncatedName>` with your actual CA names as shown in the CertEnroll directory.
-- For DNS, ensure ca.jsigroup.local resolves to the ADCS server’s IP (edit your DNS or hosts file as needed).
+- For DNS, ensure ca.jsiggroup.local resolves to the ADCS server’s IP (edit your DNS or hosts file as needed).

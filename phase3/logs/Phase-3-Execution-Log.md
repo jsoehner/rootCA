@@ -380,20 +380,7 @@ Validated rerun command:
 
 ---
 
-### Lessons Learned — Subject DN and End Entity Profile Mapping (2026-04-26)
-
-Multiple failed attempts to sign the AD CS subordinate CSR were due to mismatches between the CSR Subject DN and the requirements of the EJBCA end entity profile. Key points:
-
-- The end entity profile must allow the exact DN structure present in the CSR (e.g., correct number of OU and O fields).
-- DN normalization is required: extra or missing OU/O fields will cause registration to fail with errors like "Wrong number of ORGANIZATIONALUNIT fields in Subject DN."
-- The helper script now enforces early PoPO validation and explicit end entity profile selection to avoid silent failures.
-- Successful issuance was achieved only after aligning the CSR DN with the profile and using the correct EE profile (`ADCS2025_SubCA_EE_Profile`).
-
-This should be referenced for future subordinate onboarding and profile design.
-
----
-
-### Entry 10 -- Windows AD CS Host Repair Script Added (2026-04-25)
+### Entry 10 — Windows AD CS Host Repair Script Added (2026-04-25)
 
 Objective:
 - Resolve Windows Server 2022 component store corruption (`0x80073701 ERROR_SXS_ASSEMBLY_MISSING`) that was blocking ADCS reinstallation on the pilot Windows host.
@@ -413,6 +400,10 @@ Actions completed:
    - `~/rootCA/Phase-3-Pilot-Testing.md` (Section 2.2)
    - `~/rootCA/phase3/Phase-3-Test-Execution-Worksheet.md` (Test 2 preconditions)
 
+Resolution:
+- Original VM was irreparably corrupted at the component store level (`NoChangeNeeded` returned on clean install attempt).
+- Decision made to provision a fresh Windows Server VM for pilot testing.
+
 Usage on Windows pilot host:
 ```powershell
 # Online repair:
@@ -424,8 +415,55 @@ Usage on Windows pilot host:
 
 Logs saved to: `C:\Temp\phase3-adcs-repair\` on the Windows host.
 
-Impact on Test 2:
-- Test 2 remains PENDING pending a fresh CSR from the repaired Windows host.
+---
+
+### Entry 11 — New VM Provisioned; Subordinate CSR Signed Successfully (2026-04-25)
+
+Objective:
+- Resume Test 2 on a fresh Windows Server VM after the previous host's component store was irreparably corrupted.
+
+Actions completed:
+1. Provisioned new Windows Server 2022 VM (`JSI-ROOT` hostname replaced).
+2. Installed ADCS-Cert-Authority cleanly on the new VM (no component store errors).
+3. Ran `prepare-ADCS.ps1` to configure subordinate CA and generate a fresh CSR.
+4. Transferred CSR to Linux EJBCA host.
+5. Diagnosed and resolved EJBCA EE profile DN mismatch errors:
+   - Profile `ADCS2025_SubCA_EE_Profile` requires CN-only subject (no OU or O suffix).
+   - Regenerated CSR on Windows with DN: `CN=JSIGROUP Intermediate CA - AD CS - PILOT` (no suffix).
+6. Signed subordinate CSR successfully via CLI helper:
+   ```bash
+   ./phase3/phase3-sign-adcs-subordinate-csr.sh \
+     --csr ~/rootCA/clean.req \
+     --ee-profile ADCS2025_SubCA_EE_Profile
+   ```
+7. Signing run timestamp: `20260425T222205Z`
+
+Issued certificate details:
+- Subject: `CN=JSIGROUP Intermediate CA - AD CS - PILOT`
+- Issuer: `CN=JSIGROUP Pilot Root CA, O=JSIGROUP, C=CA`
+- Algorithm: `ecdsa-with-SHA384` / ECC P-384
+- Validity: 2026-04-25 to 2026-07-21 (90 days)
+- Basic Constraints: `CA:TRUE, pathLen:0` (critical)
+- Key Usage: `Certificate Sign, CRL Sign` (critical)
+- AIA: `http://ca.jsiggroup.local/root.cer`
+- CDP: `http://ca.jsiggroup.local/crl/root.crl`
+
+Evidence artifacts:
+- `~/rootCA/phase3/pilot-sub-from-adcs.pem`
+- `~/rootCA/phase3/pilot-sub-from-adcs.cer`
+- `~/rootCA/phase3/logs/phase3-sign-csr-20260425T222205Z.log`
+- `~/rootCA/phase3/logs/phase3-sign-csr-addendentity-20260425T222205Z.log`
+
+### Lessons Learned — Subject DN and End Entity Profile Mapping (2026-04-25)
+
+Multiple failed attempts to sign the AD CS subordinate CSR were due to mismatches between the CSR Subject DN and the requirements of the EJBCA end entity profile:
+
+- The `ADCS2025_SubCA_EE_Profile` requires a **CN-only** subject. Any OU or O fields in the CSR DN will cause `ra addendentity` to fail with "Wrong number of ORGANIZATIONALUNIT/ORGANIZATION fields in Subject DN."
+- When preparing the CSR on Windows using `prepare-ADCS.ps1`, set `CADistinguishedNameSuffix = ""` (empty) so that `Install-AdcsCertificationAuthority` generates a CN-only subject.
+- PoPO validation must pass before EJBCA issuance. Always run `openssl req -verify -noout` on the CSR before submitting.
+
+Impact on `prepare-ADCS.ps1`:
+- `UserDefaults.CADistinguishedNameSuffix` has been corrected to `""` (empty string).
 
 ---
 
@@ -434,7 +472,7 @@ Impact on Test 2:
 | Test | Result | Date | Notes |
 |------|--------|------|-------|
 | Test 1: Root chain recognition | PENDING | | |
-| Test 2: AD CS subordinate issuance | PENDING | | |
+| Test 2: AD CS subordinate issuance | ✅ PASS | 2026-04-25 | Cert signed at T222205Z; ECC P-384; BC CA:TRUE pathLen:0; KU keyCertSign+cRLSign |
 | Test 3: AD CS enrollment workflow | PENDING | | |
 | Test 4: Chain building & validation | PENDING | | |
 | Test 5: TLS/Schannel validation | PENDING | | |
@@ -444,9 +482,11 @@ Impact on Test 2:
 
 ## Next Steps (as of 2026-04-26)
 
-- Execute Windows interoperability tests (Test 1–6) using the worksheet in phase3/Phase-3-Test-Execution-Worksheet.md.
-- Capture and save all evidence files as specified.
-- Update this log and the worksheet with PASS/FAIL results and notes for each test.
+- Install signed subordinate certificate (`pilot-sub-from-adcs.cer`) into Windows AD CS and verify service starts cleanly.
+- Execute Test 1 (root trust installation) on Windows endpoints.
+- Execute Tests 3–6 (enrollment, chain, TLS, CRL) using the worksheet in `phase3/Phase-3-Test-Execution-Worksheet.md`.
+- Capture and save all evidence files as specified in the worksheet.
+- Update this log and the worksheet with PASS/FAIL results and notes for each remaining test.
 - Complete the GO/NO-GO decision block once all tests are complete.
 
 ---

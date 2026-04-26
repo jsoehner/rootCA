@@ -121,7 +121,7 @@ $ErrorActionPreference = "Stop"
 # override these defaults. Current values are set for JSIGROUP pilot testing.
 $Script:UserDefaults = @{
     CaCommonName              = "JSIGROUP Intermediate CA - AD CS - PILOT"
-    CADistinguishedNameSuffix = "O=JSIGROUP,C=CA"
+    CADistinguishedNameSuffix = ""                         # CN-only: ADCS2025_SubCA_EE_Profile requires no OU/O suffix
     CAType                    = "StandaloneSubordinateCA"  # Or EnterpriseSubordinateCA
     KeyAlgorithm              = "ECC_P384"                  # Or RSA_4096
     WorkRoot                  = "C:\certs"

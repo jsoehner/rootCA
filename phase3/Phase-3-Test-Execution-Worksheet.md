@@ -99,9 +99,9 @@ Evidence files:
 - `test2-adcs-eventviewer-screenshot.png`
 
 Result:
-- [ ] PASS
+- [x] PASS
 - [ ] FAIL
-Notes:
+Notes: Subordinate cert signed at 20260425T222205Z. ECC P-384, BC CA:TRUE pathLen:0, KU keyCertSign+cRLSign. Artifacts: pilot-sub-from-adcs.pem/.cer
 
 ---
 
@@ -117,7 +117,6 @@ Preconditions:
 Steps:
 1. On Windows endpoint, submit enrollment request:
    - `certreq -submit -config "pilot-adcs.pilot.jsiggroup.local\\JSIGROUP Intermediate CA - AD CS - PILOT" request.inf C:\\Temp\\phase3-evidence\\test3-issued.cer > C:\\Temp\\phase3-evidence\\test3-certreq-submit.txt`
-      - `certreq -submit -config "pilot-adcs.pilot.jsigroup.local\\JSIGROUP Intermediate CA - AD CS - PILOT" request.inf C:\\Temp\\phase3-evidence\\test3-issued.cer > C:\\Temp\\phase3-evidence\\test3-certreq-submit.txt`
 2. Open MMC Certificates snap-in and confirm issued cert in Personal store.
 3. Confirm full chain appears clean (root -> subordinate -> end-entity).
 
@@ -180,10 +179,8 @@ Steps:
 1. Bind pilot-issued cert to IIS site on test server.
 2. From Windows client, browse to target URL:
    - `https://pilot-web.pilot.jsiggroup.local`
-      - `https://pilot-web.pilot.jsigroup.local`
 3. Run on Windows client:
    - `certutil -ssl https://pilot-web.pilot.jsiggroup.local > C:\\Temp\\phase3-evidence\\test5-certutil-ssl.txt`
-      - `certutil -ssl https://pilot-web.pilot.jsigroup.local > C:\\Temp\\phase3-evidence\\test5-certutil-ssl.txt`
 4. Confirm browser and Schannel report no trust/chain errors.
 
 PASS criteria:
@@ -235,7 +232,7 @@ Notes:
 
 Mandatory test summary:
 - Test 1: [ ] PASS [ ] FAIL
-- Test 2: [ ] PASS [ ] FAIL
+- Test 2: [x] PASS [ ] FAIL
 - Test 3: [ ] PASS [ ] FAIL
 - Test 4: [ ] PASS [ ] FAIL
 - Test 5: [ ] PASS [ ] FAIL
