@@ -75,8 +75,8 @@ Phase 2 defines the certificate profiles and constraints that EJBCA will use to 
    - **Authority Key Identifier:** [x] Enabled, [ ] Critical
 
 5. **Publishing Tab:**
-   - **CRL Distribution Point:** `http://ca.jsiggroup.local/crl/root.crl` (URI, non-critical)
-   - **Authority Info Access:** `http://ca.jsiggroup.local/root.cer` (caIssuers, non-critical)
+   - **CRL Distribution Point:** `http://ca.jsigroup.local/crl/root.crl` (URI, non-critical)
+   - **Authority Info Access:** `http://ca.jsigroup.local/root.cer` (caIssuers, non-critical)
    - **OCSP:** (leave blank; offline root does not use OCSP responder)
 
 6. **Finalize:** Click **Create Profile** (stores in EJBCA database)
@@ -113,8 +113,8 @@ Phase 2 defines the certificate profiles and constraints that EJBCA will use to 
 | **Subject Key Identifier** | SHA1(subordinate public key) | Enables chain building for end-entity certs |
 | **Authority Key Identifier** | Root CA SKID + Root Serial | Point to root in chain-building queries |
 | **Certificate Policies** | Optional: OID 2.5.4.97 (org-specific) | Marks subordinate issuance scope |
-| **CRL Distribution Points** | `http://ca.jsiggroup.local/crl/root.crl` | Points to root CRL (issued by root, not subordinate) |
-| **Authority Info Access** | `caIssuers: http://ca.jsiggroup.local/root.cer` | Link to root cert for chain building |
+| **CRL Distribution Points** | `http://ca.jsigroup.local/crl/root.crl` | Points to root CRL (issued by root, not subordinate) |
+| **Authority Info Access** | `caIssuers: http://ca.jsigroup.local/root.cer` | Link to root cert for chain building |
 | **Subject Alternative Name** | *(not present for CA cert)* | Not applicable to subordinate CA |
 
 ### 3.4 EJBCA Configuration
@@ -142,8 +142,8 @@ Phase 2 defines the certificate profiles and constraints that EJBCA will use to 
    - **Subject Key Identifier:** [x] Enabled
    - **Authority Key Identifier:** [x] Enabled (will be populated during signing with Root SKID + serial)
    - **Certificate Policies:** [x] Enabled (optional), add OID `2.5.4.97` if org policy defined
-   - **CRL Distribution Points:** `http://ca.jsiggroup.local/crl/root.crl`
-   - **Authority Info Access:** `http://ca.jsiggroup.local/root.cer` (caIssuers)
+   - **CRL Distribution Points:** `http://ca.jsigroup.local/crl/root.crl`
+   - **Authority Info Access:** `http://ca.jsigroup.local/root.cer` (caIssuers)
 
 5. **Finalize:** Click **Create Profile**
 
@@ -255,9 +255,9 @@ openssl x509 -in test-subord.crt -text -noout | grep -A 30 "X509v3 Extensions"
 #     serial:(root serial number)
 #   X509v3 CRL Distribution Points:
 #     Full Name:
-#       URI:http://ca.jsiggroup.local/crl/root.crl
+#       URI:http://ca.jsigroup.local/crl/root.crl
 #   X509v3 Authority Information Access:
-#     CA Issuers - URI:http://ca.jsiggroup.local/root.cer
+#     CA Issuers - URI:http://ca.jsigroup.local/root.cer
 
 # Verify signature algorithm:
 openssl x509 -in test-subord.crt -text -noout | grep "Signature Algorithm"
@@ -280,8 +280,8 @@ Root Profile (RootCAProd-ECC384-SHA384):
   [x] Subject Key Identifier present and non-critical
   [x] Authority Key Identifier matches SKID (self-signed)
   [x] Signature Algorithm: ecdsa-with-SHA384
-  [x] CRL Distribution Point URI correct: http://ca.jsiggroup.local/crl/root.crl
-  [x] Authority Info Access URI correct: http://ca.jsiggroup.local/root.cer
+  [x] CRL Distribution Point URI correct: http://ca.jsigroup.local/crl/root.crl
+  [x] Authority Info Access URI correct: http://ca.jsigroup.local/root.cer
 
 Subordinate Profile (SubordCAProd-ECC384-SHA384):
   [x] Basic Constraints rendered: ca:TRUE, pathLen=0 (critical)
@@ -358,7 +358,7 @@ Evidence Set:
 | Aspect | Specification |
 |--------|---------------|
 | **CRL Issuer** | RootCA (self-issued; signed by root private key) |
-| **Distribution Points** | `http://ca.jsiggroup.local/crl/root.crl` (static HTTP, no dynamic endpoints) |
+| **Distribution Points** | `http://ca.jsigroup.local/crl/root.crl` (static HTTP, no dynamic endpoints) |
 | **Cadence** | Issued annually (minimum); on revocation events (unscheduled) |
 | **Validity** | Next CRL must be published ≥7 days before current CRL expiry |
 | **Revocation Entries** | None (production root never revoked; at expiry, new root ceremony conducted) |
@@ -369,7 +369,7 @@ Evidence Set:
 
 | AIA Extension | Value | Purpose |
 |---------------|-------|---------|
-| **caIssuers** | `http://ca.jsiggroup.local/root.cer` | Enables chain building: if client encounters subordinate CA cert without root in chain, it can auto-download root |
+| **caIssuers** | `http://ca.jsigroup.local/root.cer` | Enables chain building: if client encounters subordinate CA cert without root in chain, it can auto-download root |
 | **OCSP** | *(not present)* | Offline root does not run OCSP responder; clients rely on CRL checking for revocation status |
 
 ### 6.3 Subordinate CRL Distribution

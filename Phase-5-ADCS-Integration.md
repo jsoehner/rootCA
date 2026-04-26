@@ -99,8 +99,8 @@ If needed, publish subordinate cert via:
 ### 5.1 Root Artifacts
 
 Publish to static endpoint:
-- root cert: https://ca.jsiggroup.local/root.cer
-- root crl: https://ca.jsiggroup.local/crl/root.crl
+- root cert: https://ca.jsigroup.local/root.cer
+- root crl: https://ca.jsigroup.local/crl/root.crl
 
 Validation commands:
 - certutil -URL root-ca.cer

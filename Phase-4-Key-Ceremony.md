@@ -261,7 +261,7 @@ INITIAL CRL GENERATION:
     Revocation Entries: 0 (empty; no revoked certs yet)
     
   [ ] CRL signature verified (signed by root key on HSM)
-  [ ] CRL will be published to: http://ca.jsiggroup.local/crl/root.crl
+  [ ] CRL will be published to: http://ca.jsigroup.local/crl/root.crl
 
 ─────────────────────────────────────────────────────────────────────
 PHASE 5: AUDIT LOG & EVIDENCE PRESERVATION
@@ -334,7 +334,7 @@ END OF ROOT CA KEY CEREMONY RECORD
 DISTRIBUTION:
   Original (printed, hand-signed): Locked safe, location ___________________________
   Scanned PDF copy 1: Storage media (USB/CD)
-  Scanned PDF copy 2: Secure encrypted email to [officer-email]@jsiggroup.local (optional)
+  Scanned PDF copy 2: Secure encrypted email to [officer-email]@jsigroup.local (optional)
 
 NEXT PHASE: Upon completion and archival of this ceremony record, proceed to Phase 5
 (AD CS Integration) to issue the subordinate CA certificate and install it in Windows
@@ -482,7 +482,7 @@ Server 2025 AD CS in the production JSIGROUP domain.
 - [ ] **Physically seal ceremony log** (3 copies):
   - Original: locked in Officer B's safe; key held by Officer B
   - Copy 1: scanned to PDF; encrypted and stored on USB key (locked in separate safe; key held by Officer A)
-  - Copy 2: scanned to PDF; email to root-ca-committee@jsiggroup.local (encrypted email preferred)
+  - Copy 2: scanned to PDF; email to root-ca-committee@jsigroup.local (encrypted email preferred)
 - [ ] Physically disconnect HSM from USB (if removable); store in HSM custody case or separate locked container
 - [ ] Document HSM custody transfer (who took possession, when, where; record in evidence archive)
 - [ ] **Door remains locked** for 15 minutes post-ceremony (cool-down period; no one enters); then unlocked by Auditor
@@ -502,8 +502,8 @@ Once ceremony is complete and all attestations are signed:
 
 ### 4.2 Root Certificate Distribution Preparation
 
-- [ ] Root certificate exported to distribution endpoint: `/var/www/html/root.cer` or `https://ca.jsiggroup.local/root.cer`
-- [ ] Root CRL copied to distribution endpoint: `/var/www/html/crl/root.crl` or `https://ca.jsiggroup.local/crl/root.crl`
+- [ ] Root certificate exported to distribution endpoint: `/var/www/html/root.cer` or `https://ca.jsigroup.local/root.cer`
+- [ ] Root CRL copied to distribution endpoint: `/var/www/html/crl/root.crl` or `https://ca.jsigroup.local/crl/root.crl`
 - [ ] Verify distribution endpoint is reachable from test Windows endpoints (Phase 5 prep)
 
 ---

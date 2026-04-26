@@ -127,8 +127,8 @@ This policy establishes governance, technical requirements, and operational cont
 | **Subject Key Identifier** | 2.5.29.14 | SHA1(subordinate public key) | NO | Enable chain building |
 | **Authority Key Identifier** | 2.5.29.35 | Root CA SKID + serial | NO | Point to root certificate in chain building |
 | **Certificate Policies** | 2.5.29.32 | OID TBD (org-specific policy) | YES (if defined) | Document subordinate issuance scope |
-| **CRL Distribution Points** | 2.5.29.31 | `http(s)://ca.jsiggroup.local/crl/root.crl` | NO | Point to root CRL location |
-| **Authority Information Access** | 1.3.6.1.5.5.7.1.1 | caIssuers=`http(s)://ca.jsiggroup.local/root.cer` | NO | Enable chain building from subordinates |
+| **CRL Distribution Points** | 2.5.29.31 | `http(s)://ca.jsigroup.local/crl/root.crl` | NO | Point to root CRL location |
+| **Authority Information Access** | 1.3.6.1.5.5.7.1.1 | caIssuers=`http(s)://ca.jsigroup.local/root.cer` | NO | Enable chain building from subordinates |
 
 ---
 
@@ -156,7 +156,7 @@ This policy establishes governance, technical requirements, and operational cont
 |--------|---------------|
 | **Signing** | Root key signs CRL offline; transferred to distribution endpoint via secure media |
 | **Cadence** | CRL issued annually (minimum); delta-CRL if revocation event before anniversary |
-| **Distribution Point** | Static HTTPS (e.g., `https://ca.jsiggroup.local/crl/root.crl`) |
+| **Distribution Point** | Static HTTPS (e.g., `https://ca.jsigroup.local/crl/root.crl`) |
 | **Expiry Overlap** | Next CRL issued minimum 7 days before current CRL expiry (prevent validation gaps) |
 | **OCSP** | None for root/subordinate (offline-friendly); end-entity OCSP delegated to AD CS responder (Phase 5) |
 

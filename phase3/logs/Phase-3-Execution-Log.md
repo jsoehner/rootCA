@@ -445,8 +445,8 @@ Issued certificate details:
 - Validity: 2026-04-25 to 2026-07-21 (90 days)
 - Basic Constraints: `CA:TRUE, pathLen:0` (critical)
 - Key Usage: `Certificate Sign, CRL Sign` (critical)
-- AIA: `http://ca.jsiggroup.local/root.cer`
-- CDP: `http://ca.jsiggroup.local/crl/root.crl`
+- AIA: `http://ca.jsigroup.local/root.cer`
+- CDP: `http://ca.jsigroup.local/crl/root.crl`
 
 Evidence artifacts:
 - `~/rootCA/phase3/pilot-sub-from-adcs.pem`

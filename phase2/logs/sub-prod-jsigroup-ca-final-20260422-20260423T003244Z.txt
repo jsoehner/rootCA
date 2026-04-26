@@ -28,10 +28,10 @@ Certificate:
             X509v3 Authority Key Identifier: 
                 E3:09:F1:47:63:56:F4:58:1E:AC:C7:58:33:C4:6C:65:B3:E1:C7:E0
             Authority Information Access: 
-                CA Issuers - URI:http://ca.jsiggroup.local/root.cer
+                CA Issuers - URI:http://ca.jsigroup.local/root.cer
             X509v3 CRL Distribution Points: 
                 Full Name:
-                  URI:http://ca.jsiggroup.local/crl/root.crl
+                  URI:http://ca.jsigroup.local/crl/root.crl
 
             X509v3 Subject Key Identifier: 
                 9E:B0:C5:22:25:85:9E:11:B3:DB:82:C7:0F:32:20:1D:73:5A:CD:BB

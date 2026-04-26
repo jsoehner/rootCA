@@ -439,8 +439,8 @@ XMLEOF
   echo "Created: $file"
 }
 
-CDP="http://ca.jsiggroup.local/crl/root.crl"
-AIA="http://ca.jsiggroup.local/root.cer"
+CDP="http://ca.jsigroup.local/crl/root.crl"
+AIA="http://ca.jsigroup.local/root.cer"
 
 # Key Usage bits (index 0-8):
 # 0:digitalSig 1:nonRep 2:keyEnciph 3:dataEnciph 4:keyAgree 5:keyCertSign 6:cRLSign 7:encipherOnly 8:decipherOnly

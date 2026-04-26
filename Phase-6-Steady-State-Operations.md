@@ -34,7 +34,7 @@ Minimum cadence:
    - openssl crl -in root.crl -text -noout
 5. Publish to distribution endpoint.
 6. Validate from representative clients:
-   - certutil -urlcache https://ca.jsiggroup.local/crl/root.crl
+   - certutil -urlcache https://ca.jsigroup.local/crl/root.crl
 
 SLO:
 - New CRL available within 4 hours of signing

@@ -195,7 +195,7 @@ Retroactive lessons learned:
 | **Host** | Separate Windows Server 2025; not production AD CS | Test isolation |
 | **Enrollment Policy** | Match production: standard domain user enrollment, no complex constraints | Representative test scenario |
 | **Certificate Template** | Generic web server certificate template (TLS usage) | Tests ECC chain in real Schannel scenario |
-| **Domain** | Pilot domain (e.g., `pilot.jsiggroup.local`) | Separate from production JSIGROUP domain |
+| **Domain** | Pilot domain (e.g., `pilot.jsigroup.local`) | Separate from production JSIGROUP domain |
 | **Subordinate CA Cert** | Issued by pilot root; installed in pilot AD CS | Tests full issuance chain |
 
 #### Windows Host Preparation Scripts
@@ -246,12 +246,12 @@ Production Windows AD CS:
   - [NOT YET DEPLOYED; waits for pilot go/no-go]
 
 Pilot Windows AD CS:
-  - pilot.jsiggroup.local domain
+  - pilot.jsigroup.local domain
   - [ACTIVE; tests subordinate issuance]
 
 Test Endpoints:
   - Windows 10/11/Server 2019/2022 mix
-  - Domain-joined to pilot.jsiggroup.local
+  - Domain-joined to pilot.jsigroup.local
   - [ACTIVE; tests chain validation]
 ```
 
@@ -330,7 +330,7 @@ All tests below must **PASS** before proceeding to Phase 4 production ceremony.
    - Algorithm: ECDSA P-384 or RSA 4096 (matching subordinate)
 3. On pilot endpoint, enroll certificate via:
    - Group Policy enrollment (GPO certificate auto-enrollment), OR
-   - `certreq.exe -submit -config "pilot-adcs.pilot.jsiggroup.local\JSIGROUP Intermediate CA - AD CS - PILOT"`, OR
+   - `certreq.exe -submit -config "pilot-adcs.pilot.jsigroup.local\JSIGROUP Intermediate CA - AD CS - PILOT"`, OR
    - Active Directory Certificate Services web enrollment interface
 4. Verify enrollment succeeds: certificate appears in endpoint's Personal store with valid chain
 5. Open Microsoft Management Console (mmc) Certificates snap-in; verify:
@@ -378,9 +378,9 @@ All tests below must **PASS** before proceeding to Phase 4 production ceremony.
 **Steps:**
 1. On a test Windows Server 2025 endpoint, configure IIS or similar TLS service:
    - Bind the end-entity certificate from test 3 to an HTTPS listener
-   - Service URL: `https://pilot-web.pilot.jsiggroup.local`
+   - Service URL: `https://pilot-web.pilot.jsigroup.local`
 2. From a client endpoint (Windows 10/11, also in pilot domain):
-   - Open browser to `https://pilot-web.pilot.jsiggroup.local`
+   - Open browser to `https://pilot-web.pilot.jsigroup.local`
    - Schannel validates certificate chain and signature
 3. Observe browser behavior:
    - [ ] No certificate warning (green lock icon or valid cert indicator)
@@ -410,11 +410,11 @@ All tests below must **PASS** before proceeding to Phase 4 production ceremony.
    # Or via CLI: ejbca.sh gencrl CAPilot
    ```
 2. Export pilot CRL (DER format) to distribution endpoint:
-   - Publication URL: `http://ca-pilot.pilot.jsiggroup.local/crl/root.crl`
+   - Publication URL: `http://ca-pilot.pilot.jsigroup.local/crl/root.crl`
    - Store as `/var/www/html/crl/root.crl`
 3. From Windows client, retrieve CRL:
    ```
-   certutil -urlcache http://ca-pilot.pilot.jsiggroup.local/crl/root.crl crl.crt
+   certutil -urlcache http://ca-pilot.pilot.jsigroup.local/crl/root.crl crl.crt
    certutil -dump crl.crt  # Verify CRL format and entries
    ```
 4. Verify CRL properties:
