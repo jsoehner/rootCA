@@ -465,6 +465,26 @@ Multiple failed attempts to sign the AD CS subordinate CSR were due to mismatche
 Impact on `prepare-ADCS.ps1`:
 - `UserDefaults.CADistinguishedNameSuffix` has been corrected to `""` (empty string).
 
+### Entry 12 — EJBCA Database URL Correction and IIS Standalone Setup (2026-04-26)
+
+Objective:
+- Permanently correct the hardcoded spelling mistake (`jsiggroup.local` → `jsigroup.local`) in the pilot CA and certificate profiles.
+- Set up a standalone IIS HTTP distribution point for AIA and CDP without ADCS roles interfering.
+
+Actions completed:
+1. Root CA Configuration: Re-issued the `JSIGROUP-Pilot-RootCA` CA Certificate via `ejbca.sh ca renewca` to burn in the corrected URLs.
+2. Certificate Profiles Fix: Modified all `jsiggroup` references to `jsigroup` inside the `CertificateProfileData` database table by running SQL `UPDATE` directly against the MariaDB `data` column using `REPLACE(data, 'jsiggroup', 'jsigroup')`.
+3. Cleared caches using `ejbca.sh clearcache -all` and subsequently wiped the custom profiles from the database to perform a clean `ejbca.sh ca importprofiles`.
+4. Verified new subordinate cert output: URLs are now correctly `http://ca.jsigroup.local/root.cer` and `http://ca.jsigroup.local/crl/root.crl`.
+5. Created `artifacts/setup-crl-web-server.ps1` to automatically configure a standalone IIS server to host CRLs with Anonymous Authentication, proper MIME types (`.crl` and `.cer`), and double-escaping enabled for Delta CRLs.
+
+### Lessons Learned — EJBCA Profile Management and Unique DN Constraints (2026-04-26)
+
+- **Hardcoded Certificate Profile URLs**: Modifying the CA's default CDP/AIA settings using `editca` does NOT change the URLs embedded in the certificate if the corresponding Certificate Profile overrides them. Our scripts (`gen-cert-profiles.sh`) had hardcoded the URLs into the XML profiles, so direct database updates and re-imports were necessary.
+- **EJBCA `importprofiles` limitation**: Running `ejbca.sh ca importprofiles` will exit with code `1` and abort the process if *any* of the profiles in the target directory already exist in the database. To cleanly apply XML profile fixes via CLI, the old profiles must be dropped or modified in the database.
+- **EJBCA Enforce Unique DN Error**: When iteratively generating test CSRs using the same Subject DN (e.g. `CN=Test SubCA`), EJBCA rejects subsequent issuances with "User is not allowed to use same subject DN". You must either change the DN for the test, or delete the old end entity (`delendentity`) and manually confirm revocation to free up the DN.
+- **IIS Delta CRL Requirements**: When standing up a standalone IIS server for CRL publication, you must set `allowDoubleEscaping=true` in `requestFiltering`. If this is omitted, IIS blocks Delta CRL requests (which contain the `+` character, e.g., `MyCA+.crl`) throwing a 404 error.
+
 ---
 
 ## Test Results

@@ -28,6 +28,7 @@ Governance and implementation phases:
 Windows pilot host PowerShell scripts (copy to Windows Server before use):
 - [artifacts/Repair-ADCS-Install.ps1](artifacts/Repair-ADCS-Install.ps1) -- Repairs component store corruption (`0x80073701`) and reinstalls ADCS-Cert-Authority. Use when ADCS installation fails on the pilot Windows Server 2022/2025 host.
 - [artifacts/prepare-ADCS.ps1](artifacts/prepare-ADCS.ps1) -- Initial ADCS role configuration after installation.
+- [artifacts/setup-crl-web-server.ps1](artifacts/setup-crl-web-server.ps1) -- Configures a standalone IIS Web Server for hosting CRLs and AIA certificates without authentication and with double-escaping enabled for Delta CRLs.
 
 ## Execution Order
 

@@ -221,6 +221,13 @@ For initial ADCS role configuration after installation, also see:
 ~/rootCA/artifacts/prepare-ADCS.ps1
 ```
 
+For configuring a standalone IIS server to host the HTTP CDP (CRL) and AIA endpoints (required for Tests 4 and 6), use:
+```powershell
+# Copy from Linux host first:
+# scp ~/rootCA/artifacts/setup-crl-web-server.ps1 user@crl-windows-host:C:\certs\
+.\setup-crl-web-server.ps1
+```
+
 Script logs and evidence are written to `C:\Temp\phase3-adcs-repair\` on the Windows host.
 
 ### 2.3 Pilot Infrastructure Isolation
