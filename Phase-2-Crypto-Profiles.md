@@ -149,6 +149,39 @@ Phase 2 defines the certificate profiles and constraints that EJBCA will use to 
 
 ---
 
+## 4. Lessons Learned & Evidence (2026-04-23)
+
+### Operator Notes & Execution Summary
+- Phase 2 required a full refresh of certificate profiles and reissuance of CA material to align with 10-year root and 5-year subordinate validity.
+- All profile XMLs were regenerated and validated; naming conventions frozen for both production and pilot.
+- CLI validation scripts confirmed correct extension rendering and constraint enforcement for both root and subordinate.
+- HSM token inventory was verified empty post-cleanup; no transient artifacts remained.
+- Manual sign-off for Officer A and B is pending; technical closeout is complete.
+
+### Evidence Artifacts
+- [phase2/profiles/certprofile_RootCAProd-ECC384-SHA384-100.xml](phase2/profiles/certprofile_RootCAProd-ECC384-SHA384-100.xml)
+- [phase2/profiles/certprofile_SubordCAProd-ECC384-SHA384-101.xml](phase2/profiles/certprofile_SubordCAProd-ECC384-SHA384-101.xml)
+- [phase2/profiles/certprofile_RootCAPilot-ECC384-SHA384-102.xml](phase2/profiles/certprofile_RootCAPilot-ECC384-SHA384-102.xml)
+- [phase2/profiles/certprofile_SubordCAPilot-ECC384-SHA384-103.xml](phase2/profiles/certprofile_SubordCAPilot-ECC384-SHA384-103.xml)
+- [phase2/profiles/certprofile_SubordCAPilot-RSA4096-SHA256-104.xml](phase2/profiles/certprofile_SubordCAPilot-RSA4096-SHA256-104.xml)
+- [phase2/logs/phase2-cert-validation-prod-jsigroup-ca-final-20260422-20260423T003244Z.txt](phase2/logs/phase2-cert-validation-prod-jsigroup-ca-final-20260422-20260423T003244Z.txt)
+- [phase2/logs/root-prod-jsigroup-ca-final-20260422-20260423T003244Z.txt](phase2/logs/root-prod-jsigroup-ca-final-20260422-20260423T003244Z.txt)
+- [phase2/logs/sub-prod-jsigroup-ca-final-20260422-20260423T003244Z.txt](phase2/logs/sub-prod-jsigroup-ca-final-20260422-20260423T003244Z.txt)
+- [phase2/logs/phase2-cleanup-verification-20260423T003737Z.txt](phase2/logs/phase2-cleanup-verification-20260423T003737Z.txt)
+- [phase2/logs/phase2-closeout-report-20260423T003847Z.txt](phase2/logs/phase2-closeout-report-20260423T003847Z.txt)
+
+### Closeout Checklist (as of 2026-04-23)
+- [x] All certificate profiles regenerated and validated
+- [x] Root and subordinate CA material reissued and validated
+- [x] HSM token inventory verified empty
+- [x] Test certificates deleted
+- [ ] Officer A signature captured (pending)
+- [ ] Officer B signature captured (pending)
+
+**Phase 2 is technically closed; pending governance signatures for full closeout.**
+
+---
+
 ## 4. Pilot Test Profiles (Phase 3 Preparation)
 
 ### 4.1 Rapid Iteration Test Profiles

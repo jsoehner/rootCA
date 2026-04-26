@@ -118,6 +118,33 @@ sudo service auditd restart
 
 # For offline-only host, filesystem encryption provides defense-in-depth
 # but is not mandatory if physical security is strong
+
+---
+
+## 4. Lessons Learned & Evidence (2026-04-19)
+
+### Operator Notes & Execution Summary
+- Fedora baseline scripts required sudo remediation due to Java alternatives misconfiguration; resolved by running `phase1-remediate-fedora.sh`.
+- Java 21 and Ant must be explicitly set for EJBCA build compatibility; Java 25 artifacts caused initial build failure.
+- EJBCA 9.3.7 deployed successfully on WildFly 30.0.1.Final with Java 21 after datasource configuration.
+- All health checks (admin web, OCSP) passed post-deployment.
+- Minor BouncyCastle classloader warning in logs, but not blocking for phase gate.
+
+### Evidence Artifacts
+- [phase1/phase1-bootstrap-fedora.sh](phase1/phase1-bootstrap-fedora.sh)
+- [phase1/phase1-verify-fedora.sh](phase1/phase1-verify-fedora.sh)
+- [phase1/phase1-remediate-fedora.sh](phase1/phase1-remediate-fedora.sh)
+- [phase1/phase1-build-ejbca9.sh](phase1/phase1-build-ejbca9.sh)
+- [phase1/phase1-run-wildfly30-ejbca9.sh](phase1/phase1-run-wildfly30-ejbca9.sh)
+- [phase1/logs/Phase-1-Execution-Log.md](phase1/logs/Phase-1-Execution-Log.md)
+
+### Closeout Checklist (as of 2026-04-19)
+- [x] All platform prerequisites installed and verified
+- [x] EJBCA clean build and deployment validated
+- [x] Health checks (admin, OCSP) passed
+- [x] Phase 1 sign-off recorded (no active blockers)
+
+**Phase 1 is formally closed. Proceed to Phase 2.**
 ```
 
 ### 3.3 Network Interface Configuration

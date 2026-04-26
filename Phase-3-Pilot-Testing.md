@@ -152,6 +152,28 @@ Retroactive lessons learned:
 - EJBCA CLI compatibility depends on deployment naming alignment with `ejbca.ear`.
 - WildFly deployment conflicts are best prevented by cleaning stale managed deployment entries before scanner-based deployment.
 
+## 1.5 Lessons Learned & Evidence (2026-04-22)
+
+### Operator Notes & Execution Summary
+- Phase 3 pilot root and subordinate were successfully created and validated using CLI-only workflows; all evidence was saved under phase3/logs/.
+- Naming conventions and profile set were confirmed before issuance; pilot root and subordinate used 90-day validity for rapid iteration.
+- Validation scripts confirmed correct extension rendering, self-signature, and chain verification for both root and subordinate.
+- All checks passed for pilot root and subordinate; evidence is suitable for go/no-go decision.
+- Manual sign-off and go/no-go decision are pending; technical pilot is complete.
+
+### Evidence Artifacts
+- [phase3/logs/Phase-3-Execution-Log.md](phase3/logs/Phase-3-Execution-Log.md)
+- [phase3/phase3-cert-validation-pilot-ecc-root-20260422T112215Z.txt](phase3/phase3-cert-validation-pilot-ecc-root-20260422T112215Z.txt)
+- [phase3/logs/phase3-cert-validation-pilot-jsigroup-ca-20260422T224614Z.txt](phase3/logs/phase3-cert-validation-pilot-jsigroup-ca-20260422T224614Z.txt)
+
+### Closeout Checklist (as of 2026-04-22)
+- [x] Pilot root and subordinate created and validated
+- [x] All validation checks passed (root, subordinate, chain)
+- [x] Evidence artifacts saved in logs/
+- [ ] Go/no-go decision documented (pending)
+
+**Phase 3 pilot is technically complete; pending formal go/no-go decision and sign-off.**
+
 ---
 
 ## 2. Pilot Environment Setup
