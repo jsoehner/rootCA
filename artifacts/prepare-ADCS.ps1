@@ -381,20 +381,25 @@ function Save-State([string]$Stage) {
     if ($stateDir) {
         Ensure-Directory -Path $stateDir
     }
-    $currentState = @{}
+    $currentState = [PSCustomObject]@{}
     if (Test-Path -LiteralPath $StateFile) {
         try {
             $currentState = Get-Content -LiteralPath $StateFile -Raw | ConvertFrom-Json
         } catch {}
     }
-    $currentState.Stage = $Stage
-    $currentState.CaCommonName = $CaCommonName
-    $currentState.CADistinguishedNameSuffix = $CADistinguishedNameSuffix
-    $currentState.CAType = $CAType
-    $currentState.KeyAlgorithm = $KeyAlgorithm
-    $currentState.RequestFile = $RequestFile
-    $currentState.UpdatedUtc = (Get-Date).ToUniversalTime().ToString("o")
-    if ($null -eq $currentState.RepairAttempts) { $currentState | Add-Member -MemberType NoteProperty -Name RepairAttempts -Value 0 }
+    
+    $currentState | Add-Member -MemberType NoteProperty -Name "Stage" -Value $Stage -Force
+    $currentState | Add-Member -MemberType NoteProperty -Name "CaCommonName" -Value $CaCommonName -Force
+    $currentState | Add-Member -MemberType NoteProperty -Name "CADistinguishedNameSuffix" -Value $CADistinguishedNameSuffix -Force
+    $currentState | Add-Member -MemberType NoteProperty -Name "CAType" -Value $CAType -Force
+    $currentState | Add-Member -MemberType NoteProperty -Name "KeyAlgorithm" -Value $KeyAlgorithm -Force
+    $currentState | Add-Member -MemberType NoteProperty -Name "RequestFile" -Value $RequestFile -Force
+    $currentState | Add-Member -MemberType NoteProperty -Name "UpdatedUtc" -Value (Get-Date).ToUniversalTime().ToString("o") -Force
+
+    if ($null -eq $currentState.PSObject.Properties['RepairAttempts']) { 
+        $currentState | Add-Member -MemberType NoteProperty -Name RepairAttempts -Value 0 -Force 
+    }
+    
     $currentState | ConvertTo-Json | Set-Content -LiteralPath $StateFile -Encoding UTF8
 }
 
