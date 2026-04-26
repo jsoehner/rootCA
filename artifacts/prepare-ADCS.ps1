@@ -624,7 +624,6 @@ function Install-AdcsRoleAndPrepareSubca {
     }
     Write-Step "Installing ADCS role binaries"
     Import-Module ServerManager -ErrorAction Stop
-    Import-Module ADCSDeployment -ErrorAction Stop
 
     if ($ServicingRepairMode -eq "Always") {
         Invoke-ServicingRepair -Reason "ServicingRepairMode=Always"
@@ -702,6 +701,8 @@ Set ServicingRepairMode to OnComponentStoreError or Always to run DISM/SFC from 
     } else {
         Write-Info "ADCS Certification Authority role is already installed."
     }
+
+    Import-Module ADCSDeployment -ErrorAction Stop
 
     Write-Step "Preparing C:\certs workspace"
     Ensure-Directory -Path $WorkRoot
