@@ -30,6 +30,10 @@ Windows pilot host PowerShell scripts (copy to Windows Server before use):
 - [artifacts/prepare-ADCS.ps1](artifacts/prepare-ADCS.ps1) -- Initial ADCS role configuration after installation.
 - [artifacts/setup-crl-web-server.ps1](artifacts/setup-crl-web-server.ps1) -- Configures a standalone IIS Web Server for hosting CRLs and AIA certificates without authentication and with double-escaping enabled for Delta CRLs.
 
+### Windows Prerequisites
+- **Shell:** All `.ps1` scripts MUST be run in **Windows PowerShell 5.1** (the blue console) as **Administrator**.
+- **Incompatibility:** Do NOT use PowerShell 7 (Core) or the black console; they lack the .NET Framework dependencies required for AD CS and Server Manager modules.
+
 ## Execution Order
 
 1. Phase 0: Approve governance and sign CA policy.

@@ -1,0 +1,17 @@
+--------------------------------
+The following categories are available:
+    [ ca | config | cryptotoken | keybind | ocsp | ra | roles | service ]
+--------------------------------
+And the following commands are available:
+    asn1dump                Dumps PEM or DER encoded certificate as readable ASN.1
+    batch                   Batch generate keys and certificates.
+    clearcache              Clears caches used internally by EJBCA.
+    createcert              Issue a certificate for a user based on a CSR
+    encryptpwd              Encrypts a password
+    gencsr                  Create a CSR
+    recover                 Recover certificates and end entities.
+    setupgradeversion       Sets the 'upgrade' and 'post upgrade' versions in database. Internal command; not meant to be used in production.
+    upgrade                 Post upgrade command. Use 'ant upgrade' instead of running this directly.
+
+Type a command and "--help" for more information.
+

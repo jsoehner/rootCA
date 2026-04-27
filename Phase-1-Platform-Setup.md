@@ -128,6 +128,7 @@ sudo service auditd restart
 - Java 21 and Ant must be explicitly set for EJBCA build compatibility; Java 25 artifacts caused initial build failure.
 - EJBCA 9.3.7 deployed successfully on WildFly 30.0.1.Final with Java 21 after datasource configuration.
 - **Critical Java 21 Finding:** WildFly `standalone.conf` requires `--add-exports=jdk.crypto.cryptoki/sun.security.pkcs11.wrapper=ALL-UNNAMED` to allow EJBCA access to the HSM PKCS#11 module (discovered/remediated during Phase 4).
+- **Critical Windows Requirement:** All PowerShell automation for AD CS (e.g., `Prepare-Enterprise.ps1`) must be executed in **Windows PowerShell 5.1**. Newer PowerShell 7/Core versions fail to load the `ServerManager` and `ADCSDeployment` modules due to missing .NET Framework dependencies (discovered/remediated during Phase 5).
 - All health checks (admin web, OCSP) passed post-deployment.
 - Minor BouncyCastle classloader warning in logs, but not blocking for phase gate.
 

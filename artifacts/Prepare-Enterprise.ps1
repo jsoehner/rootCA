@@ -493,6 +493,7 @@ KeyAlgorithm = $($Crypto.InfKeyAlgorithm)
 HashAlgorithm = $($Crypto.InfHashAlgorithm)
 KeyLength = $($Crypto.KeyLength)
 KeyUsage = 0x06
+AlternateSignatureAlgorithm = FALSE
 
 [Extensions]
 2.5.29.19 = "{critical}{text}"

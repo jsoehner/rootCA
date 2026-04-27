@@ -35,6 +35,7 @@ On Windows Server 2025 AD CS host:
 1. Install AD CS role as Subordinate CA (do not finalize with self-signed cert).
 2. Generate subordinate CSR using CA setup wizard.
 3. **IMPORTANT WORKAROUND:** Because the Enterprise SubCA wizard corrupts the ECDSA signature, regenerate the CSR immediately using `certreq -new` with `UseExistingKeySet=TRUE`. This is now automated in `Prepare-Enterprise.ps1`.
+   - **NOTE:** All PowerShell scripts (`Prepare-Enterprise.ps1`, etc.) MUST be run in **Windows PowerShell 5.1** (the blue console) as Administrator. They are incompatible with PowerShell 7/Core due to AD CS module dependencies.
 4. Export CSR to secure transfer media.
 5. Record CSR hash:
    - certutil -hashfile subordinate.req SHA256
