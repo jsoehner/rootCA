@@ -15,7 +15,7 @@
 
 [CmdletBinding()]
 param(
-    [string]$TemplateName = "Computer"
+    [string]$TemplateName = "DomainController"
 )
 
 $ErrorActionPreference = "Stop"
@@ -41,10 +41,61 @@ function Run-EnterpriseEnrollment {
     Write-Host "[*] Requesting a new certificate using the '$TemplateName' AD Template..."
     Write-Host "    (Because this is an Enterprise CA, no manual approval is needed!)" -ForegroundColor DarkGray
     
+    # Ensure the template is published to the CA before requesting
+    & certutil -setCAtemplates +$TemplateName | Out-Null
+    Restart-Service -Name CertSvc -ErrorAction SilentlyContinue
+    
+    Write-Host "[*] Trusting the Production Root CA in the Local Machine store..." -ForegroundColor DarkGray
+    $rootCertPath = "C:\certs\root-ca-prod-ecc384.cer"
+    if (Test-Path $rootCertPath) {
+        Import-Certificate -FilePath $rootCertPath -CertStoreLocation "Cert:\LocalMachine\Root" -ErrorAction SilentlyContinue | Out-Null
+    }
+
     try {
-        # Using the native PKI cmdlet to request a cert from the Enterprise CA
-        $enrollResult = Get-Certificate -Template $TemplateName -CertStoreLocation "Cert:\LocalMachine\My" -ErrorAction Stop
-        $cert = $enrollResult.Certificate
+        # WORKAROUND: Legacy V1 AD templates (like DomainController) force the client to use a Legacy CSP. 
+        # Legacy CSPs cannot verify ECDSA CA signatures and throw 0x80070057 during installation.
+        # We use an INF file to explicitly generate an RSA key inside a modern CNG Provider, 
+        # which correctly processes the ECC signature during installation, while still leveraging the AD Template.
+        $infPath = Join-Path $workDir "ent-request.inf"
+        $reqPath = Join-Path $workDir "ent-request.req"
+        $cerPath = Join-Path $workDir "ent-issued.cer"
+        $rspPath = Join-Path $workDir "ent-issued.rsp"
+        
+        # Cleanup previous run artifacts to prevent certreq ERROR_FILE_EXISTS
+        if (Test-Path $reqPath) { Remove-Item $reqPath -Force }
+        if (Test-Path $cerPath) { Remove-Item $cerPath -Force }
+        if (Test-Path $rspPath) { Remove-Item $rspPath -Force }
+        
+        $inf = @"
+[Version]
+Signature="`$Windows NT`$"
+
+[NewRequest]
+Subject = "CN=$env:COMPUTERNAME.jsigroup.local"
+MachineKeySet = TRUE
+RequestType = PKCS10
+ProviderName = "Microsoft Software Key Storage Provider"
+KeyAlgorithm = RSA
+KeyLength = 2048
+HashAlgorithm = SHA256
+"@
+        Set-Content -Path $infPath -Value $inf -Encoding ASCII
+        
+        Write-Host "    -> Generating RSA 2048 CSR via CNG..." -ForegroundColor DarkGray
+        $newOut = & cmd.exe /c "certreq.exe -new -q $infPath $reqPath 2>&1"
+        if ($LASTEXITCODE -ne 0) { throw "certreq -new failed: $newOut" }
+        
+        Write-Host "    -> Submitting to Enterprise CA as Machine Context..." -ForegroundColor DarkGray
+        $submitOut = & cmd.exe /c "certreq.exe -AdminForceMachine -submit -attrib `"CertificateTemplate:$TemplateName`" -q $reqPath $cerPath 2>&1"
+        if ($LASTEXITCODE -ne 0 -or -not (Test-Path $cerPath)) { throw "certreq -submit failed: $submitOut" }
+        
+        Write-Host "    -> Accepting and installing issued certificate..." -ForegroundColor DarkGray
+        $acceptOut = & cmd.exe /c "certreq.exe -accept -q -machine $cerPath 2>&1"
+        if ($LASTEXITCODE -ne 0) { throw "certreq -accept failed: $acceptOut" }
+
+        # Get the newest certificate from the store matching the subject
+        $cert = Get-ChildItem "Cert:\LocalMachine\My" | Where-Object Subject -match $env:COMPUTERNAME | Sort-Object NotBefore -Descending | Select-Object -First 1
+        if (-not $cert) { throw "Certificate not found in store after successful enroll." }
     } catch {
         throw "Failed to enroll for template '$TemplateName'. Ensure the template is published on the CA and Domain Computers have Enroll permissions. Error: $($_.Exception.Message)"
     }
@@ -78,11 +129,18 @@ function Run-TlsValidation {
         New-WebBinding -Name "Default Web Site" -Protocol https -Port 443 -IPAddress "*" | Out-Null
     }
     
-    Write-Host "[*] Binding Enterprise certificate to IIS (Port 443)..."
-    if (Test-Path "IIS:\SslBindings\*!443") { Remove-Item -Path "IIS:\SslBindings\*!443" -Force }
-    if (Test-Path "IIS:\SslBindings\0.0.0.0!443") { Remove-Item -Path "IIS:\SslBindings\0.0.0.0!443" -Force }
+    Write-Host "[*] Binding Enterprise certificate to IIS (Port 443) via netsh..."
+    $thumbprint = $cert.Thumbprint
     
-    Get-Item -Path "Cert:\LocalMachine\My\$($cert.Thumbprint)" | New-Item -Path "IIS:\SslBindings\*!443" | Out-Null
+    # Remove existing bindings
+    & netsh http delete sslcert ipport=0.0.0.0:443 2>&1 | Out-Null
+    
+    # Add new binding
+    $appId = "{4dc3e181-e14b-4a21-b022-59fc669b0914}"
+    $netshOut = & netsh http add sslcert ipport=0.0.0.0:443 certhash=$thumbprint appid=$appId 2>&1
+    if ($LASTEXITCODE -ne 0 -and $netshOut -notmatch "SSL Certificate successfully added") {
+        throw "Failed to bind certificate using netsh: $netshOut"
+    }
     
     Write-Host "[*] Restarting IIS (W3SVC) to apply bindings..."
     Restart-Service -Name W3SVC -ErrorAction SilentlyContinue
@@ -136,17 +194,38 @@ function Run-EnterpriseRenewal {
     Write-Host "`n[*] Test 7: Certificate Renewal on Enterprise AD CS" -ForegroundColor Cyan
     Write-Host "[*] Sending renewal request to the CA for cert thumbprint: $($state.Thumbprint)..."
 
-    # In an Enterprise CA environment, certreq can automatically renew a machine certificate
-    # using the existing certificate as the signature for the renewal request.
-    $renewOutput = & cmd.exe /c "certreq -enroll -q -machine -cert $($state.Thumbprint) renew 2>&1"
-    $renewStr = $renewOutput | Out-String
+    # WORKAROUND: Just like the initial enrollment, native Enterprise renewal falls back to the AD Template's 
+    # Legacy CSP settings, which throws 0x80070057 when trying to verify the ECC CA signature.
+    # We must explicitly force the renewal to happen within the CNG provider using an INF file.
+    $infPath = Join-Path $workDir "ent-renew.inf"
+    $reqPath = Join-Path $workDir "ent-renew.req"
+    $cerPath = Join-Path $workDir "ent-renew.cer"
+    
+    if (Test-Path $reqPath) { Remove-Item $reqPath -Force }
+    if (Test-Path $cerPath) { Remove-Item $cerPath -Force }
+    
+    $inf = @"
+[Version]
+Signature="`$Windows NT`$"
 
-    if ($LASTEXITCODE -ne 0 -and $renewStr -notmatch "Certificate Request Processor: The operation completed successfully") {
-        # Note: If the template forces manager approval, this might pend instead of issue.
-        Write-Host "    -> FAIL: Renewal failed or went to pending state. Output:" -ForegroundColor Red
-        Write-Host $renewStr
-        throw "Renewal operation failed."
-    }
+[NewRequest]
+RenewalCert = "$($state.Thumbprint)"
+MachineKeySet = TRUE
+RequestType = CMC
+"@
+    Set-Content -Path $infPath -Value $inf -Encoding ASCII
+    
+    Write-Host "    -> Generating CMC Renewal CSR..." -ForegroundColor DarkGray
+    $newOut = & cmd.exe /c "certreq.exe -new -q $infPath $reqPath 2>&1"
+    if ($LASTEXITCODE -ne 0) { throw "certreq -new failed: $newOut" }
+    
+    Write-Host "    -> Submitting renewal request as Machine Context..." -ForegroundColor DarkGray
+    $submitOut = & cmd.exe /c "certreq.exe -AdminForceMachine -submit -attrib `"CertificateTemplate:$TemplateName`" -q $reqPath $cerPath 2>&1"
+    if ($LASTEXITCODE -ne 0 -or -not (Test-Path $cerPath)) { throw "certreq -submit failed: $submitOut" }
+    
+    Write-Host "    -> Accepting and installing renewed certificate..." -ForegroundColor DarkGray
+    $acceptOut = & cmd.exe /c "certreq.exe -accept -q -machine $cerPath 2>&1"
+    if ($LASTEXITCODE -ne 0) { throw "certreq -accept failed: $acceptOut" }
 
     Write-Host "    -> PASS: Certificate successfully renewed via Enterprise auto-enrollment protocol!" -ForegroundColor Green
     

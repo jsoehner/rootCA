@@ -1,6 +1,6 @@
 # Phase 5: AD CS Integration and Operationalization
 
-**Phase Status:** NOT STARTED; BLOCKED PENDING PHASE 4 COMPLETION  
+**Phase Status:** COMPLETE
 **Date Created:** 2026-04-19  
 **Phase Dependencies:** Phase 4 root key ceremony must be completed and signed  
 
@@ -34,8 +34,9 @@ From AD CS server:
 On Windows Server 2025 AD CS host:
 1. Install AD CS role as Subordinate CA (do not finalize with self-signed cert).
 2. Generate subordinate CSR using CA setup wizard.
-3. Export CSR to secure transfer media.
-4. Record CSR hash:
+3. **IMPORTANT WORKAROUND:** Because the Enterprise SubCA wizard corrupts the ECDSA signature, regenerate the CSR immediately using `certreq -new` with `UseExistingKeySet=TRUE`. This is now automated in `Prepare-Enterprise.ps1`.
+4. Export CSR to secure transfer media.
+5. Record CSR hash:
    - certutil -hashfile subordinate.req SHA256
 
 ### 3.2 Sign CSR on Offline EJBCA Root
@@ -126,6 +127,12 @@ Recommended sample clients:
 - Windows 11
 - Windows Server 2025
 - Any legacy systems still in support scope
+
+### 6.1 Known Cryptographic Gotchas
+
+> **Note:** If deploying an **ECDSA (ECC P-384)** Enterprise CA, Native AD CS Auto-Enrollment with default Version 1 templates (e.g., DomainController, Machine) will fail during certificate installation with `ERROR_INVALID_PARAMETER (0x80070057)`. This is due to a CryptoAPI chain verification bug where legacy Cryptographic Service Providers (forced by V1 templates) cannot parse ECDSA CA signatures.
+> 
+> See the `Phase-5-Execution-Log.md` for the full technical breakdown and the **"Decoupled Enrollment"** workaround using `certreq -new` via CNG KSPs.
 
 ## 7. Operational Runbooks (Initial)
 

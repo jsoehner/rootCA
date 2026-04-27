@@ -781,7 +781,32 @@ Set ServicingRepairMode to OnComponentStoreError or Always to run DISM/SFC from 
 
         Install-AdcsCertificationAuthority @installArgs
 
-        Write-Info "Generated subordinate CA request: $RequestFile"
+        Write-Info "Generated initial subordinate CA request: $RequestFile"
+        
+        # WORKAROUND: Windows Server 2025 Enterprise Subordinate CAs with ECDSA often generate
+        # corrupted CSRs due to AD CS extensions breaking the ASN.1 signature boundaries.
+        # We regenerate a clean PKCS#10 CSR using the exact same private key.
+        if ($KeyAlgorithm -eq "ECC_P384" -and $CAType -eq "EnterpriseSubordinateCA") {
+            Write-Info "Applying ECDSA CSR signature workaround for Enterprise CA..."
+            $cleanInfPath = Join-Path -Path $WorkRoot -ChildPath "subca_clean_workaround.inf"
+            $cleanInf = @"
+[Version]
+Signature="`$Windows NT`$"
+
+[NewRequest]
+Subject = "CN=$CaCommonName"
+KeyContainer = "$CaCommonName"
+UseExistingKeySet = TRUE
+MachineKeySet = TRUE
+RequestType = PKCS10
+ProviderName = "Microsoft Software Key Storage Provider"
+HashAlgorithm = SHA384
+KeyUsage = 0x06
+"@
+            Set-Content -Path $cleanInfPath -Value $cleanInf -Encoding ASCII
+            & certreq.exe -new $cleanInfPath $RequestFile
+            Write-Info "Clean subordinate CA request overwritten at: $RequestFile"
+        }
     }
 
     Save-State -Stage "Prepared"
