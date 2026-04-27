@@ -54,6 +54,9 @@ function Run-Tests3And4 {
     if (Test-Path $reqPath) { Remove-Item $reqPath -Force }
     if (Test-Path $rspPath) { Remove-Item $rspPath -Force }
 
+    # Clean up any test certs from previous runs
+    Get-ChildItem "Cert:\LocalMachine\My" -ErrorAction SilentlyContinue | Where-Object { $_.Subject -eq "CN=Pilot-Auto-Test-Cert" } | Remove-Item -Force
+
     Write-Host "`n[*] Test 3: Generating ECC P-256 CSR..."
     $infContent = @"
 [NewRequest]
@@ -95,6 +98,11 @@ OID = 1.3.6.1.5.5.7.3.1 ; Server Authentication
     if (!(Test-Path $cerPath)) { throw "Failed to retrieve certificate: $($retrieveOutput | Out-String)" }
     Write-Host "    -> PASS: Certificate retrieved and saved to $cerPath." -ForegroundColor Green
 
+    Write-Host "`n[*] Test 3: Accepting certificate to bind private key to Machine store..."
+    $acceptOutput = & certreq -accept $cerPath 2>&1
+    if ($LASTEXITCODE -ne 0) { throw "Failed to accept certificate: $($acceptOutput | Out-String)" }
+    Write-Host "    -> PASS: Certificate accepted and fully installed." -ForegroundColor Green
+
     Write-Host "`n[*] Test 4: Validating certificate chain and CRL reachability..."
     $verifyOutput = & certutil -verify -urlfetch $cerPath 2>&1
     if ($LASTEXITCODE -ne 0) { throw "Chain validation failed. Output: $($verifyOutput | Out-String)" }
@@ -107,17 +115,11 @@ function Run-Test5 {
     if (!(Test-Path $cerPath)) { throw "Certificate not found. Run Tests 3 & 4 first." }
     
     Write-Host "`n[*] Test 5: TLS/Schannel Validation" -ForegroundColor Cyan
-    Write-Host "[*] Accepting certificate to bind private key to Machine store..."
-    
-    # Clean up any public-only certs from previous failed runs
-    Get-ChildItem "Cert:\LocalMachine\My" | Where-Object { $_.Subject -eq "CN=Pilot-Auto-Test-Cert" } | Remove-Item -Force
-    
-    $acceptOutput = & certreq -accept $cerPath 2>&1
-    if ($LASTEXITCODE -ne 0) { throw "Failed to accept certificate: $($acceptOutput | Out-String)" }
+    Write-Host "[*] Locating previously installed certificate..."
     
     $cert = Get-ChildItem "Cert:\LocalMachine\My" | Where-Object { $_.Subject -eq "CN=Pilot-Auto-Test-Cert" } | Select-Object -First 1
     if (-not $cert -or -not $cert.HasPrivateKey) {
-        throw "Certificate installed but private key is missing!"
+        throw "Certificate installed but private key is missing! Please re-run Option 1 (Tests 3 & 4)."
     }
     
     Write-Host "[*] Creating IIS HTTPS Binding..."
