@@ -370,6 +370,16 @@ function Assert-Elevation {
     }
 }
 
+function Import-CompatModule {
+    param([string]$Name, [switch]$SilentlyContinue)
+    $ea = if ($SilentlyContinue) { "SilentlyContinue" } else { "Stop" }
+    if ($PSVersionTable.PSEdition -eq 'Core') {
+        Import-Module -Name $Name -SkipEditionCheck -ErrorAction $ea -WarningAction SilentlyContinue
+    } else {
+        Import-Module -Name $Name -ErrorAction $ea
+    }
+}
+
 function Ensure-Directory([string]$Path) {
     if (-not (Test-Path -LiteralPath $Path)) {
         New-Item -ItemType Directory -Path $Path -Force | Out-Null
@@ -553,7 +563,7 @@ function Remove-AdcsConfiguration {
 
     Write-Step "Removing ADCS CA configuration"
     try {
-        Import-Module ADCSDeployment -ErrorAction Stop
+        Import-CompatModule "ADCSDeployment"
         if (Get-Command Uninstall-AdcsCertificationAuthority -ErrorAction SilentlyContinue) {
             Uninstall-AdcsCertificationAuthority -Force -ErrorAction Stop
             Write-Info "Uninstall-AdcsCertificationAuthority completed."
@@ -565,7 +575,7 @@ function Remove-AdcsConfiguration {
     }
 
     Write-Step "Uninstalling ADCS Windows features"
-    Import-Module ServerManager -ErrorAction Stop
+    Import-CompatModule "ServerManager"
     $featureNames = @(
         "ADCS-Cert-Authority",
         "ADCS-Web-Enrollment",
@@ -642,7 +652,7 @@ function Install-AdcsRoleAndPrepareSubca {
         throw "Halting to prevent endless repair loop. See above for next steps."
     }
     Write-Step "Installing ADCS role binaries"
-    Import-Module ServerManager -ErrorAction Stop
+    Import-CompatModule "ServerManager"
 
     if ($ServicingRepairMode -eq "Always") {
         Invoke-ServicingRepair -Reason "ServicingRepairMode=Always"
@@ -724,7 +734,7 @@ Set ServicingRepairMode to OnComponentStoreError or Always to run DISM/SFC from 
         Write-Info "ADCS Certification Authority role is already installed."
     }
 
-    Import-Module ADCSDeployment -ErrorAction Stop
+    Import-CompatModule "ADCSDeployment"
 
     Write-Step "Preparing C:\certs workspace"
     Ensure-Directory -Path $WorkRoot
@@ -805,7 +815,7 @@ function Install-SignedCertificate {
         Write-Info "Installing IIS Web-Server role..."
         Install-WindowsFeature -Name Web-Server,Web-Mgmt-Tools -IncludeAllSubFeature | Out-Null
     }
-    Import-Module WebAdministration -ErrorAction SilentlyContinue
+    Import-CompatModule "WebAdministration" -SilentlyContinue
 
     if (-not (Test-Path $crlPhysicalPath)) { New-Item -ItemType Directory -Force -Path $crlPhysicalPath | Out-Null }
     if (-not (Test-Path "IIS:\Sites\Default Web Site\crl")) {
