@@ -450,12 +450,14 @@ function Write-SubcaInf {
         [hashtable]$Crypto
     )
 
+    $subjectString = if ([string]::IsNullOrWhiteSpace($CADistinguishedNameSuffix)) { "CN=$CaCommonName" } else { "CN=$CaCommonName, $CADistinguishedNameSuffix" }
+
     $inf = @"
 [Version]
 Signature="`$Windows NT`$"
 
 [NewRequest]
-Subject = "CN=$CaCommonName, $CADistinguishedNameSuffix"
+Subject = "$subjectString"
 MachineKeySet = TRUE
 Exportable = FALSE
 RequestType = PKCS10
@@ -731,12 +733,15 @@ Set ServicingRepairMode to OnComponentStoreError or Always to run DISM/SFC from 
         $installArgs = @{
             CAType                    = $CAType
             CACommonName              = $CaCommonName
-            CADistinguishedNameSuffix = $CADistinguishedNameSuffix
             CryptoProviderName        = $crypto.CryptoProviderName
             KeyLength                 = $crypto.KeyLength
             HashAlgorithmName         = $crypto.HashAlgorithmName
             OutputCertRequestFile     = $RequestFile
             Force                     = $true
+        }
+        
+        if (-not [string]::IsNullOrWhiteSpace($CADistinguishedNameSuffix)) {
+            $installArgs.CADistinguishedNameSuffix = $CADistinguishedNameSuffix
         }
 
         $installCmd = Get-Command Install-AdcsCertificationAuthority -ErrorAction Stop
