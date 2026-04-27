@@ -324,29 +324,36 @@ All tests below must **PASS** before proceeding to Phase 4 production ceremony.
 
 ---
 
-#### Test 3: Pilot AD CS Enrollment Workflow
+#### Test 3: Pilot AD CS Enrollment Workflow (Standalone CA)
 
-**Objective:** Test users can enroll certificates from pilot AD CS subordinate without errors.
+**Objective:** Test users can request and retrieve certificates from the pilot AD CS Standalone subordinate.
 
 **Steps:**
-1. Configure pilot Windows endpoints to trust pilot root (test 1 above)
-2. Create a test end-entity certificate template in pilot AD CS (e.g., "Web Server - Pilot")
-   - Usage: TLS (Server Authentication OID)
-   - Allow enrollment to domain users
-   - Algorithm: ECDSA P-384 or RSA 4096 (matching subordinate)
-3. On pilot endpoint, enroll certificate via:
-   - Group Policy enrollment (GPO certificate auto-enrollment), OR
-   - `certreq.exe -submit -config "pilot-adcs.pilot.jsigroup.local\JSIGROUP Intermediate CA - AD CS - PILOT"`, OR
-   - Active Directory Certificate Services web enrollment interface
-4. Verify enrollment succeeds: certificate appears in endpoint's Personal store with valid chain
-5. Open Microsoft Management Console (mmc) Certificates snap-in; verify:
+1. Configure pilot Windows endpoints to trust pilot root (Test 1 above).
+2. On a pilot endpoint (e.g., an IIS server), generate a new Certificate Signing Request (CSR):
+   - Use the IIS Manager "Create Certificate Request" wizard, OR
+   - Create a `request.inf` file and run `certreq -new request.inf req.csr`.
+3. Submit the CSR to the AD CS Standalone CA:
+   - Copy `req.csr` to the CA server.
+   - Run `certreq -submit req.csr` and select the Standalone CA from the popup.
+   - The command will return a `RequestId` and state that the request is pending.
+4. Issue the certificate manually (Standalone CAs require approval):
+   - Open the Certification Authority MMC (`certsrv.msc`) on the CA server.
+   - Navigate to **Pending Requests**.
+   - Right-click the request ID, select **All Tasks** > **Issue**.
+5. Retrieve and install the issued certificate:
+   - In the CA MMC, go to **Issued Certificates**, double-click the cert, and export it as a `.cer` file, OR
+   - Run `certreq -retrieve <RequestId> issued.cer` to save the file.
+   - Copy `issued.cer` back to the endpoint and complete the pending request (e.g., in IIS or via `certreq -accept issued.cer`).
+6. Verify enrollment succeeds:
+   - Open Microsoft Management Console (mmc) Certificates snap-in; verify:
    - [ ] Certificate details show full chain (root → subordinate → end-entity)
    - [ ] No chain building errors
-   - [ ] Signature algorithm matches profile (ecdsa-with-SHA384 for ECC test)
+   - [ ] Signature algorithm matches profile
 
 **Expected Result:** PASS  
-**Failure Criteria:** Enrollment fails; cert not issued; chain shows errors; signature algorithm mismatch  
-**Log Output:** Certreq output; MMC screenshot showing full chain; AD CS enrollment log
+**Failure Criteria:** Request cannot be submitted; CA fails to issue cert; chain shows errors.  
+**Log Output:** Certreq output; MMC screenshot showing full chain; AD CS issued certificates view.
 
 ---
 
