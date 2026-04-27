@@ -656,12 +656,12 @@ function Install-AdcsRoleAndPrepareSubca {
         Write-Info "Attempting in-place ADCS role repair..."
 
         try {
-            Install-WindowsFeature -Name ADCS-Cert-Authority | Out-Null
+            Install-WindowsFeature -Name ADCS-Cert-Authority -IncludeManagementTools | Out-Null
             $certSvc = Get-Service -Name CertSvc -ErrorAction SilentlyContinue
 
             if (-not $certSvc) {
                 Write-Warn "In-place install did not restore CertSvc."
-                Install-WindowsFeature -Name ADCS-Cert-Authority | Out-Null
+                Install-WindowsFeature -Name ADCS-Cert-Authority -IncludeManagementTools | Out-Null
                 $certSvc = Get-Service -Name CertSvc -ErrorAction SilentlyContinue
             }
         } catch {
@@ -682,7 +682,7 @@ Set ServicingRepairMode to OnComponentStoreError or Always to run DISM/SFC from 
                                 Invoke-ServicingRepair -Reason "ADCS role repair hit 0x80073701"
 
                                 Write-Info "Retrying ADCS role repair after servicing repair."
-                                Install-WindowsFeature -Name ADCS-Cert-Authority | Out-Null
+                                Install-WindowsFeature -Name ADCS-Cert-Authority -IncludeManagementTools | Out-Null
                                 $certSvc = Get-Service -Name CertSvc -ErrorAction SilentlyContinue
 
                                 if (-not $certSvc) {
@@ -691,7 +691,7 @@ Set ServicingRepairMode to OnComponentStoreError or Always to run DISM/SFC from 
                                     $state.RepairAttempts++
                                     $state | ConvertTo-Json | Set-Content -LiteralPath $StateFile -Encoding UTF8
                                     try {
-                                        Install-WindowsFeature -Name ADCS-Cert-Authority | Out-Null
+                                        Install-WindowsFeature -Name ADCS-Cert-Authority -IncludeManagementTools | Out-Null
                                         $certSvc = Get-Service -Name CertSvc -ErrorAction SilentlyContinue
                                     } catch {
                                         Request-OperatorReboot -Reason "ADCS role reinstall failed after DISM/SFC repair."
@@ -715,9 +715,12 @@ Set ServicingRepairMode to OnComponentStoreError or Always to run DISM/SFC from 
     }
 
     if (-not $caFeature.Installed) {
-        Install-WindowsFeature -Name ADCS-Cert-Authority | Out-Null
-        Write-Info "Installed ADCS Certification Authority role."
+        Install-WindowsFeature -Name ADCS-Cert-Authority -IncludeManagementTools | Out-Null
+        Write-Info "Installed ADCS Certification Authority role and management tools."
     } else {
+        if (-not (Get-WindowsFeature -Name RSAT-ADCS-Mgmt).Installed) {
+            Install-WindowsFeature -Name RSAT-ADCS-Mgmt | Out-Null
+        }
         Write-Info "ADCS Certification Authority role is already installed."
     }
 
