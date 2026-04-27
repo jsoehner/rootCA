@@ -926,7 +926,7 @@ function Get-StageStatus {
     # Treat NeedsReboot as effectively complete for Cleanup if a reboot has been confirmed
     $cleanupComplete = $false
     if ($StateObj) {
-        if ($StateObj.Stage -in @("NeedsReboot", "Prepared", "Complete")) {
+        if ($StateObj.Stage -in @("NeedsReboot", "Rebooted", "Prepared", "Complete")) {
             $cleanupComplete = $true
         }
         if ($StateObj.Stage -in @("Prepared", "Complete")) {
@@ -946,7 +946,7 @@ function Get-StageStatus {
         $stages.Cleanup.Hint = "  --> Run this step first, then reboot when prompted."
     } elseif ($rebootPending) {
         $stages.Cleanup.Hint = "  --> REBOOT NOT YET DETECTED. Please reboot and re-run this script."
-    } elseif ($StateObj -and $StateObj.Stage -eq "NeedsReboot" -and $RebootConfirmed) {
+    } elseif ($StateObj -and (($StateObj.Stage -eq "NeedsReboot" -and $RebootConfirmed) -or ($StateObj.Stage -eq "Rebooted"))) {
         $stages.Cleanup.Hint = "  --> Reboot confirmed. Proceed with step 2."
     }
 

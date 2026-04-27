@@ -25,6 +25,13 @@ artifacts/
 .env
 .env.*
 
-# Pem and Crt files
+# Certificate and Keys
 *.pem
 *.crt
+*.crl
+*.der
+*.cer
+*.p7b
+*.p7c
+*.p12
+*.p7s
