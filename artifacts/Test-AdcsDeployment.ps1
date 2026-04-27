@@ -121,10 +121,12 @@ function Run-Test5 {
     Write-Host "[*] Testing HTTPS connection (Schannel handshake)..."
     # Ignore CN mismatch for testing purposes since we bound CN=Pilot-Auto-Test-Cert to localhost
     [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
-    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
+    # Enable TLS 1.2 (3072) and TLS 1.3 (12288)
+    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12 -bor 3072 -bor 12288
     
     try {
-        $response = Invoke-WebRequest -Uri "https://localhost" -UseBasicParsing -ErrorAction Stop
+        # Use 127.0.0.1 to guarantee IPv4, matching the 0.0.0.0!443 IIS binding above
+        $response = Invoke-WebRequest -Uri "https://127.0.0.1" -UseBasicParsing -ErrorAction Stop
         if ($response.StatusCode -eq 200) {
             Write-Host "    -> PASS: TLS Handshake succeeded and Schannel verified connection." -ForegroundColor Green
             $state = Get-State; $state.T5 = $true; Save-State $state
