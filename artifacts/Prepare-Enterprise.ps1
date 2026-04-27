@@ -120,9 +120,9 @@ $ErrorActionPreference = "Stop"
 # Update these values for your environment. Command-line parameters always
 # override these defaults. Current values are set for JSIGROUP pilot testing.
 $Script:UserDefaults = @{
-    CaCommonName              = "JSIGROUP Intermediate CA - AD CS - PILOT"
+    CaCommonName              = "JSIGROUP Intermediate CA - AD CS"
     CADistinguishedNameSuffix = ""                         # CN-only: ADCS2025_SubCA_EE_Profile requires no OU/O suffix
-    CAType                    = "EnterpriseSubordinateCA"  # Or EnterpriseSubordinateCA
+    CAType                    = "EnterpriseSubordinateCA"  # Or StandaloneSubordinateCA
     KeyAlgorithm              = "ECC_P384"                  # Or RSA_4096
     WorkRoot                  = "C:\certs"
     RequestFile               = "C:\certs\subca.req"
@@ -794,8 +794,8 @@ $transcriptStarted = Start-ExecutionTranscript
 # Stage 3 — Install the signed subordinate certificate and start CertSvc
 # ---------------------------------------------------------------------------
 function Install-SignedCertificate {
-    $signedCert = Join-Path $WorkRoot "pilot-sub-from-adcs.cer"
-    $rootCert   = Join-Path $WorkRoot "pilot-root.cer"
+    $signedCert = Join-Path $WorkRoot "prod-sub-from-adcs.cer"
+    $rootCert   = Join-Path $WorkRoot "root-ca-prod-ecc384.cer"
     $rootCrl    = Join-Path $WorkRoot "root.crl"
 
     # --- 1. Set up IIS and Host the Root CRL ---
@@ -843,7 +843,7 @@ function Install-SignedCertificate {
     Write-Step "Checking Root CA Trust"
     $rootStore = [System.Security.Cryptography.X509Certificates.X509Store]::new("Root", "LocalMachine")
     $rootStore.Open("ReadOnly")
-    $trustedRoot = @($rootStore.Certificates | Where-Object { $_.Subject -like "*JSIGROUP Pilot Root CA*" })
+    $trustedRoot = @($rootStore.Certificates | Where-Object { $_.Subject -like "*JSIGROUP Root CA*" })
     $rootStore.Close()
 
     if ($trustedRoot.Count -eq 0) {
@@ -958,7 +958,7 @@ function Get-StageStatus {
     }
 
     # Step 3 hint
-    $rootCertFile = Join-Path $WorkRoot "pilot-root.cer"
+    $rootCertFile = Join-Path $WorkRoot "root-ca-prod-ecc384.cer"
     $rootPresent = Test-Path -LiteralPath $rootCertFile
     $crlFile = Join-Path $WorkRoot "root.crl"
     $crlPresent = Test-Path -LiteralPath $crlFile
@@ -967,7 +967,7 @@ function Get-StageStatus {
         if ($CertFilePresent -and $rootPresent -and $crlPresent) {
             $stages.Install.Hint = "  --> All certificates and CRL found. Ready to install!"
         } else {
-            $stages.Install.Hint = "  --> Missing required files. Copy pilot-root.cer, pilot-sub-from-adcs.cer, AND root.crl to $WorkRoot."
+            $stages.Install.Hint = "  --> Missing required files. Copy root-ca-prod-ecc384.cer, prod-sub-from-adcs.cer, AND root.crl to $WorkRoot."
         }
     }
 
@@ -977,7 +977,7 @@ function Get-StageStatus {
 function Show-Menu {
     param($StateObj, [bool]$RebootConfirmed)
 
-    $certFile      = Join-Path $WorkRoot "pilot-sub-from-adcs.cer"
+    $certFile      = Join-Path $WorkRoot "prod-sub-from-adcs.cer"
     $certPresent   = Test-Path -LiteralPath $certFile
     $stages        = Get-StageStatus -StateObj $StateObj -CertFilePresent $certPresent -RebootConfirmed $RebootConfirmed
 
@@ -1023,17 +1023,17 @@ function Show-Menu {
     if ($stages.Prepare.Hint) { Write-Host $stages.Prepare.Hint -ForegroundColor Yellow }
     Write-Host ""
     $step3Label = "3.  Install signed certificate and start CertSvc"
-    $rootCertFile = Join-Path $WorkRoot "pilot-root.cer"
+    $rootCertFile = Join-Path $WorkRoot "root-ca-prod-ecc384.cer"
     $rootPresent = Test-Path -LiteralPath $rootCertFile
     $crlFile = Join-Path $WorkRoot "root.crl"
     $crlPresent = Test-Path -LiteralPath $crlFile
 
     if ($certPresent -and $rootPresent -and $crlPresent) {
         Write-Host "  $(Checkbox $stages.Install.Done) $step3Label" -ForegroundColor (StepColor $stages.Install.Done)
-        Write-Host "      Ready: $certFile, pilot-root.cer, root.crl" -ForegroundColor DarkGray
+        Write-Host "      Ready: $certFile, root-ca-prod-ecc384.cer, root.crl" -ForegroundColor DarkGray
     } else {
         Write-Host "  $(Checkbox $stages.Install.Done) $step3Label" -ForegroundColor DarkGray
-        Write-Host "      (waiting for: pilot-root.cer, root.crl, AND pilot-sub-from-adcs.cer)" -ForegroundColor DarkGray
+        Write-Host "      (waiting for: root-ca-prod-ecc384.cer, root.crl, AND prod-sub-from-adcs.cer)" -ForegroundColor DarkGray
     }
     if ($stages.Install.Hint) { Write-Host $stages.Install.Hint -ForegroundColor Yellow }
     Write-Host ""

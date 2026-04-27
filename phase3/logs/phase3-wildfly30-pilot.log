@@ -2056,4 +2056,130 @@ Caused by: java.io.StreamCorruptedException: invalid type code: 00
 [0m[0m06:00:00,004 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
 [0m[0m07:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
 [0m[0m08:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
+[0m[0m08:37:06,937 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:37:06-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m08:37:07,200 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:37:07-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m08:37:07,244 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:37:07-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m08:37:07,285 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:37:07-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:37:07,318 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:37:07-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m08:37:24,231 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:37:24-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:37:28,702 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:37:28-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:37:28,779 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:37:28-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:37:28,830 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:37:28-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:37:28,851 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:37:28-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca_functionality/create_crl
+[0m[0m08:37:28,878 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:37:28-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:37:28,891 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:37:28-04:00;CRL_STORED;SUCCESS;CRL;CORE;ejbca;1472584536;;;msg=Stored CRL with CRLNumber=2, fingerprint=e3aaa10d9a408beadff281f2af006651533fd6cd, issuerDN 'CN=JSIGROUP Root CA,O=JSIGROUP,C=CA'.
+[0m[0m08:37:28,914 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:37:28-04:00;CRL_CREATION;SUCCESS;CRL;CORE;ejbca;1472584536;;;msg=Created CRL with number 2 for CA 'JSIGROUP-RootCA-10Y' with DN 'CN=JSIGROUP Root CA,O=JSIGROUP,C=CA'.
+[0m[0m08:37:28,929 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:37:28-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:37:33,201 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:37:33-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:37:33,262 INFO  [org.cesecore.certificates.crl.CrlStoreSessionBean] (default task-2) Retrieved CRL from issuer 'CN=JSIGROUP Root CA,O=JSIGROUP,C=CA', with CRL number 2.
+[0m[0m08:41:22,769 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:41:22-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:41:35,279 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:41:35-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:41:39,805 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:41:39-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:41:44,449 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:41:44-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:41:48,862 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:41:48-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:43:56,420 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:43:56-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca_functionality/edit_certificate_profiles;resource1=/ca/
+[0m[0m08:43:56,439 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:43:56-04:00;CERTPROFILE_EDITING;SUCCESS;CERTIFICATEPROFILE;CORE;ejbca;;;;msg=Edited certificateprofile RootCAProd-ECC384-SHA384.
+[0m[0m08:44:00,519 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:44:00-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca_functionality/edit_certificate_profiles;resource1=/ca/
+[0m[0m08:44:00,532 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:44:00-04:00;CERTPROFILE_EDITING;SUCCESS;CERTIFICATEPROFILE;CORE;ejbca;;;;msg=Edited certificateprofile RootCAProd-ECC384-SHA384.
+[0m[0m08:44:05,517 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:44:05-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca_functionality/edit_certificate_profiles;resource1=/ca/
+[0m[0m08:44:05,529 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:44:05-04:00;CERTPROFILE_EDITING;SUCCESS;CERTIFICATEPROFILE;CORE;ejbca;;;;msg=Edited certificateprofile SubordCAProd-ECC384-SHA384.
+[0m[0m08:44:13,369 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:44:13-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca_functionality/edit_certificate_profiles;resource1=/ca/
+[0m[0m08:44:13,380 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:44:13-04:00;CERTPROFILE_EDITING;SUCCESS;CERTIFICATEPROFILE;CORE;ejbca;;;;msg=Edited certificateprofile SubordCAProd-ECC384-SHA384.
+[0m[0m08:44:18,432 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:44:18-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca_functionality/edit_certificate_profiles;resource1=/ca/
+[0m[0m08:44:18,446 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:44:18-04:00;CERTPROFILE_EDITING;SUCCESS;CERTIFICATEPROFILE;CORE;ejbca;;;;msg=Edited certificateprofile RootCAPilot-ECC384-SHA384.
+[0m[0m08:44:22,697 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:44:22-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca_functionality/edit_certificate_profiles;resource1=/ca/
+[0m[0m08:44:22,710 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:44:22-04:00;CERTPROFILE_EDITING;SUCCESS;CERTIFICATEPROFILE;CORE;ejbca;;;;msg=Edited certificateprofile RootCAPilot-ECC384-SHA384.
+[0m[0m08:44:28,095 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:44:28-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca_functionality/edit_certificate_profiles;resource1=/ca/
+[0m[0m08:44:28,109 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:44:28-04:00;CERTPROFILE_EDITING;SUCCESS;CERTIFICATEPROFILE;CORE;ejbca;;;;msg=Edited certificateprofile SubordCAPilot-ECC384-SHA384.
+[0m[0m08:44:32,494 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:44:32-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca_functionality/edit_certificate_profiles;resource1=/ca/
+[0m[0m08:44:32,506 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:44:32-04:00;CERTPROFILE_EDITING;SUCCESS;CERTIFICATEPROFILE;CORE;ejbca;;;;msg=Edited certificateprofile SubordCAPilot-ECC384-SHA384.
+[0m[0m08:44:37,485 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:44:37-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca_functionality/edit_certificate_profiles;resource1=/ca/
+[0m[0m08:44:37,503 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:44:37-04:00;CERTPROFILE_EDITING;SUCCESS;CERTIFICATEPROFILE;CORE;ejbca;;;;msg=Edited certificateprofile SubordCAPilot-RSA4096-SHA256.
+[0m[0m08:44:43,168 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:44:43-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca_functionality/edit_certificate_profiles;resource1=/ca/
+[0m[0m08:44:43,182 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:44:43-04:00;CERTPROFILE_EDITING;SUCCESS;CERTIFICATEPROFILE;CORE;ejbca;;;;msg=Edited certificateprofile SubordCAPilot-RSA4096-SHA256.
+[0m[0m08:45:32,935 INFO  [org.cesecore.certificates.ca.CaSessionBean] (default task-2) CA with name JSIGROUP-RootCA does not exist.
+[0m[0m08:45:33,202 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:45:33-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/cryptotoken/modify
+[0m[0m08:45:34,517 INFO  [org.cesecore.keys.token.SoftCryptoToken] (default task-2) Activated Crypto Token with ID -1323741395.
+[0m[0m08:45:34,612 INFO  [org.cesecore.keys.token.SoftCryptoToken] (default task-2) Error activating Crypto Token with ID -1. No keystore data available yet, creating new PKCS#12 keystore.
+[0m[0m08:45:34,726 INFO  [org.cesecore.keys.token.SoftCryptoToken] (default task-2) Error activating Crypto Token with ID -649590586. No keystore data available yet, creating new PKCS#12 keystore.
+[0m[0m08:45:34,904 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:45:34-04:00;CRYPTOTOKEN_CREATE;SUCCESS;CRYPTOTOKEN;CORE;ejbca;-649590586;;;msg=Created CryptoToken with id -649590586;name=JSIGROUP-RootCA;encProviderName=BC;signProviderName=BC;autoActivation=added;autoActivationPinProtection=legacy;added:tokenName=JSIGROUP-RootCA
+[0m[0m08:45:34,947 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:45:34-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/cryptotoken/keys/generate/-649590586
+[0m[0m08:45:35,016 INFO  [com.keyfactor.util.RandomHelper] (default task-2) Using FIPS/SP800 compliant Bouncy Castle Hybrid serialNumber RNG algorithm.
+[0m[0m08:45:35,036 INFO  [com.keyfactor.util.keys.SignWithWorkingAlgorithm] (default task-2) Signature algorithm 'SHA1withECDSA' working for provider 'BC version 1.76'.
+[0m[0m08:45:35,423 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:45:35-04:00;CRYPTOTOKEN_GEN_KEYPAIR;SUCCESS;CRYPTOTOKEN;CORE;ejbca;-649590586;;;msg=Generated new keypair in CryptoToken -649590586;keyAlias=signKey;keySpecification=secp384r1
+[0m[0m08:45:35,480 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:45:35-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/cryptotoken/keys/generate/-649590586
+[0m[0m08:45:36,447 INFO  [com.keyfactor.util.keys.SignWithWorkingAlgorithm] (default task-2) Signature algorithm 'SHA256WithRSA' working for provider 'BC version 1.76'.
+[0m[0m08:45:36,851 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:45:36-04:00;CRYPTOTOKEN_GEN_KEYPAIR;SUCCESS;CRYPTOTOKEN;CORE;ejbca;-649590586;;;msg=Generated new keypair in CryptoToken -649590586;keyAlias=encryptKey;keySpecification=2048
+[0m[0m08:45:37,053 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:45:37-04:00;CA_CREATION;FAILURE;CA;CORE;ejbca;1472584536;;;msg=CA with id 1472584536 already exists.
+[0m[0m08:45:51,641 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:45:51-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1790588970
+[0m[0m08:45:51,977 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:45:51-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1433568080
+[0m[0m08:45:52,047 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:45:52-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1089675525
+[0m[0m08:45:52,087 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:45:52-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:45:52,134 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:45:52-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/-2118228720
+[0m[0m08:46:10,646 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:10-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:10,734 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:10-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca_functionality/remove_ca;resource1=/ca_functionality/add_ca
+[0m[0m08:46:10,741 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:10-04:00;CA_RENAMING;SUCCESS;CA;CORE;ejbca;1472584536;;;msg=CA with name JSIGROUP-RootCA-10Y, and id 1472584536, renamed to JSIGROUP-RootCA.
+[0m[0m08:46:25,024 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:25,207 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:25,236 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:25,267 INFO  [org.cesecore.certificates.ca.catoken.CAToken] (default task-1) Setting CRL signing key alias to: signKey
+[0m[0m08:46:25,267 INFO  [org.cesecore.certificates.ca.catoken.CAToken] (default task-1) Setting certificate signing key alias to: signKey
+[0m[0m08:46:25,267 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;CA_KEYACTIVATE;SUCCESS;CA;CORE;ejbca;1472584536;;;certSignKey=signKey;crlSignKey=signKey;msg=Activated next signing key for Crypto Token with ID 1472584536.;sequence=00000
+[0m[0m08:46:25,277 INFO  [org.ejbca.core.ejb.ca.caadmin.CAAdminSessionBean] (default task-1) Renewing CA using signKey
+[0m[0m08:46:25,301 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca_functionality/edit_ca;resource1=/ca/1472584536
+[0m[0m08:46:25,308 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;CA_EDITING;SUCCESS;CA;CORE;ejbca;1472584536;;;msg=CA with id 1472584536 and name JSIGROUP-RootCA edited., 1;changed:catoken={version=8.0, cryptotokenid=531690250, propertydata=certSignKey=signKey
+previousSequence=00000
+previousCertSignKey=signKey
+crlSignKey=signKey
+defaultKey=encryptKey
+, signaturealgorithm=SHA384withECDSA, encryptionalgorithm=SHA384WithRSA, sequence=00000, sequenceformat=1};changed:certificatechain=[MIICkTCCAhegAwIBAgIUfZnCzpmLPb47YAKoFhrXbIBzKKcwCgYIKoZIzj0EAwMw
+OzEZMBcGA1UEAwwQSlNJR1JPVVAgUm9vdCBDQTERMA8GA1UECgwISlNJR1JPVVAx
+CzAJBgNVBAYTAkNBMB4XDTI2MDQyNzEyMzYyNVoXDTM2MDQyNDEyMzYyNFowOzEZ
+MBcGA1UEAwwQSlNJR1JPVVAgUm9vdCBDQTERMA8GA1UECgwISlNJR1JPVVAxCzAJ
+BgNVBAYTAkNBMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEfaEGlae2rRu6KrXQbn2r
+gOnIcdJzbOZanzc8Wf6xQmVtpv++utqDkMU0++6fuuBO3d3WxgVLsv+IT1pwRdad
+8d+v1DfhBaMlgkTjc2mvK/6CYAB9x+YW648DU+ttmYQFo4HbMIHYMA8GA1UdEwEB
+/wQFMAMBAf8wHwYDVR0jBBgwFoAU4wnxR2NW9FgerMdYM8RsZbPhx+AwPQYIKwYB
+BQUHAQEEMTAvMC0GCCsGAQUFBzAChiFodHRwOi8vY2EuanNpZ3JvdXAubG9jYWwv
+cm9vdC5jZXIwNgYDVR0fBC8wLTAroCmgJ4YlaHR0cDovL2NhLmpzaWdyb3VwLmxv
+Y2FsL2NybC9yb290LmNybDAdBgNVHQ4EFgQU4wnxR2NW9FgerMdYM8RsZbPhx+Aw
+DgYDVR0PAQH/BAQDAgGGMAoGCCqGSM49BAMDA2gAMGUCMFIZt6qfolnrpw5bYNug
+oGHYD2BmyDwovlMp65aFgFhq0OgRSLhAibdktRjwbXNK8wIxANpvDRI3UzBeA4A6
+pPLiTcS+NCQTwStSYrVJmr6/v9HRT1e6UyX5Lt+ibZ4QlZHA/A==];changed:expiretime=Thu Apr 24 08:36:24 EDT 2036;added:renewedcertificatechain=[MIICkzCCAhmgAwIBAgIUJTP3ZVvcNuUP40BoimDHK6ivW0gwCgYIKoZIzj0EAwMw
+OzEZMBcGA1UEAwwQSlNJR1JPVVAgUm9vdCBDQTERMA8GA1UECgwISlNJR1JPVVAx
+CzAJBgNVBAYTAkNBMB4XDTI2MDQyMjIzMjI0OVoXDTM2MDQxOTIzMjI0OFowOzEZ
+MBcGA1UEAwwQSlNJR1JPVVAgUm9vdCBDQTERMA8GA1UECgwISlNJR1JPVVAxCzAJ
+BgNVBAYTAkNBMHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEfaEGlae2rRu6KrXQbn2r
+gOnIcdJzbOZanzc8Wf6xQmVtpv++utqDkMU0++6fuuBO3d3WxgVLsv+IT1pwRdad
+8d+v1DfhBaMlgkTjc2mvK/6CYAB9x+YW648DU+ttmYQFo4HdMIHaMA8GA1UdEwEB
+/wQFMAMBAf8wHwYDVR0jBBgwFoAU4wnxR2NW9FgerMdYM8RsZbPhx+AwPgYIKwYB
+BQUHAQEEMjAwMC4GCCsGAQUFBzAChiJodHRwOi8vY2EuanNpZ2dyb3VwLmxvY2Fs
+L3Jvb3QuY2VyMDcGA1UdHwQwMC4wLKAqoCiGJmh0dHA6Ly9jYS5qc2lnZ3JvdXAu
+bG9jYWwvY3JsL3Jvb3QuY3JsMB0GA1UdDgQWBBTjCfFHY1b0WB6sx1gzxGxls+HH
+4DAOBgNVHQ8BAf8EBAMCAYYwCgYIKoZIzj0EAwMDaAAwZQIxAMTM/sH9uJ8Fh+5D
+rRMTxJfaVXBgYzhnaO3RUSQa8JY7ucZfwn5AzTNchHxnprpOVQIwboLGWqIAFNIa
+L3WAVJkf7IYpXV8c+7yRptWYFeAdvdJ5hPI1K7Ba8jdxCljtqCwJ];tokenproperties={certSignKey=signKey, previousSequence=00000, previousCertSignKey=signKey, crlSignKey=signKey, defaultKey=encryptKey};tokensequence=00000
+[0m[0m08:46:25,531 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:25,542 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;CERT_STORED;SUCCESS;CERTIFICATE;CORE;ejbca;1472584536;7D99C2CE998B3DBE3B6002A8161AD76C807328A7;SYSTEMCA;msg=Certificate stored for username 'SYSTEMCA', fp=9272009e42fc000e4ceba6ea35445fac4e2ce5cf, subjectDN 'CN=JSIGROUP Root CA,O=JSIGROUP,C=CA', issuerDN 'CN=JSIGROUP Root CA,O=JSIGROUP,C=CA', serialNo=7D99C2CE998B3DBE3B6002A8161AD76C807328A7, accountBindingId=.
+[0m[0m08:46:25,638 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:25,657 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:25,688 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca_functionality/create_crl
+[0m[0m08:46:25,709 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:25,717 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;CRL_STORED;SUCCESS;CRL;CORE;ejbca;1472584536;;;msg=Stored CRL with CRLNumber=3, fingerprint=1735d7c14949fc5ca2173df9d09bdb9b319462c4, issuerDN 'CN=JSIGROUP Root CA,O=JSIGROUP,C=CA'.
+[0m[0m08:46:25,722 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;CRL_CREATION;SUCCESS;CRL;CORE;ejbca;1472584536;;;msg=Created CRL with number 3 for CA 'JSIGROUP-RootCA' with DN 'CN=JSIGROUP Root CA,O=JSIGROUP,C=CA'.
+[0m[0m08:46:25,727 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:25,732 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;CA_RENEWED;SUCCESS;CA;CORE;ejbca;1472584536;;;msg=CA 1472584536 renewed successfully.
+[0m[0m08:46:25,768 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-1) 2026-04-27 08:46:25-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:40,150 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:46:40-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:45,231 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:46:45-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:45,319 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:46:45-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:45,357 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:46:45-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:45,373 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:46:45-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca_functionality/create_crl
+[0m[0m08:46:45,392 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:46:45-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:45,402 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:46:45-04:00;CRL_STORED;SUCCESS;CRL;CORE;ejbca;1472584536;;;msg=Stored CRL with CRLNumber=4, fingerprint=8a4b061552a7fac2221be1dd3c01d16f77cda23f, issuerDN 'CN=JSIGROUP Root CA,O=JSIGROUP,C=CA'.
+[0m[0m08:46:45,416 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:46:45-04:00;CRL_CREATION;SUCCESS;CRL;CORE;ejbca;1472584536;;;msg=Created CRL with number 4 for CA 'JSIGROUP-RootCA' with DN 'CN=JSIGROUP Root CA,O=JSIGROUP,C=CA'.
+[0m[0m08:46:45,423 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:46:45-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:49,906 INFO  [org.cesecore.audit.impl.log4j.Log4jDevice] (default task-2) 2026-04-27 08:46:49-04:00;ACCESS_CONTROL;SUCCESS;ACCESSCONTROL;CORE;ejbca;;;;resource0=/ca/1472584536
+[0m[0m08:46:49,953 INFO  [org.cesecore.certificates.crl.CrlStoreSessionBean] (default task-2) Retrieved CRL from issuer 'CN=JSIGROUP Root CA,O=JSIGROUP,C=CA', with CRL number 4.
+[0m[0m09:00:00,003 INFO  [org.ejbca.core.protocol.scep.ScepKeyRenewalSessionBean] (EJB default - 2) Renewed keys for SCEP alias
 [0m
