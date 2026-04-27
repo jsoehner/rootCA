@@ -43,7 +43,7 @@ OUT_PEM="$SCRIPT_DIR/pilot-sub-from-adcs.pem"
 CA_NAME="JSIGROUP-Pilot-RootCA"
 CERT_PROFILE="SubordCAPilot-ECC384-SHA384"
 EE_PROFILE="ADCS2025_SubCA_EE_Profile"
-SUBJECT_DN="CN=JSIGROUP Intermediate CA - AD CS - PILOT,OU=Certificate Authority,O=JSIGROUP,C=CA"
+SUBJECT_DN="CN=JSIGROUP Intermediate CA - AD CS - PILOT"
 EE_USERNAME=""
 
 # ---------------------------------------------------------------------------
