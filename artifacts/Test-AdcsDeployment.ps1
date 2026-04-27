@@ -64,6 +64,9 @@ ProviderName = "Microsoft Software Key Storage Provider"
 MachineKeySet = true
 RequestType = PKCS10
 HashAlgorithm = sha256
+
+[EnhancedKeyUsageExtension]
+OID = 1.3.6.1.5.5.7.3.1 ; Server Authentication
 "@
     Set-Content -Path $infPath -Value $infContent
     & certreq -new -q $infPath $reqPath
