@@ -127,6 +127,7 @@ sudo service auditd restart
 - Fedora baseline scripts required sudo remediation due to Java alternatives misconfiguration; resolved by running `phase1-remediate-fedora.sh`.
 - Java 21 and Ant must be explicitly set for EJBCA build compatibility; Java 25 artifacts caused initial build failure.
 - EJBCA 9.3.7 deployed successfully on WildFly 30.0.1.Final with Java 21 after datasource configuration.
+- **Critical Java 21 Finding:** WildFly `standalone.conf` requires `--add-exports=jdk.crypto.cryptoki/sun.security.pkcs11.wrapper=ALL-UNNAMED` to allow EJBCA access to the HSM PKCS#11 module (discovered/remediated during Phase 4).
 - All health checks (admin web, OCSP) passed post-deployment.
 - Minor BouncyCastle classloader warning in logs, but not blocking for phase gate.
 

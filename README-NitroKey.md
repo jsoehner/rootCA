@@ -446,3 +446,23 @@ Expected result:
 - Public-key delete command: Returned object-not-found (no remaining matching object at deletion time).
 - Post-check: No objects listed for ID A1.
 - Final state: Test key ID A1 removed.
+
+## Technical Lessons Learned (2026-04-27)
+
+During the formal Phase 4 Key Ceremony, several critical technical constraints were identified regarding the integration of Nitrokey HSM with Java 21 and EJBCA.
+
+### 1. Java 21 Module Encapsulation
+**Issue:** Java 21 enforces strict module boundaries that prevent EJBCA from accessing internal `SunPKCS11` wrappers required for HSM interaction.
+**Resolution:** The WildFly `standalone.conf` must be patched to export the `jdk.crypto.cryptoki` module:
+```bash
+# Add to JAVA_OPTS in standalone.conf
+--add-exports=jdk.crypto.cryptoki/sun.security.pkcs11.wrapper=ALL-UNNAMED
+```
+
+### 2. Java "Orphan Key" Invisibility
+**Issue:** If a key pair is generated via `pkcs11-tool` (OpenSC) without a corresponding certificate object, the Java `SunPKCS11` KeyStore provider will treat the slot as empty (0 entries). Java requires an X.509 certificate object (even a dummy one) with a matching CKA_ID to recognize a private key as a "KeyStore Entry".
+**Resolution:** Keys should be generated **natively via EJBCA** (`ejbca.sh cryptotoken generatekey`). EJBCA automatically handles the creation of the required dummy certificate object, ensuring the key is visible to the Java environment.
+
+### 3. Subject DN Uniqueness in EJBCA
+**Issue:** EJBCA uses a hash of the Subject DN as the primary key (`cAId`) for CA records. Multiple CAs (e.g., a Pilot Root and a Production Root) cannot share the exact same Subject DN even if their internal names are different.
+**Resolution:** Any existing pilot/test CAs with the same Subject DN must be fully purged from the database (and caches cleared) before the production CA can be initialized with that DN.

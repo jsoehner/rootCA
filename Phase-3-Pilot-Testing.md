@@ -1,6 +1,6 @@
 # Phase 3: Interoperability Pilot and Decision Gate
 
-**Phase Status:** IN PROGRESS — started 2026-04-20  
+**Phase Status:** COMPLETED AND SIGNED OFF  
 **Date Created:** 2026-04-19  
 **Phase Dependencies:** Phase 2 complete and signed off (2026-04-20, Jeff Soehner)  
 **Critical Gate:** This phase produces a go/no-go decision for production key ceremony (Phase 4)  
@@ -633,6 +633,18 @@ If ANY critical or unmitigated HIGH defects exist:
 | **GO (Fallback RSA)** | All 8 tests PASS with all-RSA chain; fallback viable; officer sign-off | **Phase 4**: Production key ceremony (RSA 4096 root + subordinate) |
 | **NO-GO (Technical)** | Critical test failures; algorithm not supported by Windows CNG or Schannel | **Return to Phase 3**: Retry with different algorithm; escalate if all fail |
 | **NO-GO (Policy)** | Defects acceptable for Phase 3 but require SOP/policy updates before Phase 4 | **Governance Review**: Approve SOP changes; re-decide go/no-go |
+
+---
+
+## 5. Lessons Learned & Retrospective Findings (2026-04-27)
+
+Following the successful pilot, the following critical finding was identified during the transition to the Phase 4 Production Ceremony:
+
+### 5.1 EJBCA Global Uniqueness Constraint
+**Finding:** EJBCA enforces a global uniqueness constraint on the Subject DN of all CAs in the system. Because it uses a hash of the Subject DN as the primary key (`cAId`), you cannot have a Pilot CA and a Production CA sharing the exact same Subject DN.
+**Impact:** The initial production root creation was blocked because the Pilot Root CA already occupied the intended production Subject DN in the database.
+**Resolution:** The Pilot CA records had to be purged from the MariaDB backend before the Production Root could be initialized.
+**Future Recommendation:** Always ensure that Pilot CAs use a slightly differentiated Subject DN (e.g., adding "- PILOT") or ensure a full database purge occurs between pilot and production phases if identical DNs are required.
 
 ---
 

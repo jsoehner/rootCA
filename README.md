@@ -1,7 +1,7 @@
 # JSIGROUP Offline EJBCA Root CA Project
 
 Date: 2026-04-23
-Status: Phase 1 complete and signed off; Phase 2 complete and formally closed (closeout evidence refreshed); Phase 3 ready for execution
+Status: Phase 1-4 complete and signed off; Phase 5 ready for integration.
 
 ## Purpose
 
@@ -52,9 +52,12 @@ Windows pilot host PowerShell scripts (copy to Windows Server before use):
 	- Runtime checkpoint healthy (`admin=200`, `ocsp=200`) during reissue run.
 	- NitroKey HSM token verified empty (serial `DENK0402828`; PKCS#15 profile object only).
 	- Signed off by: Jeff Soehner, 2026-04-20. Closeout refresh details: [Phase-2-Execution-Log.md](Phase-2-Execution-Log.md).
-4. Phase 3: **Ready to start.** Phase 2 sign-off complete; entry authorized.
-5. Phase 4: Not started. Still blocked by Phase 3 go decision.
-6. Phase 5: Not started. Still blocked by Phase 4 production ceremony.
+4. Phase 3: **Complete and signed off.** Pilot environment validation successful.
+5. Phase 4: **Complete and signed off (2026-04-27).** Production Root CA generated on Nitrokey HSM.
+	- Root CA: `JSIGROUP-ProductionRootCA`, SHA-256: `6D:03:22:29:AD:94:F1:48:6E:34:FE:7C:A1:E9:26:E0:36:95:91:99:C2:47:A1:93:6D:5F:C7:A9:45:D8:78:DA`
+	- Key: `root-ca-key-prod-v2` (ECDSA P-384, on-HSM)
+	- Verification: `Verification: OK` (openssl x509 check complete).
+6. Phase 5: **Ready to start.** Proceeding to AD CS integration and subordinate issuance.
 7. Phase 6: Not started. Still blocked by Phase 5 operationalization.
 
 ## Gate Conditions

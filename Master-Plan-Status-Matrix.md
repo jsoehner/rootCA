@@ -7,8 +7,8 @@ Workspace: ~/rootCA
 
 ## 🎯 Overall Project Status
 
-**Current Focus:** Phase 5 (Production AD CS Integration and Trust Rollout) preparation underway.
-**Gate Status:** Phase 4 formally closed. The Production Root Key Ceremony is complete, and the Root Certificate has been successfully generated and exported. Phase 5 is fully authorized.
+**Current Focus:** Phase 5 (Production AD CS Integration and Trust Rollout).
+**Gate Status:** Phase 4 formally closed. The Production Root Key Ceremony is complete, and the Root Certificate has been successfully generated on the Nitrokey HSM. Phase 5 is fully authorized and underway.
 
 ---
 
@@ -20,8 +20,8 @@ Workspace: ~/rootCA
 | Phase 1 | Offline platform baseline | ✅ Closed (Signed Off) | Phase-1-Platform-Setup.md, Phase-1-Execution-Log.md | Closed |
 | **Phase 2** | Crypto profiles and validation | ✅ Closed (Formal Sign-Off Complete) | Phase-2-Crypto-Profiles.md, Phase-2-Execution-Log.md, phase2/logs/phase2-closeout-report-20260423T003847Z.txt, phase2/logs/phase2-cleanup-verification-20260423T003737Z.txt | Closed |
 | **Phase 3** | Pilot interoperability and go/no-go | ✅ **Closed (GO Decision Reached)** | Phase-3-Pilot-Testing.md, phase3/logs/Phase-3-Execution-Log.md | Closed |
-| **Phase 4** | Production key ceremony | ✅ **Closed** | Phase-4-Key-Ceremony.md, phase4/logs/Phase-4-Execution-Log.md | Closed |
-| **Phase 5** | AD CS integration and trust rollout | 🟡 **Ready for Execution** | Phase-5-ADCS-Integration.md | Open |
+| **Phase 4** | Production key ceremony | ✅ **Closed (Success)** | Phase-4-Key-Ceremony.md, Phase-4-Execution-Log.md | Closed |
+| **Phase 5** | AD CS integration and trust rollout | 🟡 **In Progress** | Phase-5-ADCS-Integration.md | Open |
 | Phase 6 | Steady-state operations and audit | 🔴 Blocked | Phase-6-Steady-State-Operations.md | Blocked by Phase 5 completion |
 
 ---
@@ -40,7 +40,7 @@ Workspace: ~/rootCA
 *   **Test 2 PASSED (2026-04-25):** New Windows Server 2022 VM provisioned. Subordinate CSR generated and signed via CLI helper.
 *   **Phase 3 GO Decision (2026-04-27):** Interoperability pilot successfully executed via the consolidated `Prepare-Standalone.ps1` and `Test-Standalone.ps1` scripts. ECC P-256 certificate issuance, Windows TLS/Schannel negotiation (via native `curl.exe`), and CRL CDP retrieval all passed validation on AD CS.
 *   **Enterprise Tooling Created:** Deployed `Prepare-Enterprise.ps1` and `Test-Enterprise.ps1` for zero-touch auto-enrollment and auto-renewal testing against the upcoming Production Primary Domain Controller.
-*   **Phase 4 Key Ceremony Completed (2026-04-27):** The Production Root CA (`JSIGROUP-RootCA-10Y`) was verified. The ECC P-384 root certificate and initial empty CRL were exported and archived into a tamper-evident tarball, completing the offline ceremony.
+*   **Phase 4 Key Ceremony Completed (2026-04-27):** The **JSIGROUP-ProductionRootCA** was successfully initialized on the Nitrokey HSM. Technical visibility issues between Java 21 and OpenSC were resolved by native EJBCA generation. The 10-year root certificate and initial CRL were exported and verified.
 
 ---
 

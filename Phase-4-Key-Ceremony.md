@@ -1,6 +1,6 @@
 # Phase 4: Production Key Ceremony and Root Creation
 
-**Phase Status:** NOT STARTED; BLOCKED PENDING PHASE 3 GO DECISION  
+**Phase Status:** COMPLETED AND SIGNED OFF  
 **Date Created:** 2026-04-19  
 **Phase Dependencies:** Phase 3 (Pilot) must result in **GO** decision before Phase 4 may begin  
 **Criticality:** This phase irreversibly generates the root private key and root certificate; all officers and auditors must attest approval  
@@ -606,6 +606,29 @@ openssl crl -in root.crl -text -noout
 #     ...
 #   Revoked Certificates: None  (expected for initial empty CRL)
 ```
+
+---
+
+## 7. Lessons Learned & Procedural Adjustments (Retrospective 2026-04-27)
+
+The following technical hurdles were encountered and resolved during the live ceremony. Future ceremonies must incorporate these adjustments into the baseline SOP:
+
+### 7.1 Java 21 PKCS#11 Module Access
+**Finding:** Standard Java 21 distributions strictly encapsulate the `SunPKCS11` wrapper. EJBCA will fail to activate hardware tokens with an `IllegalAccessException` if the module is not explicitly exported.
+**Adjustment:** Ensure the application server `standalone.conf` includes:
+`--add-exports=jdk.crypto.cryptoki/sun.security.pkcs11.wrapper=ALL-UNNAMED`
+
+### 7.2 Hardware Key Visibility ("Orphan Key" Problem)
+**Finding:** Generating keys via `pkcs11-tool` (C-library) does not create the X.509 certificate metadata object that the Java `SunPKCS11` provider requires to recognize a key as a "KeyStore entry". This results in the token appearing empty to EJBCA even if keys physically exist.
+**Adjustment:** **MANDATORY:** Always use `ejbca.sh cryptotoken generatekey` to create ceremony keys. This ensures EJBCA injects the necessary dummy certificate object required for Java visibility.
+
+### 7.3 Subject DN and CA ID Uniqueness
+**Finding:** EJBCA generates the unique internal `cAId` by hashing the Subject DN. You cannot create a Production CA with the exact same Subject DN as a pre-existing Pilot/Test CA without a database collision.
+**Adjustment:** All pilot/test CAs sharing the production Subject DN must be fully deleted from the database (`CAData`, `CertificateData`, `CRLData`) and EJBCA caches flushed before the ceremony begins.
+
+### 7.4 CLI Binary Persistence
+**Finding:** IDE background processes or `ant clean` tasks may delete the `ejbca-ejb-cli.jar`.
+**Adjustment:** Always verify CLI availability with `ant ejbca-ejb-cli` before starting the formal ceremony window.
 
 ---
 
