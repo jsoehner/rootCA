@@ -116,7 +116,10 @@ function Run-Test5 {
     
     Write-Host "[*] Binding certificate to IIS (Port 443)..."
     $thumbprint = $cert.Thumbprint
-    Get-Item -Path "Cert:\LocalMachine\My\$thumbprint" | New-Item -Path "IIS:\SslBindings\0.0.0.0!443" -Force | Out-Null
+    if (Test-Path "IIS:\SslBindings\0.0.0.0!443") {
+        Remove-Item -Path "IIS:\SslBindings\0.0.0.0!443" -Force
+    }
+    Get-Item -Path "Cert:\LocalMachine\My\$thumbprint" | New-Item -Path "IIS:\SslBindings\0.0.0.0!443" | Out-Null
     
     Write-Host "[*] Testing HTTPS connection (Schannel handshake)..."
     # Ignore CN mismatch for testing purposes since we bound CN=Pilot-Auto-Test-Cert to localhost
