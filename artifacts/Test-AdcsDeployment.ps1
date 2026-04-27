@@ -116,20 +116,22 @@ function Run-Test5 {
     
     Write-Host "[*] Binding certificate to IIS (Port 443)..."
     $thumbprint = $cert.Thumbprint
-    if (Test-Path "IIS:\SslBindings\0.0.0.0!443") {
-        Remove-Item -Path "IIS:\SslBindings\0.0.0.0!443" -Force
-    }
-    Get-Item -Path "Cert:\LocalMachine\My\$thumbprint" | New-Item -Path "IIS:\SslBindings\0.0.0.0!443" | Out-Null
+    if (Test-Path "IIS:\SslBindings\*!443") { Remove-Item -Path "IIS:\SslBindings\*!443" -Force }
+    if (Test-Path "IIS:\SslBindings\0.0.0.0!443") { Remove-Item -Path "IIS:\SslBindings\0.0.0.0!443" -Force }
+    
+    Get-Item -Path "Cert:\LocalMachine\My\$thumbprint" | New-Item -Path "IIS:\SslBindings\*!443" | Out-Null
+    
+    Write-Host "[*] Restarting IIS (W3SVC) to ensure bindings are applied..."
+    Restart-Service -Name W3SVC -ErrorAction SilentlyContinue
     
     Write-Host "[*] Testing HTTPS connection (Schannel handshake)..."
     # Ignore CN mismatch for testing purposes since we bound CN=Pilot-Auto-Test-Cert to localhost
     [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
-    # Enable TLS 1.2 (3072) and TLS 1.3 (12288)
-    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12 -bor 3072 -bor 12288
+    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
     
     try {
-        # Use 127.0.0.1 to guarantee IPv4, matching the 0.0.0.0!443 IIS binding above
-        $response = Invoke-WebRequest -Uri "https://127.0.0.1" -UseBasicParsing -ErrorAction Stop
+        # *!443 binding supports both IPv4 and IPv6 localhost
+        $response = Invoke-WebRequest -Uri "https://localhost" -UseBasicParsing -ErrorAction Stop
         if ($response.StatusCode -eq 200) {
             Write-Host "    -> PASS: TLS Handshake succeeded and Schannel verified connection." -ForegroundColor Green
             $state = Get-State; $state.T5 = $true; Save-State $state
