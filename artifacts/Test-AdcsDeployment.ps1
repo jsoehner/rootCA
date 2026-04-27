@@ -97,6 +97,7 @@ Write-Host "    -> PASS: Certificate administratively issued." -ForegroundColor 
 
 # 5. Retrieve the certificate
 Write-Host "`n[*] Test 4: Retrieving issued certificate..."
+if (Test-Path $rspPath) { Remove-Item $rspPath -Force }
 $retrieveOutput = & certreq -retrieve -q -config $caConfigString $requestId $cerPath 2>&1
 if (!(Test-Path $cerPath)) {
     throw "Failed to retrieve certificate: $($retrieveOutput | Out-String)"
