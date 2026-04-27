@@ -410,6 +410,23 @@ function Get-State {
     Get-Content -LiteralPath $StateFile -Raw | ConvertFrom-Json
 }
 
+function Test-RebootOccurred {
+    param($StateObj)
+
+    if ($null -eq $StateObj -or -not $StateObj.PSObject.Properties['UpdatedUtc']) {
+        return $false
+    }
+
+    try {
+        $lastBoot    = (Get-CimInstance -ClassName Win32_OperatingSystem).LastBootUpTime.ToUniversalTime()
+        $stateSaved  = [datetime]::Parse($StateObj.UpdatedUtc, $null, [System.Globalization.DateTimeStyles]::RoundtripKind)
+        return $lastBoot -gt $stateSaved
+    } catch {
+        # If we cannot determine boot time, assume no reboot rather than block the operator
+        return $false
+    }
+}
+
 function Remove-ItemIfPresent([string]$Path) {
     if (Test-Path -LiteralPath $Path) {
         Remove-Item -LiteralPath $Path -Recurse -Force -ErrorAction SilentlyContinue
@@ -824,7 +841,7 @@ function Install-SignedCertificate {
 # Interactive menu
 # ---------------------------------------------------------------------------
 function Get-StageStatus {
-    param($StateObj, [bool]$CertFilePresent)
+    param($StateObj, [bool]$CertFilePresent, [bool]$RebootConfirmed)
 
     $stages = @{
         Cleanup   = @{ Done = $false; Hint = "" }
@@ -832,9 +849,11 @@ function Get-StageStatus {
         Install   = @{ Done = $false; Hint = "" }
     }
 
+    # Treat NeedsReboot as effectively complete for Cleanup if a reboot has been confirmed
+    $cleanupComplete = $false
     if ($StateObj) {
         if ($StateObj.Stage -in @("NeedsReboot", "Prepared", "Complete")) {
-            $stages.Cleanup.Done = $true
+            $cleanupComplete = $true
         }
         if ($StateObj.Stage -in @("Prepared", "Complete")) {
             $stages.Prepare.Done = $true
@@ -843,18 +862,25 @@ function Get-StageStatus {
             $stages.Install.Done = $true
         }
     }
+    $stages.Cleanup.Done = $cleanupComplete
+
+    # Determine whether step 2 is unlocked
+    $rebootPending = ($StateObj -and $StateObj.Stage -eq "NeedsReboot" -and -not $RebootConfirmed)
 
     # Step 1 hint
-    if (-not $stages.Cleanup.Done) {
-        $stages.Cleanup.Hint = "  --> Run this step first, then reboot."
-    } elseif ($StateObj -and $StateObj.Stage -eq "NeedsReboot") {
-        $stages.Cleanup.Hint = "  --> REBOOT REQUIRED before running step 2."
+    if (-not $cleanupComplete) {
+        $stages.Cleanup.Hint = "  --> Run this step first, then reboot when prompted."
+    } elseif ($rebootPending) {
+        $stages.Cleanup.Hint = "  --> REBOOT NOT YET DETECTED. Please reboot and re-run this script."
+    } elseif ($StateObj -and $StateObj.Stage -eq "NeedsReboot" -and $RebootConfirmed) {
+        $stages.Cleanup.Hint = "  --> Reboot confirmed. Proceed with step 2."
     }
 
     # Step 2 hint
-    if ($stages.Cleanup.Done -and -not $stages.Prepare.Done -and
-        ($StateObj -and $StateObj.Stage -ne "NeedsReboot")) {
+    if ($cleanupComplete -and -not $stages.Prepare.Done -and -not $rebootPending) {
         $stages.Prepare.Hint = "  --> Run this step to install the role and generate a CSR."
+    } elseif ($rebootPending) {
+        $stages.Prepare.Hint = "  --> Locked until reboot is detected."
     }
 
     # Step 3 hint
@@ -870,11 +896,11 @@ function Get-StageStatus {
 }
 
 function Show-Menu {
-    param($StateObj)
+    param($StateObj, [bool]$RebootConfirmed)
 
     $certFile      = Join-Path $WorkRoot "pilot-sub-from-adcs.cer"
     $certPresent   = Test-Path -LiteralPath $certFile
-    $stages        = Get-StageStatus -StateObj $StateObj -CertFilePresent $certPresent
+    $stages        = Get-StageStatus -StateObj $StateObj -CertFilePresent $certPresent -RebootConfirmed $RebootConfirmed
 
     function Checkbox { param([bool]$Done) if ($Done) { return "[X]" } else { return "[ ]" } }
     function StepColor { param([bool]$Done) if ($Done) { return "Green" } else { return "White" } }
@@ -882,11 +908,33 @@ function Show-Menu {
     Write-Host ""
     Write-Host "  ============================================================" -ForegroundColor Cyan
     Write-Host "   AD CS Pilot Setup Wizard" -ForegroundColor Cyan
+
     if ($StateObj -and $StateObj.Stage) {
-        Write-Host "   Current Stage : $($StateObj.Stage)" -ForegroundColor Cyan
+        $stageLabel = $StateObj.Stage
+        if ($StateObj.Stage -eq "NeedsReboot") {
+            if ($RebootConfirmed) {
+                $stageLabel = "NeedsReboot [Reboot confirmed - ready for step 2]"
+                Write-Host "   Current Stage : $stageLabel" -ForegroundColor Green
+            } else {
+                $stageLabel = "NeedsReboot [Reboot NOT yet detected]"
+                Write-Host "   Current Stage : $stageLabel" -ForegroundColor Yellow
+            }
+        } else {
+            Write-Host "   Current Stage : $stageLabel" -ForegroundColor Cyan
+        }
+        # Show last boot and state save time for transparency
+        try {
+            $lastBoot   = (Get-CimInstance -ClassName Win32_OperatingSystem).LastBootUpTime
+            Write-Host "   Last Boot     : $($lastBoot.ToString('yyyy-MM-dd HH:mm:ss'))" -ForegroundColor DarkGray
+        } catch {}
+        if ($StateObj.PSObject.Properties['UpdatedUtc']) {
+            $saved = [datetime]::Parse($StateObj.UpdatedUtc, $null, [System.Globalization.DateTimeStyles]::RoundtripKind).ToLocalTime()
+            Write-Host "   Stage saved   : $($saved.ToString('yyyy-MM-dd HH:mm:ss'))" -ForegroundColor DarkGray
+        }
     } else {
         Write-Host "   Current Stage : Not started" -ForegroundColor Cyan
     }
+
     Write-Host "  ============================================================" -ForegroundColor Cyan
     Write-Host ""
     Write-Host "  $(Checkbox $stages.Cleanup.Done) 1.  Clean up / reset old AD CS configuration" -ForegroundColor (StepColor $stages.Cleanup.Done)
@@ -909,13 +957,25 @@ function Show-Menu {
     Write-Host ""
     Write-Host "  ============================================================" -ForegroundColor Cyan
     Write-Host ""
+    Write-Host "  NOTE: To avoid pausing the script, do not click or select text" -ForegroundColor DarkGray
+    Write-Host "        in this window while it is running (Windows QuickEdit Mode)." -ForegroundColor DarkGray
+    Write-Host ""
 
     return Read-Host "Select a step (1-4)"
 }
 
 try {
-    $state     = Get-State
-    $selection = Show-Menu -StateObj $state
+    $state          = Get-State
+    $rebootOccurred = ($state -and $state.Stage -eq "NeedsReboot" -and (Test-RebootOccurred -StateObj $state))
+
+    # Auto-advance state: if a reboot has been detected since the NeedsReboot stage was saved,
+    # promote the stage so step 2 is automatically unlocked on the next run.
+    if ($rebootOccurred) {
+        Save-State -Stage "Rebooted"
+        $state = Get-State
+    }
+
+    $selection = Show-Menu -StateObj $state -RebootConfirmed $rebootOccurred
 
     switch ($selection) {
         "1" { Remove-AdcsConfiguration }
