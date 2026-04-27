@@ -792,15 +792,44 @@ $transcriptStarted = Start-ExecutionTranscript
 # ---------------------------------------------------------------------------
 function Install-SignedCertificate {
     $signedCert = Join-Path $WorkRoot "pilot-sub-from-adcs.cer"
+    $rootCert   = Join-Path $WorkRoot "pilot-root.cer"
 
+    # --- 1. Ensure Root CA is Trusted ---
+    Write-Step "Checking Root CA Trust"
+    $rootStore = [System.Security.Cryptography.X509Certificates.X509Store]::new("Root", "LocalMachine")
+    $rootStore.Open("ReadOnly")
+    $trustedRoot = @($rootStore.Certificates | Where-Object { $_.Subject -like "*JSIGROUP Pilot Root CA*" })
+    $rootStore.Close()
+
+    if ($trustedRoot.Count -eq 0) {
+        Write-Info "Root CA is not currently trusted."
+        if (-not (Test-Path -LiteralPath $rootCert)) {
+            Write-Warn "Root certificate not found at: $rootCert"
+            Write-Host ""
+            Write-Host "ACTION REQUIRED:" -ForegroundColor Yellow
+            Write-Host "  To install the Subordinate CA, Windows must first trust the Root CA." -ForegroundColor Yellow
+            Write-Host "  Copy the root certificate from EJBCA to this server and place it at:" -ForegroundColor Yellow
+            Write-Host "  $rootCert" -ForegroundColor Cyan
+            Write-Host ""
+            throw "Halting: root certificate not present."
+        }
+        
+        Write-Info "Installing Root CA from $rootCert into LocalMachine\Root..."
+        Import-Certificate -FilePath $rootCert -CertStoreLocation "Cert:\LocalMachine\Root" | Out-Null
+        Write-Info "Root CA installed and trusted successfully."
+    } else {
+        Write-Info "Root CA is already trusted."
+    }
+
+    # --- 2. Install Subordinate CA ---
     if (-not (Test-Path -LiteralPath $signedCert)) {
-        Write-Warn "Signed certificate not found at: $signedCert"
+        Write-Warn "Signed subordinate certificate not found at: $signedCert"
         Write-Host ""
         Write-Host "ACTION REQUIRED:" -ForegroundColor Yellow
-        Write-Host "  Copy the signed certificate from EJBCA to this server and place it at:" -ForegroundColor Yellow
+        Write-Host "  Copy the signed subordinate certificate from EJBCA to this server and place it at:" -ForegroundColor Yellow
         Write-Host "  $signedCert" -ForegroundColor Cyan
         Write-Host ""
-        throw "Halting: signed certificate not present. Copy the file and re-run this script, then choose option 3."
+        throw "Halting: signed subordinate certificate not present."
     }
 
     Write-Step "Installing signed subordinate CA certificate"
@@ -884,11 +913,18 @@ function Get-StageStatus {
     }
 
     # Step 3 hint
+    $rootCertFile = Join-Path $WorkRoot "pilot-root.cer"
+    $rootPresent = Test-Path -LiteralPath $rootCertFile
+
     if ($stages.Prepare.Done -and -not $stages.Install.Done) {
-        if ($CertFilePresent) {
-            $stages.Install.Hint = "  --> Signed certificate found. Ready to install!"
+        if ($CertFilePresent -and $rootPresent) {
+            $stages.Install.Hint = "  --> Root and Signed certificates found. Ready to install!"
+        } elseif ($CertFilePresent -and -not $rootPresent) {
+            $stages.Install.Hint = "  --> Signed cert found, but missing Root. Copy pilot-root.cer to $WorkRoot."
+        } elseif (-not $CertFilePresent -and $rootPresent) {
+            $stages.Install.Hint = "  --> Root cert found, but missing Signed SubCA cert. Copy pilot-sub-from-adcs.cer to $WorkRoot."
         } else {
-            $stages.Install.Hint = "  --> Copy pilot-sub-from-adcs.cer to $WorkRoot, then run this step."
+            $stages.Install.Hint = "  --> Copy BOTH pilot-root.cer and pilot-sub-from-adcs.cer to $WorkRoot, then run this step."
         }
     }
 
@@ -944,12 +980,15 @@ function Show-Menu {
     if ($stages.Prepare.Hint) { Write-Host $stages.Prepare.Hint -ForegroundColor Yellow }
     Write-Host ""
     $step3Label = "3.  Install signed certificate and start CertSvc"
-    if ($certPresent) {
+    $rootCertFile = Join-Path $WorkRoot "pilot-root.cer"
+    $rootPresent = Test-Path -LiteralPath $rootCertFile
+
+    if ($certPresent -and $rootPresent) {
         Write-Host "  $(Checkbox $stages.Install.Done) $step3Label" -ForegroundColor (StepColor $stages.Install.Done)
-        Write-Host "      Certificate : $certFile" -ForegroundColor DarkGray
+        Write-Host "      Certificates: $certFile AND $rootCertFile" -ForegroundColor DarkGray
     } else {
         Write-Host "  $(Checkbox $stages.Install.Done) $step3Label" -ForegroundColor DarkGray
-        Write-Host "      (waiting for: $certFile)" -ForegroundColor DarkGray
+        Write-Host "      (waiting for: pilot-root.cer and pilot-sub-from-adcs.cer)" -ForegroundColor DarkGray
     }
     if ($stages.Install.Hint) { Write-Host $stages.Install.Hint -ForegroundColor Yellow }
     Write-Host ""
