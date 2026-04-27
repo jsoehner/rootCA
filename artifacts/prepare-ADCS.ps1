@@ -770,13 +770,159 @@ Assert-Elevation
 Ensure-Directory -Path $WorkRoot
 $transcriptStarted = Start-ExecutionTranscript
 
-try {
-    $state = Get-State
+# ---------------------------------------------------------------------------
+# Stage 3 — Install the signed subordinate certificate and start CertSvc
+# ---------------------------------------------------------------------------
+function Install-SignedCertificate {
+    $signedCert = Join-Path $WorkRoot "pilot-sub-from-adcs.cer"
 
-    if (-not $state -or $state.Stage -ne "NeedsReboot") {
-        Remove-AdcsConfiguration
+    if (-not (Test-Path -LiteralPath $signedCert)) {
+        Write-Warn "Signed certificate not found at: $signedCert"
+        Write-Host ""
+        Write-Host "ACTION REQUIRED:" -ForegroundColor Yellow
+        Write-Host "  Copy the signed certificate from EJBCA to this server and place it at:" -ForegroundColor Yellow
+        Write-Host "  $signedCert" -ForegroundColor Cyan
+        Write-Host ""
+        throw "Halting: signed certificate not present. Copy the file and re-run this script, then choose option 3."
+    }
+
+    Write-Step "Installing signed subordinate CA certificate"
+    Write-Info "Certificate file: $signedCert"
+
+    $certutilResult = & certutil -installcert "$signedCert" 2>&1
+    $certutilExit   = $LASTEXITCODE
+
+    $certutilResult | ForEach-Object { Write-Info "  [certutil] $_" }
+
+    if ($certutilExit -ne 0) {
+        throw "certutil -installcert exited with code $certutilExit. See output above."
+    }
+
+    Write-Info "Certificate installed successfully."
+
+    Write-Step "Starting CertSvc"
+    try {
+        Set-Service -Name CertSvc -StartupType Automatic -ErrorAction SilentlyContinue
+        Start-Service -Name CertSvc -ErrorAction Stop
+        Write-Info "CertSvc started and set to Automatic."
+    } catch {
+        throw "CertSvc failed to start: $($_.Exception.Message)"
+    }
+
+    Save-State -Stage "Complete"
+
+    Write-Host ""
+    Write-Host "====================================================" -ForegroundColor Green
+    Write-Host "  SUCCESS: Subordinate CA is operational!" -ForegroundColor Green
+    Write-Host "  The AD CS service (CertSvc) is running." -ForegroundColor Green
+    Write-Host "  Proceed with Phase 3 interoperability tests." -ForegroundColor Green
+    Write-Host "====================================================" -ForegroundColor Green
+    Write-Host ""
+}
+
+# ---------------------------------------------------------------------------
+# Interactive menu
+# ---------------------------------------------------------------------------
+function Get-StageStatus {
+    param($StateObj, [bool]$CertFilePresent)
+
+    $stages = @{
+        Cleanup   = @{ Done = $false; Hint = "" }
+        Prepare   = @{ Done = $false; Hint = "" }
+        Install   = @{ Done = $false; Hint = "" }
+    }
+
+    if ($StateObj) {
+        if ($StateObj.Stage -in @("NeedsReboot", "Prepared", "Complete")) {
+            $stages.Cleanup.Done = $true
+        }
+        if ($StateObj.Stage -in @("Prepared", "Complete")) {
+            $stages.Prepare.Done = $true
+        }
+        if ($StateObj.Stage -eq "Complete") {
+            $stages.Install.Done = $true
+        }
+    }
+
+    # Step 1 hint
+    if (-not $stages.Cleanup.Done) {
+        $stages.Cleanup.Hint = "  --> Run this step first, then reboot."
+    } elseif ($StateObj -and $StateObj.Stage -eq "NeedsReboot") {
+        $stages.Cleanup.Hint = "  --> REBOOT REQUIRED before running step 2."
+    }
+
+    # Step 2 hint
+    if ($stages.Cleanup.Done -and -not $stages.Prepare.Done -and
+        ($StateObj -and $StateObj.Stage -ne "NeedsReboot")) {
+        $stages.Prepare.Hint = "  --> Run this step to install the role and generate a CSR."
+    }
+
+    # Step 3 hint
+    if ($stages.Prepare.Done -and -not $stages.Install.Done) {
+        if ($CertFilePresent) {
+            $stages.Install.Hint = "  --> Signed certificate found. Ready to install!"
+        } else {
+            $stages.Install.Hint = "  --> Copy pilot-sub-from-adcs.cer to $WorkRoot, then run this step."
+        }
+    }
+
+    return $stages
+}
+
+function Show-Menu {
+    param($StateObj)
+
+    $certFile      = Join-Path $WorkRoot "pilot-sub-from-adcs.cer"
+    $certPresent   = Test-Path -LiteralPath $certFile
+    $stages        = Get-StageStatus -StateObj $StateObj -CertFilePresent $certPresent
+
+    function Checkbox { param([bool]$Done) if ($Done) { return "[X]" } else { return "[ ]" } }
+    function StepColor { param([bool]$Done) if ($Done) { return "Green" } else { return "White" } }
+
+    Write-Host ""
+    Write-Host "  ============================================================" -ForegroundColor Cyan
+    Write-Host "   AD CS Pilot Setup Wizard" -ForegroundColor Cyan
+    if ($StateObj -and $StateObj.Stage) {
+        Write-Host "   Current Stage : $($StateObj.Stage)" -ForegroundColor Cyan
     } else {
-        Install-AdcsRoleAndPrepareSubca
+        Write-Host "   Current Stage : Not started" -ForegroundColor Cyan
+    }
+    Write-Host "  ============================================================" -ForegroundColor Cyan
+    Write-Host ""
+    Write-Host "  $(Checkbox $stages.Cleanup.Done) 1.  Clean up / reset old AD CS configuration" -ForegroundColor (StepColor $stages.Cleanup.Done)
+    if ($stages.Cleanup.Hint) { Write-Host $stages.Cleanup.Hint -ForegroundColor Yellow }
+    Write-Host ""
+    Write-Host "  $(Checkbox $stages.Prepare.Done) 2.  Install ADCS role and generate SubCA CSR" -ForegroundColor (StepColor $stages.Prepare.Done)
+    if ($stages.Prepare.Hint) { Write-Host $stages.Prepare.Hint -ForegroundColor Yellow }
+    Write-Host ""
+    $step3Label = "3.  Install signed certificate and start CertSvc"
+    if ($certPresent) {
+        Write-Host "  $(Checkbox $stages.Install.Done) $step3Label" -ForegroundColor (StepColor $stages.Install.Done)
+        Write-Host "      Certificate : $certFile" -ForegroundColor DarkGray
+    } else {
+        Write-Host "  $(Checkbox $stages.Install.Done) $step3Label" -ForegroundColor DarkGray
+        Write-Host "      (waiting for: $certFile)" -ForegroundColor DarkGray
+    }
+    if ($stages.Install.Hint) { Write-Host $stages.Install.Hint -ForegroundColor Yellow }
+    Write-Host ""
+    Write-Host "      4.  Exit"
+    Write-Host ""
+    Write-Host "  ============================================================" -ForegroundColor Cyan
+    Write-Host ""
+
+    return Read-Host "Select a step (1-4)"
+}
+
+try {
+    $state     = Get-State
+    $selection = Show-Menu -StateObj $state
+
+    switch ($selection) {
+        "1" { Remove-AdcsConfiguration }
+        "2" { Install-AdcsRoleAndPrepareSubca }
+        "3" { Install-SignedCertificate }
+        "4" { Write-Info "Exiting." }
+        default { Write-Warn "'$selection' is not a valid option. Please enter 1, 2, 3 or 4." }
     }
 }
 finally {
