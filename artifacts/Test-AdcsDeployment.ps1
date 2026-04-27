@@ -107,9 +107,18 @@ function Run-Test5 {
     if (!(Test-Path $cerPath)) { throw "Certificate not found. Run Tests 3 & 4 first." }
     
     Write-Host "`n[*] Test 5: TLS/Schannel Validation" -ForegroundColor Cyan
-    Write-Host "[*] Importing certificate to Machine Personal store..."
+    Write-Host "[*] Accepting certificate to bind private key to Machine store..."
     
-    $cert = Import-Certificate -FilePath $cerPath -CertStoreLocation "Cert:\LocalMachine\My"
+    # Clean up any public-only certs from previous failed runs
+    Get-ChildItem "Cert:\LocalMachine\My" | Where-Object { $_.Subject -eq "CN=Pilot-Auto-Test-Cert" } | Remove-Item -Force
+    
+    $acceptOutput = & certreq -accept $cerPath 2>&1
+    if ($LASTEXITCODE -ne 0) { throw "Failed to accept certificate: $($acceptOutput | Out-String)" }
+    
+    $cert = Get-ChildItem "Cert:\LocalMachine\My" | Where-Object { $_.Subject -eq "CN=Pilot-Auto-Test-Cert" } | Select-Object -First 1
+    if (-not $cert -or -not $cert.HasPrivateKey) {
+        throw "Certificate installed but private key is missing!"
+    }
     
     Write-Host "[*] Creating IIS HTTPS Binding..."
     Import-Module WebAdministration -ErrorAction SilentlyContinue
