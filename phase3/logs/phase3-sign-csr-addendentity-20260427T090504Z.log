@@ -1,0 +1,15 @@
+Using certificate profile: SubordCAPilot-ECC384-SHA384, with id: 380872775
+Using entity profile: ADCS2025_SubCA_EE_Profile, with id: 198381620
+Trying to add end entity:
+Username: jsi-pilot-adcs-sub-20260427T090504Z
+Password: <password hidden>
+DN: CN=JSIGROUP Intermediate CA - AD CS - PILOT
+CA Name: JSIGROUP-Pilot-RootCA
+SubjectAltName: null
+Email: null
+Type: 1
+Token: USERGENERATED
+Certificate profile: 380872775
+End entity profile: 198381620
+User 'jsi-pilot-adcs-sub-20260427T090504Z' has been added.
+Note: If batch processing should be possible, also use 'ra setclearpwd jsi-pilot-adcs-sub-20260427T090504Z <pwd>'.
