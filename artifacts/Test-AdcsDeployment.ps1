@@ -141,8 +141,8 @@ function Run-Test5 {
     Write-Host "[*] Testing HTTPS connection (Schannel handshake)..."
     try {
         # Using native curl.exe to bypass .NET Framework quirks. 
-        # --resolve maps the CN to localhost so Schannel performs full, strict validation!
-        $curlOutput = & curl.exe --resolve "Pilot-Auto-Test-Cert:443:127.0.0.1" -s -v -I https://Pilot-Auto-Test-Cert 2>&1
+        # Wrap in cmd /c so PowerShell's ErrorActionPreference=Stop doesn't panic when curl writes to stderr
+        $curlOutput = & cmd.exe /c "curl.exe --resolve Pilot-Auto-Test-Cert:443:127.0.0.1 -s -v -I https://Pilot-Auto-Test-Cert 2>&1"
         $curlStr = $curlOutput | Out-String
         
         # IIS default response might be 403 or 404 if no default document exists, which means TLS succeeded perfectly!
