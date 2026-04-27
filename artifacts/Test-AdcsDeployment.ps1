@@ -182,7 +182,7 @@ function Show-Menu {
                 "2" { Run-Test5 }
                 "3" { Run-Test6 }
                 "4" { Run-Tests3And4; Run-Test5; Run-Test6 }
-                "5" { break }
+                "5" { return }
                 default { Write-Host "Invalid option." -ForegroundColor Yellow }
             }
         } catch {
