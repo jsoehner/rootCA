@@ -139,16 +139,18 @@ function Run-Test5 {
     Restart-Service -Name W3SVC -ErrorAction SilentlyContinue
     
     Write-Host "[*] Testing HTTPS connection (Schannel handshake)..."
-    # Ignore CN mismatch for testing purposes since we bound CN=Pilot-Auto-Test-Cert to localhost
-    [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}
-    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
-    
     try {
-        # *!443 binding supports both IPv4 and IPv6 localhost
-        $response = Invoke-WebRequest -Uri "https://localhost" -UseBasicParsing -ErrorAction Stop
-        if ($response.StatusCode -eq 200) {
+        # Using native curl.exe to bypass .NET Framework quirks. 
+        # --resolve maps the CN to localhost so Schannel performs full, strict validation!
+        $curlOutput = & curl.exe --resolve "Pilot-Auto-Test-Cert:443:127.0.0.1" -s -v -I https://Pilot-Auto-Test-Cert 2>&1
+        $curlStr = $curlOutput | Out-String
+        
+        # IIS default response might be 403 or 404 if no default document exists, which means TLS succeeded perfectly!
+        if ($LASTEXITCODE -eq 0 -or $curlStr -match "HTTP/1.1 200|HTTP/1.1 403|HTTP/1.1 404") {
             Write-Host "    -> PASS: TLS Handshake succeeded and Schannel verified connection." -ForegroundColor Green
             $state = Get-State; $state.T5 = $true; Save-State $state
+        } else {
+            throw "TLS Handshake failed! curl output: $curlStr"
         }
     } catch {
         throw "Failed to validate TLS connection. Exception: $($_.Exception.Message)"
