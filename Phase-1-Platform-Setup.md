@@ -138,7 +138,7 @@ sudo service auditd restart
 - [phase1/phase1-remediate-fedora.sh](phase1/phase1-remediate-fedora.sh)
 - [phase1/phase1-build-ejbca9.sh](phase1/phase1-build-ejbca9.sh)
 - [phase1/phase1-run-wildfly30-ejbca9.sh](phase1/phase1-run-wildfly30-ejbca9.sh)
-- [phase1/logs/Phase-1-Execution-Log.md](phase1/logs/Phase-1-Execution-Log.md)
+- [phase1/Phase-1-Execution-Log.md](phase1/Phase-1-Execution-Log.md)
 
 ### Closeout Checklist (as of 2026-04-19)
 - [x] All platform prerequisites installed and verified
@@ -409,7 +409,7 @@ Recorded closure (2026-04-19):
 ```
 
 Sign-off evidence sources:
-- [Phase-1-Execution-Log.md](Phase-1-Execution-Log.md)
+- [phase1/Phase-1-Execution-Log.md](phase1/Phase-1-Execution-Log.md)
 - [phase1](phase1)
 
 ---

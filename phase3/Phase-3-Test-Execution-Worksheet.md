@@ -2,7 +2,7 @@
 
 Date Prepared: 2026-04-22  
 Scope: Mandatory Phase 3 interoperability tests (Tests 1-6)  
-Gate Use: Populate results in phase3/logs/Phase-3-Execution-Log.md and complete GO/NO-GO block.
+Gate Use: Populate results in phase3/Phase-3-Execution-Log.md and complete GO/NO-GO block.
 
 ---
 

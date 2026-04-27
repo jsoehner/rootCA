@@ -51,7 +51,7 @@ PHASE 3 EXECUTION CHECKLIST
 ===========================
 
 ENTRY GATE:
-   [x] Phase 2 sign-off recorded in Phase-2-Execution-Log.md
+   [x] Phase 2 sign-off recorded in phase2/Phase-2-Execution-Log.md
    [x] Phase 2 sign-off recorded in Phase-2-Crypto-Profiles.md
    [x] Naming decision frozen for pilot and downstream docs
 
@@ -134,7 +134,7 @@ openssl x509 -in ~/rootCA/phase3/pilot-root.pem -noout \
 | `pilot-root.pem` subject/issuer | `CN=JSIGROUP Pilot Root CA, O=JSIGROUP, C=CA` (self-signed) |
 | `pilot-root.pem` validity | notAfter = Jul 21 2026 |
 
-Verified clean on 2026-04-22 (see Entry 4 in [phase3/logs/Phase-3-Execution-Log.md](phase3/logs/Phase-3-Execution-Log.md)).
+Verified clean on 2026-04-22 (see Entry 4 in [phase3/Phase-3-Execution-Log.md](phase3/Phase-3-Execution-Log.md)).
 
 ---
 
@@ -193,7 +193,7 @@ Retroactive lessons learned:
 - Manual sign-off and go/no-go decision are pending; technical pilot is complete.
 
 ### Evidence Artifacts
-- [phase3/logs/Phase-3-Execution-Log.md](phase3/logs/Phase-3-Execution-Log.md)
+- [phase3/Phase-3-Execution-Log.md](phase3/Phase-3-Execution-Log.md)
 - [phase3/phase3-cert-validation-pilot-ecc-root-20260422T112215Z.txt](phase3/phase3-cert-validation-pilot-ecc-root-20260422T112215Z.txt)
 - [phase3/logs/phase3-cert-validation-pilot-jsigroup-ca-20260422T224614Z.txt](phase3/logs/phase3-cert-validation-pilot-jsigroup-ca-20260422T224614Z.txt)
 

@@ -133,7 +133,7 @@ Recommended sample clients:
 
 > **Note:** If deploying an **ECDSA (ECC P-384)** Enterprise CA, Native AD CS Auto-Enrollment with default Version 1 templates (e.g., DomainController, Machine) will fail during certificate installation with `ERROR_INVALID_PARAMETER (0x80070057)`. This is due to a CryptoAPI chain verification bug where legacy Cryptographic Service Providers (forced by V1 templates) cannot parse ECDSA CA signatures.
 > 
-> See the `Phase-5-Execution-Log.md` for the full technical breakdown and the **"Decoupled Enrollment"** workaround using `certreq -new` via CNG KSPs.
+> See the `phase5/Phase-5-Execution-Log.md` for the full technical breakdown and the **"Decoupled Enrollment"** workaround using `certreq -new` via CNG KSPs.
 
 ## 7. Operational Runbooks (Initial)
 

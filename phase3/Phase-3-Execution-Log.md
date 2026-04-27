@@ -11,7 +11,7 @@
 
 | Item | Status |
 |------|--------|
-| Phase 2 sign-off recorded in Phase-2-Execution-Log.md | ✅ DONE |
+| Phase 2 sign-off recorded in phase2/Phase-2-Execution-Log.md | ✅ DONE |
 | Phase 2 sign-off recorded in Phase-2-Crypto-Profiles.md | ✅ DONE |
 | Naming frozen (`JSIGROUP`) | ✅ DONE |
 | EJBCA runtime healthy (admin=200, ocsp=200) | ✅ DONE |
