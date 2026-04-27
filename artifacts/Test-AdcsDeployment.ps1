@@ -50,8 +50,11 @@ if (!(Test-Path $workDir)) { New-Item -ItemType Directory -Force -Path $workDir 
 $infPath = Join-Path $workDir "test.inf"
 $reqPath = Join-Path $workDir "test.req"
 $cerPath = Join-Path $workDir "test.cer"
+$rspPath = Join-Path $workDir "test.rsp"
 
 if (Test-Path $cerPath) { Remove-Item $cerPath -Force }
+if (Test-Path $reqPath) { Remove-Item $reqPath -Force }
+if (Test-Path $rspPath) { Remove-Item $rspPath -Force }
 
 # 2. Create INF for CSR
 Write-Host "`n[*] Test 1: Generating ECC P-256 CSR for $SubjectName..."
