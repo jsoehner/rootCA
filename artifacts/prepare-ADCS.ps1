@@ -793,8 +793,50 @@ $transcriptStarted = Start-ExecutionTranscript
 function Install-SignedCertificate {
     $signedCert = Join-Path $WorkRoot "pilot-sub-from-adcs.cer"
     $rootCert   = Join-Path $WorkRoot "pilot-root.cer"
+    $rootCrl    = Join-Path $WorkRoot "root.crl"
 
-    # --- 1. Ensure Root CA is Trusted ---
+    # --- 1. Set up IIS and Host the Root CRL ---
+    $crlPhysicalPath = "C:\inetpub\wwwroot\crl"
+    Write-Step "Configuring IIS to host CRLs"
+    if (-not (Get-WindowsFeature -Name Web-Server).Installed) {
+        Write-Info "Installing IIS Web-Server role..."
+        Install-WindowsFeature -Name Web-Server,Web-Mgmt-Tools -IncludeAllSubFeature | Out-Null
+    }
+    Import-Module WebAdministration -ErrorAction SilentlyContinue
+
+    if (-not (Test-Path $crlPhysicalPath)) { New-Item -ItemType Directory -Force -Path $crlPhysicalPath | Out-Null }
+    if (-not (Test-Path "IIS:\Sites\Default Web Site\crl")) {
+        New-WebApplication -Name "crl" -Site "Default Web Site" -PhysicalPath $crlPhysicalPath -Force | Out-Null
+    }
+    Set-WebConfigurationProperty -Filter '/system.webServer/security/authentication/anonymousAuthentication' -Name 'enabled' -Value $true -PSPath "IIS:\Sites\Default Web Site\crl"
+    Set-WebConfigurationProperty -Filter '/system.webServer/security/requestFiltering' -Name 'allowDoubleEscaping' -Value $true -PSPath "IIS:\Sites\Default Web Site\crl"
+    
+    $mimeTypes = @(
+        @{ Ext = ".crl"; Mime = "application/pkix-crl" },
+        @{ Ext = ".cer"; Mime = "application/x-x509-ca-cert" },
+        @{ Ext = ".crt"; Mime = "application/x-x509-ca-cert" }
+    )
+    foreach ($type in $mimeTypes) {
+        Remove-WebConfigurationProperty -Filter "//staticContent" -Name "." -AtElement @{fileExtension=$type.Ext} -PSPath "IIS:\Sites\Default Web Site" -ErrorAction SilentlyContinue
+        Add-WebConfigurationProperty -Filter "//staticContent" -Name "." -Value @{fileExtension=$type.Ext; mimeType=$type.Mime} -PSPath "IIS:\Sites\Default Web Site" -ErrorAction SilentlyContinue
+    }
+    Write-Info "IIS configured for /crl hosting."
+
+    if (-not (Test-Path -LiteralPath $rootCrl)) {
+        Write-Warn "Root CRL not found at: $rootCrl"
+        Write-Host ""
+        Write-Host "ACTION REQUIRED:" -ForegroundColor Yellow
+        Write-Host "  The Subordinate CA certificate requires the Root CRL to validate the trust chain." -ForegroundColor Yellow
+        Write-Host "  Copy root.crl from EJBCA to this server and place it at:" -ForegroundColor Yellow
+        Write-Host "  $rootCrl" -ForegroundColor Cyan
+        Write-Host ""
+        throw "Halting: root CRL not present."
+    }
+    
+    Write-Info "Publishing root CRL to IIS directory..."
+    Copy-Item -LiteralPath $rootCrl -Destination (Join-Path $crlPhysicalPath "root.crl") -Force
+
+    # --- 2. Ensure Root CA is Trusted ---
     Write-Step "Checking Root CA Trust"
     $rootStore = [System.Security.Cryptography.X509Certificates.X509Store]::new("Root", "LocalMachine")
     $rootStore.Open("ReadOnly")
@@ -915,16 +957,14 @@ function Get-StageStatus {
     # Step 3 hint
     $rootCertFile = Join-Path $WorkRoot "pilot-root.cer"
     $rootPresent = Test-Path -LiteralPath $rootCertFile
+    $crlFile = Join-Path $WorkRoot "root.crl"
+    $crlPresent = Test-Path -LiteralPath $crlFile
 
     if ($stages.Prepare.Done -and -not $stages.Install.Done) {
-        if ($CertFilePresent -and $rootPresent) {
-            $stages.Install.Hint = "  --> Root and Signed certificates found. Ready to install!"
-        } elseif ($CertFilePresent -and -not $rootPresent) {
-            $stages.Install.Hint = "  --> Signed cert found, but missing Root. Copy pilot-root.cer to $WorkRoot."
-        } elseif (-not $CertFilePresent -and $rootPresent) {
-            $stages.Install.Hint = "  --> Root cert found, but missing Signed SubCA cert. Copy pilot-sub-from-adcs.cer to $WorkRoot."
+        if ($CertFilePresent -and $rootPresent -and $crlPresent) {
+            $stages.Install.Hint = "  --> All certificates and CRL found. Ready to install!"
         } else {
-            $stages.Install.Hint = "  --> Copy BOTH pilot-root.cer and pilot-sub-from-adcs.cer to $WorkRoot, then run this step."
+            $stages.Install.Hint = "  --> Missing required files. Copy pilot-root.cer, pilot-sub-from-adcs.cer, AND root.crl to $WorkRoot."
         }
     }
 
@@ -982,13 +1022,15 @@ function Show-Menu {
     $step3Label = "3.  Install signed certificate and start CertSvc"
     $rootCertFile = Join-Path $WorkRoot "pilot-root.cer"
     $rootPresent = Test-Path -LiteralPath $rootCertFile
+    $crlFile = Join-Path $WorkRoot "root.crl"
+    $crlPresent = Test-Path -LiteralPath $crlFile
 
-    if ($certPresent -and $rootPresent) {
+    if ($certPresent -and $rootPresent -and $crlPresent) {
         Write-Host "  $(Checkbox $stages.Install.Done) $step3Label" -ForegroundColor (StepColor $stages.Install.Done)
-        Write-Host "      Certificates: $certFile AND $rootCertFile" -ForegroundColor DarkGray
+        Write-Host "      Ready: $certFile, pilot-root.cer, root.crl" -ForegroundColor DarkGray
     } else {
         Write-Host "  $(Checkbox $stages.Install.Done) $step3Label" -ForegroundColor DarkGray
-        Write-Host "      (waiting for: pilot-root.cer and pilot-sub-from-adcs.cer)" -ForegroundColor DarkGray
+        Write-Host "      (waiting for: pilot-root.cer, root.crl, AND pilot-sub-from-adcs.cer)" -ForegroundColor DarkGray
     }
     if ($stages.Install.Hint) { Write-Host $stages.Install.Hint -ForegroundColor Yellow }
     Write-Host ""
