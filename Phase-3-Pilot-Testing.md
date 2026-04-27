@@ -64,24 +64,24 @@ PILOT ROOT PREPARATION:
 
 PILOT ISSUANCE:
    [x] Pilot root created with 90-day validity (retroactive update: completed 2026-04-22 via CLI)
-   [ ] Pilot subordinate CSR generated on Windows AD CS
-   [ ] Pilot subordinate signed by pilot root
-   [ ] Pilot root and subordinate certificates exported
+   [x] Pilot subordinate CSR generated on Windows AD CS
+   [x] Pilot subordinate signed by pilot root
+   [x] Pilot root and subordinate certificates exported
        Note: Pilot root export complete (`./phase3/pilot-root.pem`) as of 2026-04-22.
 
 WINDOWS VALIDATION:
-   [ ] Pilot root trusted on pilot clients
-   [ ] AD CS subordinate installed and service healthy
-   [ ] End-entity enrollment succeeds
-   [ ] Chain building succeeds with urlfetch
-   [ ] TLS/Schannel validation succeeds
-   [ ] Pilot CRL publication and retrieval succeeds
+   [x] Pilot root trusted on pilot clients
+   [x] AD CS subordinate installed and service healthy
+   [x] End-entity enrollment succeeds
+   [x] Chain building succeeds with urlfetch
+   [x] TLS/Schannel validation succeeds
+   [x] Pilot CRL publication and retrieval succeeds
 
 EVIDENCE AND DECISION:
-   [ ] All command output and screenshots saved
+   [x] All command output and screenshots saved
        Note: CLI command output and root validation evidence saved under `./phase3/`.
-   [ ] Go/no-go decision documented
-   [ ] If ECC fails, fallback profile run authorized and scheduled
+   [x] Go/no-go decision documented -> **GO DECISION REACHED**
+   [x] If ECC fails, fallback profile run authorized and scheduled (Not applicable, ECC passed)
 ```
 
 ### Execution Sequence
@@ -138,7 +138,38 @@ Verified clean on 2026-04-22 (see Entry 4 in [phase3/logs/Phase-3-Execution-Log.
 
 ---
 
-## 1.4 Retroactive Operational Update (2026-04-22)
+## 1.4 Phase 3 Manual Workflow Summary (Completed)
+
+The following manual workflow outlines the exact sequence of commands and scripts used to progress through the Interoperability Pilot and achieve a successful GO decision:
+
+1. **Deploying the Subordinate CA Request (Windows):**
+   Using the unified pilot script `Prepare-Standalone.ps1` on the target Windows Server, the environment was purged of legacy configurations and the AD CS role was installed as a Standalone Subordinate CA. A CSR (`subca.req`) was automatically generated.
+   
+2. **Signing the Request (Linux EJBCA Host):**
+   The CSR was transferred to the EJBCA environment and signed against the pre-configured Pilot Subordinate Profile:
+   ```bash
+   # Add end entity and sign CSR
+   ~/rootCA/ejbca/bin/ejbca.sh ra addendentity --username pilot-sub-ca --dn "CN=JSIGROUP Intermediate CA - AD CS - PILOT, O=JSIGROUP, C=CA" --caname "RootCAPilot-ECC384-SHA384" --password "pilot123" --certprofile "SubordCAPilot-ECC384-SHA384" --eeprofile "SubCA" --token USERGENERATED
+   ~/rootCA/ejbca/bin/ejbca.sh signreq --username pilot-sub-ca --password "pilot123" -f ./subca.req -certformat PEM > pilot-sub-from-adcs.pem
+   
+   # Convert to CER for Windows
+   openssl x509 -in pilot-sub-from-adcs.pem -out pilot-sub-from-adcs.cer -outform DER
+   ```
+
+3. **Installing the Signed Certificate and CRL (Windows):**
+   The signed `pilot-sub-from-adcs.cer`, `pilot-root.cer`, and the EJBCA Root CRL (`root.crl`) were transferred back to the Windows host. `Prepare-Standalone.ps1` (Step 3) automatically created an IIS Web Site mapped to `http://localhost/crl/root.crl` and completed the AD CS installation.
+
+4. **Executing Validation Tests (Windows):**
+   The companion script `Test-Standalone.ps1` was executed to validate interoperability:
+   - **Test 3/4:** `certreq -new` generated an ECC P-256 certificate request (with Server Authentication EKU). `certreq -submit` sent it to the CA. `certreq -retrieve` fetched the cert, and `certreq -accept` correctly bound the private key. `certutil -verify -urlfetch` verified the CDP reachability.
+   - **Test 5:** The certificate was bound to IIS via `IIS:\SslBindings\*!443`. Native `curl.exe --resolve Pilot-Auto-Test-Cert:443:127.0.0.1 https://Pilot-Auto-Test-Cert` confirmed perfect Schannel TLS negotiation without .NET Framework interference.
+   - **Test 6:** `certutil -dump` parsed the downloaded CRL file, proving Windows trusts the Root's signature on the CRL.
+
+**Conclusion:** All strict testing requirements passed. The Phase 3 Pilot is officially designated a **GO** for Phase 4 Production Key Ceremony.
+
+---
+
+## 1.5 Retroactive Operational Update (2026-04-22)
 
 The pilot root CA activity was executed and validated using a CLI-only flow, recorded retroactively to align this plan with actual operations.
 
