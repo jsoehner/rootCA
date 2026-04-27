@@ -200,35 +200,25 @@ Retroactive lessons learned:
 
 #### Windows Host Preparation Scripts
 
-If ADCS installation fails on the Windows Server 2022/2025 pilot host (error `0x80073701 ERROR_SXS_ASSEMBLY_MISSING` or similar component store corruption), use the repair script from the artifacts folder:
+For configuring the Windows Server 2022/2025 pilot host, use the unified `prepare-ADCS.ps1` wizard:
 
 ```powershell
-# Copy from Linux host first:
-# scp ~/rootCA/artifacts/Repair-ADCS-Install.ps1 user@pilot-windows-host:C:\certs\
+# Copy the script from the Linux host first:
+# scp ~/rootCA/artifacts/prepare-ADCS.ps1 user@pilot-windows-host:C:\certs\
 
-# Online repair (Windows Update / WSUS access):
-.\Repair-ADCS-Install.ps1
+# Run from an elevated PowerShell prompt:
+.\prepare-ADCS.ps1
+```
 
-# Offline repair (mount WS2022 ISO on E: first):
+The script operates as a 4-step interactive wizard:
+1. **Clean up / reset old AD CS configuration:** Removes the CA role, clears registry keys/certificates, and requires a reboot. Useful if a previous attempt failed.
+2. **Install ADCS role and generate SubCA CSR:** Installs the AD CS binaries and generates the `subca.req` CSR file.
+3. **Install signed certificate and start CertSvc:** Automatically installs the IIS Web-Server role, configures the `/crl` application, publishes the root CRL, installs the root CA certificate to the trusted store, installs the subordinate CA certificate, and starts the `CertSvc` service.
+
+If ADCS installation fails repeatedly (e.g., error `0x80073701 ERROR_SXS_ASSEMBLY_MISSING` or component store corruption), use the offline repair script:
+```powershell
 .\Repair-ADCS-Install.ps1 -RepairSource "E:\sources\install.wim"
-
-# Skip repair if component store is already healthy, reinstall only:
-.\Repair-ADCS-Install.ps1 -SkipRepair
 ```
-
-For initial ADCS role configuration after installation, also see:
-```
-~/rootCA/artifacts/prepare-ADCS.ps1
-```
-
-For configuring a standalone IIS server to host the HTTP CDP (CRL) and AIA endpoints (required for Tests 4 and 6), use:
-```powershell
-# Copy from Linux host first:
-# scp ~/rootCA/artifacts/setup-crl-web-server.ps1 user@crl-windows-host:C:\certs\
-.\setup-crl-web-server.ps1
-```
-
-Script logs and evidence are written to `C:\Temp\phase3-adcs-repair\` on the Windows host.
 
 ### 2.3 Pilot Infrastructure Isolation
 
@@ -293,19 +283,23 @@ All tests below must **PASS** before proceeding to Phase 4 production ceremony.
 **Objective:** Pilot root can successfully issue subordinate CA certificate to Windows AD CS.
 
 **Steps:**
-1. Generate subordinate CSR on pilot AD CS (standard Windows CA setup → create subordinate CA config)
-2. Submit CSR to pilot EJBCA root via offline transfer (USB key or email)
-3. In pilot EJBCA, ensure end entity profile `ADCS2025_SubCA_EE_Profile` is present and mapped to the intended subordinate CA certificate profile.
-4. Pre-check CSR PoPO before EJBCA issuance:
-    ```bash
-    openssl req -in <path-to-your-new-csr.req> -verify -noout
-    ```
-    If this check fails, regenerate CSR on AD CS before continuing.
-4. Sign CSR via CLI helper:
+1. Generate subordinate CSR on pilot AD CS using the wizard:
+   - Run `.\prepare-ADCS.ps1` and select **Option 2**.
+   - Copy `C:\certs\subca.req` to the Linux host's `artifacts/` folder.
+2. Ensure you have the Root CA CRL exported from EJBCA:
    ```bash
+   # Extract the CRL from EJBCA:
+   /home/jsoehner/rootCA/artifacts/ejbca/ejbca-ce-r9.3.7/bin/ejbca.sh ca getcrl "JSIGROUP-Pilot-RootCA" artifacts/root.crl
+   ```
+3. Sign CSR via CLI helper:
+   ```bash
+   # NOTE: If you are retrying this step, you must first delete the old End Entity from EJBCA
+   # database because EJBCA enforces unique Subject DNs.
+   # mysql -u $EJBCA_DB_USER -p$EJBCA_DB_PASSWORD $EJBCA_DB_NAME -e "DELETE FROM CertificateData WHERE subjectDN='CN=JSIGROUP Intermediate CA - AD CS - PILOT'; DELETE FROM UserData WHERE subjectDN='CN=JSIGROUP Intermediate CA - AD CS - PILOT';" && ejbca.sh clearcache -all
+
    ./phase3/phase3-sign-adcs-subordinate-csr.sh \
-     --csr <path-to-your-new-csr.req> \
-       --ee-profile ADCS2025_SubCA_EE_Profile
+     --csr artifacts/subca.req \
+     --ee-profile ADCS2025_SubCA_EE_Profile
    ```
    Output artifacts:
    - `./phase3/pilot-sub-from-adcs.pem`
@@ -315,12 +309,17 @@ All tests below must **PASS** before proceeding to Phase 4 production ceremony.
    - [ ] Not After: 90 days from signing date
    - [ ] Contains critical Basic Constraints: ca:TRUE, pathLen=0
    - [ ] Contains critical Key Usage: keyCertSign, cRLSign
-5. Return signed subordinate cert (`pilot-sub-from-adcs.cer`) to pilot AD CS
-6. Install subordinate cert in pilot AD CS; complete CA setup (Windows configures crypto container, validates certificate)
-7. Restart AD CS; verify service healthcheck: all tests pass (`certutil -pulse`)
+5. Copy the required files back to the pilot AD CS server into `C:\certs\`:
+   - `artifacts/pilot-sub-from-adcs.cer`
+   - `artifacts/pilot-root.cer`
+   - `artifacts/root.crl`
+6. Install subordinate cert in pilot AD CS using the wizard:
+   - Run `.\prepare-ADCS.ps1` and select **Option 3**.
+   - The script will configure IIS, host the `root.crl`, install the root certificate, install the subordinate certificate, and start the `CertSvc` service automatically.
+7. Verify service healthcheck: all tests pass (`certutil -pulse`)
 
 **Expected Result:** PASS  
-**Failure Criteria:** CSR signing fails, AD CS service fails to start, cert validation errors in Event Viewer. If EJBCA reports PoPO failure, treat CSR as invalid and regenerate on AD CS.  
+**Failure Criteria:** CSR signing fails, AD CS service fails to start, cert validation errors in Event Viewer.  
 **Log Output:** EJBCA issuance log entry; Windows AD CS certutil pulse output; Event Viewer screenshot
 
 ---
