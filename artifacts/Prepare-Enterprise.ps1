@@ -948,7 +948,7 @@ function Install-SignedCertificate {
     Write-Host "====================================================" -ForegroundColor Green
     Write-Host "  SUCCESS: Subordinate CA is operational!" -ForegroundColor Green
     Write-Host "  The AD CS service (CertSvc) is running." -ForegroundColor Green
-    Write-Host "  Proceed with Phase 3 interoperability tests." -ForegroundColor Green
+    Write-Host "  Proceed with Phase 6 steady-state validation." -ForegroundColor Green
     Write-Host "====================================================" -ForegroundColor Green
     Write-Host ""
 }
@@ -1028,7 +1028,7 @@ function Show-Menu {
 
     Write-Host ""
     Write-Host "  ============================================================" -ForegroundColor Cyan
-    Write-Host "   AD CS Pilot Setup Wizard" -ForegroundColor Cyan
+    Write-Host "   AD CS Production Setup Wizard" -ForegroundColor Cyan
 
     if ($StateObj -and $StateObj.Stage) {
         $stageLabel = $StateObj.Stage
