@@ -31,7 +31,7 @@ LOG_DIR="$SCRIPT_DIR/logs"
 HEALTH_URL="http://127.0.0.1:8080/ejbca/publicweb/healthcheck/ejbcahealth"
 
 CSR_FILE=""
-OUT_PEM="$SCRIPT_DIR/subordinate-ca.pem"
+OUT_PEM="$SCRIPT_DIR/prod-sub-from-adcs.pem"
 CA_NAME="JSIGROUP-ProductionRootCA"
 CERT_PROFILE="SubordCAProd-ECC384-SHA384"
 EE_PROFILE="ADCS2025_Prod_SubCA_EE_Profile"
@@ -192,3 +192,5 @@ run_ejbca --timeout 60 ca getcrl --caname "$CA_NAME" -f "$CRL_OUT" >/dev/null 2>
 
 log "SUCCESS: Production Subordinate CA issued at: $OUT_DER"
 log "SUCCESS: CRL updated and exported to: $CRL_OUT"
+log "NOTE: Please copy '$OUT_DER', '$ROOT_DIR/phase4/root-ca-production.cer', and '$CRL_OUT' to the Windows host."
+log "      Rename 'root-ca-production.cer' to 'root-ca-prod-ecc384.cer' if required by the installation script."

@@ -21,7 +21,7 @@ Workspace: ~/rootCA
 | **Phase 2** | Crypto profiles and validation | ✅ Closed (Formal Sign-Off Complete) | Phase-2-Crypto-Profiles.md, phase2/Phase-2-Execution-Log.md, phase2/logs/phase2-closeout-report-20260423T003847Z.txt, phase2/logs/phase2-cleanup-verification-20260423T003737Z.txt | Closed |
 | **Phase 3** | Pilot interoperability and go/no-go | ✅ **Closed (GO Decision Reached)** | Phase-3-Pilot-Testing.md, phase3/Phase-3-Execution-Log.md | Closed |
 | **Phase 4** | Production key ceremony | ✅ **Closed (Success)** | Phase-4-Key-Ceremony.md, phase4/Phase-4-Execution-Log.md | Closed |
-| **Phase 5** | AD CS integration and trust rollout | 🟡 **In Progress (SubCA & CRL Issued)** | Phase-5-ADCS-Integration.md, phase5/Phase-5-Execution-Log.md | Open |
+| **Phase 5** | AD CS integration and trust rollout | ✅ **Closed (Success)** | Phase-5-ADCS-Integration.md, phase5/Phase-5-Execution-Log.md | Deployment |
 | Phase 6 | Steady-state operations and audit | 🔴 Blocked | Phase-6-Steady-State-Operations.md | Blocked by Phase 5 completion |
 
 ---
