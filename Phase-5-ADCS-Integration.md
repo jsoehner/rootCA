@@ -57,7 +57,7 @@ On offline EJBCA host:
 5. Export artifacts:
    - subordinate-ca.cer
    - root-ca.cer
-   - chain bundle (if needed)
+   - root.crl (MUST be updated every time a cert is signed to ensure validity)
 6. Record cert fingerprints and serials in issuance log.
 
 ### 3.3 Install Subordinate Cert in AD CS

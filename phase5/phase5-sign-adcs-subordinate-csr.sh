@@ -181,4 +181,14 @@ openssl x509 -in "$OUT_PEM" -outform der -out "$OUT_DER"
 log "Step 8: Validating issued certificate..."
 openssl x509 -in "$OUT_PEM" -text -noout | grep -E "Subject:|Issuer:|CA:TRUE|Certificate Sign" | tee -a "$RUN_LOG"
 
+# ---------------------------------------------------------------------------
+# Step 9 — Update and Export CRL
+# ---------------------------------------------------------------------------
+log "Step 9: Generating and exporting fresh CRL for '$CA_NAME'..."
+run_ejbca --timeout 60 ca createcrl "$CA_NAME" >/dev/null 2>&1 || log "WARNING: CRL generation reported an issue."
+
+CRL_OUT="$ROOT_DIR/artifacts/root.crl"
+run_ejbca --timeout 60 ca getcrl --caname "$CA_NAME" -f "$CRL_OUT" >/dev/null 2>&1 || die "Failed to export CRL to $CRL_OUT"
+
 log "SUCCESS: Production Subordinate CA issued at: $OUT_DER"
+log "SUCCESS: CRL updated and exported to: $CRL_OUT"

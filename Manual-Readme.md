@@ -85,6 +85,14 @@ If the helper scripts are unavailable, use this canonical EJBCA command to sign 
 ```
 **Rationale:** This separates the registration (RA) from the issuance, ensuring strict policy enforcement.
 
+### 5.4 Mandatory CRL Update
+**Gotcha:** If you sign a new certificate but do not update the CRL, AD CS may reject the new certificate during installation because the existing CRL (from the pilot phase) will have an AKI mismatch.
+**Manual Fix:** Always run `createcrl` followed by `getcrl` immediately after signing.
+```bash
+./ejbca.sh ca createcrl JSIGROUP-ProductionRootCA
+./ejbca.sh ca getcrl --caname JSIGROUP-ProductionRootCA -f artifacts/root.crl
+```
+
 ---
 
 ## Summary of Manual Rationale
@@ -94,6 +102,7 @@ If the helper scripts are unavailable, use this canonical EJBCA command to sign 
 | **Key Gen** | `ejbca.sh generatekey` | Ensures Java-visibility on the Nitrokey. |
 | **CSR Sign** | `AlternateSignatureAlgorithm=FALSE` | Standardizes OIDs for BouncyCastle compatibility. |
 | **Shell Choice** | `PowerShell 5.1` | Required for legacy .NET Framework COM objects in AD CS. |
+| **Revocation** | `createcrl / getcrl` | Synchronizes offline root status with AD CS infrastructure. |
 
 ---
 *Created: 2026-04-27*
