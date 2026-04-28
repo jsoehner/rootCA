@@ -61,7 +61,10 @@ Windows pilot host PowerShell scripts (copy to Windows Server before use):
 	- Root CA: `JSIGROUP-ProductionRootCA`, SHA-256: `6D:03:22:29:AD:94:F1:48:6E:34:FE:7C:A1:E9:26:E0:36:95:91:99:C2:47:A1:93:6D:5F:C7:A9:45:D8:78:DA`
 	- Key: `root-ca-key-prod-v2` (ECDSA P-384, on-HSM)
 	- Verification: `Verification: OK` (openssl x509 check complete).
-6. Phase 5: **Ready to start.** Proceeding to AD CS integration and subordinate issuance.
+6. Phase 5: **In Progress.** Production Subordinate CA issued (2026-04-27). Awaiting final installation on Windows host.
+	- Subordinate CA: `CN=JSIGROUP Intermediate CA - AD CS`
+	- Signature: `ecdsa-with-SHA384`
+	- Status: Signed and ready for transfer.
 7. Phase 6: Not started. Still blocked by Phase 5 operationalization.
 
 ## Gate Conditions

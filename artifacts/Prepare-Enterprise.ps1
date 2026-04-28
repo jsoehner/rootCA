@@ -541,7 +541,13 @@ function Remove-MatchingCertificates {
                 }
             }
 
-            $store.Remove($cert)
+            try {
+                $store.Remove($cert)
+                Write-Info "Successfully removed certificate from store."
+            } catch {
+                Write-Warn "Could not remove certificate from store: $($_.Exception.Message)"
+                Write-Warn "This is usually non-blocking. You can manually delete it via certlm.msc if needed."
+            }
         }
     }
     finally {

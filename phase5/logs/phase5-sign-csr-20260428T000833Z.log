@@ -1,0 +1,5 @@
+PEM certificate written to file '/home/jsoehner/rootCA/phase5/subordinate-ca.pem'
+        Issuer: CN=JSIGROUP Root CA, O=JSIGROUP, C=CA
+        Subject: CN=JSIGROUP Intermediate CA - AD CS
+                CA:TRUE, pathlen:0
+                Certificate Sign, CRL Sign
