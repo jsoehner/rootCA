@@ -1,14 +1,14 @@
 # Master Plan Status Matrix
 
-Date: 2026-04-26
+Date: 2026-04-27
 Workspace: ~/rootCA
 
 ---
 
 ## 🎯 Overall Project Status
 
-**Current Focus:** Phase 5 (Production AD CS Integration and Trust Rollout).
-**Gate Status:** Phase 4 formally closed. The Production Root Key Ceremony is complete, and the Root Certificate has been successfully generated on the Nitrokey HSM. Phase 5 is fully authorized and underway.
+**Current Focus:** Phase 6 (Steady-State Controls and Audit Program).
+**Gate Status:** Phase 5 formally closed. The Production AD CS Subordinate CA is fully operational and integrated with the Active Directory domain. The production chain (Root + Subordinate) is verified and trust is established across the JSIGROUP environment.
 
 ---
 
@@ -18,11 +18,11 @@ Workspace: ~/rootCA
 | :--- | :--- | :--- | :--- | :--- |
 | Phase 0 | Governance and policy approval | ✅ Closed (Signed Off) | CA-Policy.md (Status: APPROVED AND SIGNED OFF) | Closed |
 | Phase 1 | Offline platform baseline | ✅ Closed (Signed Off) | Phase-1-Platform-Setup.md, phase1/Phase-1-Execution-Log.md | Closed |
-| **Phase 2** | Crypto profiles and validation | ✅ Closed (Formal Sign-Off Complete) | Phase-2-Crypto-Profiles.md, phase2/Phase-2-Execution-Log.md, phase2/logs/phase2-closeout-report-20260423T003847Z.txt, phase2/logs/phase2-cleanup-verification-20260423T003737Z.txt | Closed |
+| **Phase 2** | Crypto profiles and validation | ✅ Closed (Formal Sign-Off Complete) | Phase-2-Crypto-Profiles.md, phase2/Phase-2-Execution-Log.md | Closed |
 | **Phase 3** | Pilot interoperability and go/no-go | ✅ **Closed (GO Decision Reached)** | Phase-3-Pilot-Testing.md, phase3/Phase-3-Execution-Log.md | Closed |
 | **Phase 4** | Production key ceremony | ✅ **Closed (Success)** | Phase-4-Key-Ceremony.md, phase4/Phase-4-Execution-Log.md | Closed |
-| **Phase 5** | AD CS integration and trust rollout | ✅ **Closed (Success)** | Phase-5-ADCS-Integration.md, phase5/Phase-5-Execution-Log.md | Deployment |
-| Phase 6 | Steady-state operations and audit | 🔴 Blocked | Phase-6-Steady-State-Operations.md | Blocked by Phase 5 completion |
+| **Phase 5** | AD CS integration and trust rollout | ✅ **Closed (Success)** | Phase-5-ADCS-Integration.md, phase5/Phase-5-Execution-Log.md | Closed |
+| Phase 6 | Steady-state operations and audit | 🟢 **Ready for Execution** | Phase-6-Steady-State-Operations.md | Open |
 
 ---
 
@@ -30,38 +30,35 @@ Workspace: ~/rootCA
 
 *   **Governance:** Policy/governance approval is complete and signed off.
 *   **Baseline:** Phase 1 baseline is complete and signed off.
-*   **Runtime Environment:** Runtime baseline successfully migrated and normalized to EJBCA 9.3.7 + WildFly 30.
-*   **Retirement:** Legacy EJBCA 8 and WildFly 26 runtime paths have been retired.
-*   **Phase 2 Core:** Production root/subordinate CA creation and export are complete.
-*   **Validation:** OpenSSL validation evidence has been generated and archived under `phase2/` and `phase2/logs/`.
-*   **Closeout:** Phase 2 closeout helper was run, and the closeout report was generated under `phase2/logs/`.
-*   **GO:** Phase 2 formal sign-off complete on 2026-04-20; refreshed closeout verification completed on 2026-04-23. All prerequisites for Phase 3 are met.
-*   **Retroactive Phase 3 Update (2026-04-22):** Pilot root creation/export completed using CLI-only workflow (`phase3-step3-pilot-root.sh`) with validation evidence in `phase3/`.
-*   **Test 2 PASSED (2026-04-25):** New Windows Server 2022 VM provisioned. Subordinate CSR generated and signed via CLI helper.
-*   **Phase 3 GO Decision (2026-04-27):** Interoperability pilot successfully executed via the consolidated `Prepare-Standalone.ps1` and `Test-Standalone.ps1` scripts. ECC P-256 certificate issuance, Windows TLS/Schannel negotiation (via native `curl.exe`), and CRL CDP retrieval all passed validation on AD CS.
-*   **Enterprise Tooling Created:** Deployed `Prepare-Enterprise.ps1` and `Test-Enterprise.ps1` for zero-touch auto-enrollment and auto-renewal testing against the upcoming Production Primary Domain Controller.
-*   **Phase 4 Key Ceremony Completed (2026-04-27):** The **JSIGROUP-ProductionRootCA** was successfully initialized on the Nitrokey HSM. Technical visibility issues between Java 21 and OpenSC were resolved by native EJBCA generation. The 10-year root certificate and initial CRL were exported and verified.
+*   **Phase 2 Core:** Production root/subordinate CA profiles and validation are complete.
+*   **Phase 3 Pilot:** Successful interoperability pilot with Windows Server 2022/2025.
+*   **Phase 4 Production Ceremony:** HSM initialization of the **JSIGROUP-ProductionRootCA** complete.
+*   **Phase 5 Integration (2026-04-27):** Production AD CS Subordinate CA issued, installed, and operational.
+    - Verified ECDSA P-384 chain integrity.
+    - Resolved Windows "Specified" signature OID compatibility via `AlternateSignatureAlgorithm = FALSE`.
+    - Enforced mandatory CRL synchronization with every issuance.
 
 ---
 
-## 🚀 Phase 5 Immediate Action Plan (Execution Focus)
+## 🚀 Phase 6 Immediate Action Plan (Operational Focus)
 
-**Objective:** Integrate the Production Root with the Active Directory domain and issue the Production Subordinate CA certificate.
+**Objective:** Transition to long-term steady-state monitoring and compliance.
 
 **Key Tasks:**
-1. **Root Trust Distribution:** Deploy the new `root-ca-prod-ecc384.cer` to all domain endpoints via GPO.
-2. **Subordinate AD CS Installation:** Run `Prepare-Enterprise.ps1` on the production PDC to generate the Subordinate CSR.
-3. **Subordinate Signing:** Sign the PDC's CSR using the offline Production Root CA in EJBCA.
-4. **Certificate Installation:** Install the signed Subordinate CA and finalize the Enterprise AD CS role.
+1. **Enrollment Testing:** Run `Test-Enterprise.ps1` to verify auto-enrollment for domain controllers and workstations.
+2. **CRL Cadence:** Finalize the monthly/annual CRL ceremony schedule.
+3. **Backup & DR:** Verify off-site storage of HSM passphrases and Root CA backup artifacts.
+4. **Tabletop Drill:** Execute the first distribution endpoint outage simulation.
 
 ---
 
 ## ⚠️ Risks and Notes
 
-*   **Historical Context:** A historical NO-GO checkpoint earlier in the Phase 2 log has been superseded by later completion updates and closeout-prep evidence.
-*   **Operational Guidance:** Operational scripts must exclusively use the WildFly 30 launcher path.
-*   **Lesson Applied:** Preserve deployment name `ejbca.ear` for EJBCA CLI compatibility and clean stale managed deployments before redeploy.
+*   **Infrastructure Artifacts:** The database remains named `ejbca_pilot` as a legacy schema artifact; this does not affect production validity but must be noted in disaster recovery documentation.
+*   **Crypto Boundary:** ECC P-384 certificates require the **Decoupled Enrollment** pattern for compatibility with legacy V1 AD templates (documented in `phase5/Phase-5-Execution-Log.md`).
 
-## 🗓️ Recommended Next Update Trigger
+---
 
-Update this matrix after the Phase 3 GO/NO-GO decision is finalized.
+## 🗓️ Next Update Trigger
+
+Update this matrix upon completion of the first Phase 6 quarterly audit check.

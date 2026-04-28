@@ -93,6 +93,14 @@ If the helper scripts are unavailable, use this canonical EJBCA command to sign 
 ./ejbca.sh ca getcrl --caname JSIGROUP-ProductionRootCA -f artifacts/root.crl
 ```
 
+### 5.5 Final Chain Verification
+**Rationale:** Before closing Phase 5, you must prove the Windows CA can verify the full chain up to the HSM Root.
+```powershell
+# On Windows Server:
+certutil -verify -urlfetch C:\certs\prod-sub-from-adcs.cer
+```
+**Success Criteria:** `Leaf certificate is valid. Certificate is a CA certificate.`
+
 ---
 
 ## Summary of Manual Rationale
@@ -106,4 +114,4 @@ If the helper scripts are unavailable, use this canonical EJBCA command to sign 
 
 ---
 *Created: 2026-04-27*
-*Last Update: Phase 5 Integration*
+*Last Update: Phase 5 Deployment Success*
